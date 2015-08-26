@@ -1,4 +1,5 @@
-expiscor
+expiscor - Latin for "Discover"
 ========
 
-NS Discover Class Library
+The expiscor class library provides a rich set of classes for content modeling 
+and data source access.
