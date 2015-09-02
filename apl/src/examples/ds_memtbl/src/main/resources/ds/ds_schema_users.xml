@@ -1,0 +1,9 @@
+<!-- Test data provided by Mockaroo at https://www.mockaroo.com/ -->
+<Schema name="ds_schema" title="Data Source Schema">
+ <Field type="Integer" name="id" title="Id" />
+ <Field type="Text" name="first_name" title="First Name" />
+ <Field type="Text" name="last_name" title="Last Name" />
+ <Field type="Text" name="email" title="Email Address" />
+ <Field type="Text" name="country" title="Country" />
+ <Field type="Text" name="ip_address" title="IP Address" />
+</Schema>

@@ -1,0 +1,50 @@
+#
+# source setup.script
+#
+# http://blog.taylormcgann.com/2012/06/13/customize-your-shell-command-prompt/
+#
+export PS1="\[\033[0;30;30m\]\w>\[\e[0m\] "
+#
+# http://osxdaily.com/2012/02/21/add-color-to-the-terminal-in-mac-os-x/
+#
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+#
+export NSHOME=/Users/acole/ns-public/NS
+#
+export NSBIN=$NSHOME/bin
+export NSPKG=$NSHOME/pkg
+export NSETS=$NSHOME/tools
+export NSREP=$NSHOME/maven/.m2/repository
+#
+export APL=$NSHOME/apl
+export APLSRC=$APL/src
+export APLBIN=$APL/bin
+export APLJAR=$APL/jar
+export APLKIT=$APL/kit
+export APLDOC=$APL/doc
+export APLTMP=$APL/tmp
+#
+
+export PATH=$PATH:$APLBIN
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home
+
+export ANT_HOME=$NSETS/apache-ant-1.9.3
+export PATH=$PATH:$ANT_HOME/bin
+
+export M2_HOME=$NSETS/apache-maven-3.2.1
+export PATH=$PATH:$M2_HOME/bin
+
+export TOMCAT_HOME=/Library/Tomcat/Home
+
+export SOLR_HOME=/Users/acole/expiscor/search/solr/release/solr-4.10.3/discover
+
+export ELASTIC_HOME=/Users/acole/expiscor/search/elastic/elasticsearch-1.7.0
+
+export CASSANDRA_HOME=/Users/acole/expiscor/db/dsc-cassandra-2.1.8
+export PATH=$PATH:$CASSANDRA_HOME/bin
+
+alias daplsrc='cd $APLSRC;clear;pwd'
+
+echo NS OSS development environment has been initialized.

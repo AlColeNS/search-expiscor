@@ -1,0 +1,1586 @@
+<Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+ <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+   <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">AI-0C73DF74791C44788DFC07E6FF4E0BD9</Field>
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:00:59</Field>
+    <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-13-2012 14:09:32</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+    <Field type="Text" name="nsd_acl_view" title="NSD ACL View" isMultiValue="true" isIndexed="true" isStored="true">AI-56A96DA9E981481688563E2D14D5D878|AI-59C3B3567DA441529BB265886514C907|AI-2618D6F5A90949BAA7E920D1B04C7EE1|AI-66022731E81D4040A155F13CD083826A|AI-355934804A6548CC8D320ED4ABBC8C53|AI-F802A6FF29494B9F8F0D31469D48C756|AI-B32BD81D1AD04207BF1E61E39A4E0E13</Field>
+    <Field type="Text" name="nsd_acl_preview" title="NSD ACL Preview" isMultiValue="true" isIndexed="true" isStored="true">AI-B754B1A4D760411CB5112C4350E036C5</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">3</Field>
+    <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">dd255546cfd54142fe0079cbd3df3e61</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">0C73DF74791C44788DFC07E6FF4E0BD9</Field>
+    <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+    <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+    <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+    <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000014</Field>
+    <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+    <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Innovator Admin</Field>
+    <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+    <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+    <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:00:59</Field>
+    <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-13-2012 14:09:32</Field>
+    <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">3</Field>
+    <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+    <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+    <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+   </Columns>
+ </Table>
+ <Related>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">7A2690916B0B44508BF2CA5B980E2EFA</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">7A2690916B0B44508BF2CA5B980E2EFA-380F0DB2517D4651810FC5B78A061530</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">ROUNDED-HEAD-SCREW_M4X5</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000040 ROUNDED-HEAD-SCREW_M4X5</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A45A878375F85486A80AB5B68F7B48C1F</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:26</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:29</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">45A878375F85486A80AB5B68F7B48C1F</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">380F0DB2517D4651810FC5B78A061530</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000040</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000040 ROUNDED-HEAD-SCREW_M4X5</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">ROUNDED-HEAD-SCREW_M4X5</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000040 ROUNDED-HEAD-SCREW_M4X5</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:26</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:29</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">BC246920064145F6854E29E37A5FCD9C</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">BC246920064145F6854E29E37A5FCD9C-D6B680115CDA4577B9C7559084621CFE</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">BAG</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000041 BAG</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AF6C26CD294A244308AAF45B9AD96CD15</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:30</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:32</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">F6C26CD294A244308AAF45B9AD96CD15</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">D6B680115CDA4577B9C7559084621CFE</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000041</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000041 BAG</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">BAG</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000041 BAG</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:30</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:32</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">B33FB85C77AB4F5997591540E9FAFCA2</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">B33FB85C77AB4F5997591540E9FAFCA2-4528572AC757426C8B4C8898A116E9EC</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">PLUG_CONNECTOR_FORM-L</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000042 PLUG_CONNECTOR_FORM-L</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A8E507F0945C7420093C47B9B3BE8025D</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:33</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:36</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">8E507F0945C7420093C47B9B3BE8025D</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">4528572AC757426C8B4C8898A116E9EC</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000042</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000042 PLUG_CONNECTOR_FORM-L</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">PLUG_CONNECTOR_FORM-L</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000042 PLUG_CONNECTOR_FORM-L</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:33</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:36</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">0B6FFF7DA4434DD8858C230091C69216</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">0B6FFF7DA4434DD8858C230091C69216-BE1106F3E9544F6F999D3C63FE47AD64</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">WIRE_CONTROLLER</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000047 WIRE_CONTROLLER</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A3E3B5F8F838E4F56A61267F31060660C</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:55</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:03:00</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">3E3B5F8F838E4F56A61267F31060660C</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">BE1106F3E9544F6F999D3C63FE47AD64</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000047</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000047 WIRE_CONTROLLER</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">WIRE_CONTROLLER</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000047 WIRE_CONTROLLER</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:55</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:03:00</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">9ACD478269264672B162F18F91AF225A</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">9ACD478269264672B162F18F91AF225A-8AEDEADEF18E4325B8EC41C0FDA98598</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">CONTROLLER</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000043 CONTROLLER</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A200B742F79E24494B7883B17FB81C20E</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:36</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:40</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">200B742F79E24494B7883B17FB81C20E</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">8AEDEADEF18E4325B8EC41C0FDA98598</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000043</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000043 CONTROLLER</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">CONTROLLER</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000043 CONTROLLER</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:36</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:40</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">B7AF5FCC2A4C41A6B1B2BDDBEFC4D2AF</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">B7AF5FCC2A4C41A6B1B2BDDBEFC4D2AF-FBA76AA1BF9E4EFCB1B6EB77392BBDB8</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">ACCUMULATOR</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000044 ACCUMULATOR</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A419AF5B9C78547A7888166348701511A</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:41</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:44</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">419AF5B9C78547A7888166348701511A</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">FBA76AA1BF9E4EFCB1B6EB77392BBDB8</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000044</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000044 ACCUMULATOR</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">ACCUMULATOR</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000044 ACCUMULATOR</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:41</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:44</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">56535B114F96435E92A4651EEA00728B</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">56535B114F96435E92A4651EEA00728B-353424A3B4AB484FB259664962F12103</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">HARNESS_REAR_AXLE</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000050 HARNESS_REAR_AXLE</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AA428EC29D30A4D03BE64657D68C9C70F</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:03:08</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:03:11</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">A428EC29D30A4D03BE64657D68C9C70F</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">353424A3B4AB484FB259664962F12103</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000050</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000050 HARNESS_REAR_AXLE</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">HARNESS_REAR_AXLE</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000050 HARNESS_REAR_AXLE</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:03:08</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:03:11</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">929C349111E9447A96A76CBA13EC0990</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">929C349111E9447A96A76CBA13EC0990-E9BA9EBA735E41F0BA9F34FF2E744465</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">SPHERE</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000049 SPHERE</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3ACC4DD3716A27453499D5F4AB863782CD</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:03:04</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:03:08</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">CC4DD3716A27453499D5F4AB863782CD</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">E9BA9EBA735E41F0BA9F34FF2E744465</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000049</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000049 SPHERE</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">SPHERE</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000049 SPHERE</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:03:04</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:03:08</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">BC269FDA3595400BB2BEFA6BC89BAF41</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">BC269FDA3595400BB2BEFA6BC89BAF41-49FECBA58A4644F9A317D4AB805B8A0C</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">RUBBER_CORD</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000048 RUBBER_CORD</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AB7B2ADC43AC4462B83CAC3F9D7DBB0B9</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:03:00</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:03:04</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">B7B2ADC43AC4462B83CAC3F9D7DBB0B9</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">49FECBA58A4644F9A317D4AB805B8A0C</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000048</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000048 RUBBER_CORD</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">RUBBER_CORD</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000048 RUBBER_CORD</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:03:00</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:03:04</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">346D928640A94FD997824F00CB37D81D</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">346D928640A94FD997824F00CB37D81D-74F55A3FCB1241D7A1BA283060ECE72A</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">WIRE_ACCUMULATOR</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000045 WIRE_ACCUMULATOR</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AE7F9EDFE73CE41B1B8F523ECF1138BC2</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:44</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:47</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">E7F9EDFE73CE41B1B8F523ECF1138BC2</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">74F55A3FCB1241D7A1BA283060ECE72A</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000045</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000045 WIRE_ACCUMULATOR</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">WIRE_ACCUMULATOR</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000045 WIRE_ACCUMULATOR</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:44</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:47</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">1EF4C4185400404683A4D419ACB18E50</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">1EF4C4185400404683A4D419ACB18E50-BBCE1FDCBADD4756B8A0D45EDF70B1E8</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">PLUG_CONNECTOR_FORM-I</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000046 PLUG_CONNECTOR_FORM-I</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A5DD09A8BDB824627AE01F19272E4B459</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:47</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:54</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">5DD09A8BDB824627AE01F19272E4B459</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">BBCE1FDCBADD4756B8A0D45EDF70B1E8</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000046</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000046 PLUG_CONNECTOR_FORM-I</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">PLUG_CONNECTOR_FORM-I</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000046 PLUG_CONNECTOR_FORM-I</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:47</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:54</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">2740492D4BD84CADB2FBF3958FAE8A03</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">2740492D4BD84CADB2FBF3958FAE8A03-B7BBDEA4432A4DBD96597030147D5BC8</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">FRAME_FRONT_AXLE-ASSEMBLY</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000016 FRAME_FRONT_AXLE-ASSEMBLY</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3ADA22638B2E214CC4ADF24BDA8ED10ACA</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:05</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 04:41:22</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">DA22638B2E214CC4ADF24BDA8ED10ACA</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">B7BBDEA4432A4DBD96597030147D5BC8</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000016</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000016 FRAME_FRONT_AXLE-ASSEMBLY</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">FRAME_FRONT_AXLE-ASSEMBLY</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000016 FRAME_FRONT_AXLE-ASSEMBLY</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:05</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 04:41:22</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">A5E76F46B944459097750579901A8418</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">A5E76F46B944459097750579901A8418-26ED30F7E5E646758CAA4A16C4A3D02D</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">FRAME_REAR_AXLE</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000020 FRAME_REAR_AXLE</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AC5592290C6EA49B797AE86F0BC757436</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:18</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:21</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">C5592290C6EA49B797AE86F0BC757436</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">26ED30F7E5E646758CAA4A16C4A3D02D</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000020</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000020 FRAME_REAR_AXLE</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">FRAME_REAR_AXLE</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000020 FRAME_REAR_AXLE</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:18</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:21</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">6797B279DCA542F1A14F68C968BD869C</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">6797B279DCA542F1A14F68C968BD869C-6B05290BBCBD42288CA901805E66EAF1</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">HANDLE_BAR</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000022 HANDLE_BAR</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A0470AA46EA3A4454867B9A33FB67AB1C</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:25</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:27</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">0470AA46EA3A4454867B9A33FB67AB1C</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">6B05290BBCBD42288CA901805E66EAF1</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000022</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000022 HANDLE_BAR</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">HANDLE_BAR</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000022 HANDLE_BAR</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:25</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:27</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">9F9C5B26DE2347FD9DA4AA50014F4D37</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">9F9C5B26DE2347FD9DA4AA50014F4D37-145DFFF38CC94F99BA21081F3B4893DE</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">RETAINER_SWITCH</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000023 RETAINER_SWITCH</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A725207B8972841F99F414590D58A2633</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:28</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:31</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">725207B8972841F99F414590D58A2633</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">145DFFF38CC94F99BA21081F3B4893DE</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000023</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000023 RETAINER_SWITCH</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">RETAINER_SWITCH</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000023 RETAINER_SWITCH</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:28</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:31</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">5F355143B0FC443193B138D34858F161</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">5F355143B0FC443193B138D34858F161-D6775D82F94E4B1D9ECECD13605FCD18</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">TUBE_TOP</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000026 TUBE_TOP</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A20AFCB5467ED46AB80B5E3070279C161</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:38</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:41</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">20AFCB5467ED46AB80B5E3070279C161</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">D6775D82F94E4B1D9ECECD13605FCD18</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000026</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000026 TUBE_TOP</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">TUBE_TOP</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000026 TUBE_TOP</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:38</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:41</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">88F4DCAA98E9448F8BDD0E7D44D3197F</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">88F4DCAA98E9448F8BDD0E7D44D3197F-5E15F089EC91403982FE44BE46848E72</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">WHEEL_BIG-ASSEMBLY</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000027 WHEEL_BIG-ASSEMBLY</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AC523D590FEA04BEDA38B998D8645F3F3</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:41</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 04:42:03</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">C523D590FEA04BEDA38B998D8645F3F3</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">5E15F089EC91403982FE44BE46848E72</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000027</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000027 WHEEL_BIG-ASSEMBLY</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">WHEEL_BIG-ASSEMBLY</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000027 WHEEL_BIG-ASSEMBLY</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:41</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 04:42:03</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">BF418AC01EA445B2AF4F0BDB03EAAD6A</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">BF418AC01EA445B2AF4F0BDB03EAAD6A-24E6D07E4C42470682D5CAE342022932</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">ELECTRIC_MOTOR</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000024 ELECTRIC_MOTOR</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AEB080163931144698FD80A996A35C875</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:31</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:34</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">EB080163931144698FD80A996A35C875</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">24E6D07E4C42470682D5CAE342022932</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000024</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000024 ELECTRIC_MOTOR</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">ELECTRIC_MOTOR</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000024 ELECTRIC_MOTOR</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:31</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:34</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">38F68797588E418FA6F09732D03FB17E</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">38F68797588E418FA6F09732D03FB17E-AD784F2B0B204F4E8490DEB8808FD890</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">SOCKET</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000025 SOCKET</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A9574DE06C7414B15A48B6D6C016FF7B1</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:35</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:37</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">9574DE06C7414B15A48B6D6C016FF7B1</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">AD784F2B0B204F4E8490DEB8808FD890</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000025</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000025 SOCKET</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">SOCKET</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000025 SOCKET</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:35</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:37</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">C1DBBE4D20984956A437902CEC22CF65</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">C1DBBE4D20984956A437902CEC22CF65-2099E6DD42024F85B55F81E60C5E5970</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">HEXAGON-CAP-NUT_M8</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000032 HEXAGON-CAP-NUT_M8</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A7530BB7833644EC995FC4BD17E6DB4DD</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:58</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:01</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">7530BB7833644EC995FC4BD17E6DB4DD</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">2099E6DD42024F85B55F81E60C5E5970</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000032</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000032 HEXAGON-CAP-NUT_M8</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">HEXAGON-CAP-NUT_M8</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000032 HEXAGON-CAP-NUT_M8</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:58</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:01</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">9FAF0E3BB5974734A92E9512B0916025</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">9FAF0E3BB5974734A92E9512B0916025-63954B8F796D4DDCBFAC027E249C96B6</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">SPRING_WASHER</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000033 SPRING_WASHER</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A89F0C4E15FFF4AA79DBDCEBBFC822CB0</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:01</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:06</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">89F0C4E15FFF4AA79DBDCEBBFC822CB0</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">63954B8F796D4DDCBFAC027E249C96B6</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000033</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000033 SPRING_WASHER</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">SPRING_WASHER</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000033 SPRING_WASHER</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:01</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:06</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">BE0B32CC64304FCE89AC014C45E966A0</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">BE0B32CC64304FCE89AC014C45E966A0-7ED01E4439E24A2BB501079DB0A6D40F</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">WASHER</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000034 WASHER</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AECD92A97818E44298ACA361D7E3A2B89</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:06</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:09</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">ECD92A97818E44298ACA361D7E3A2B89</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">7ED01E4439E24A2BB501079DB0A6D40F</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000034</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000034 WASHER</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">WASHER</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000034 WASHER</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:06</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:09</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">002B8B537F02487CAED29ECEB415D620</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">002B8B537F02487CAED29ECEB415D620-B6B36CF99A544CE39B2C2CCEA9EB40BC</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">WHEEL_SMALL-ASSEMBLY</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000035 WHEEL_SMALL-ASSEMBLY</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3AE73FE3D0B2DA4ED38E9815347D4EE21B</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:09</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 04:41:44</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">E73FE3D0B2DA4ED38E9815347D4EE21B</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">B6B36CF99A544CE39B2C2CCEA9EB40BC</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000035</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000035 WHEEL_SMALL-ASSEMBLY</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">WHEEL_SMALL-ASSEMBLY</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000035 WHEEL_SMALL-ASSEMBLY</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:09</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 04:41:44</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">20D4B2EE5A1A45EFADBB781619237D49</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">20D4B2EE5A1A45EFADBB781619237D49-7A676126708C4A0E954CB1EABFBE3329</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">COUNTERSINK-SCREW_M4X10</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000015 COUNTERSINK-SCREW_M4X10</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A8F4F3C0F53744310A65034E47D12D80E</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:02</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:05</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">8F4F3C0F53744310A65034E47D12D80E</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">7A676126708C4A0E954CB1EABFBE3329</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000015</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000015 COUNTERSINK-SCREW_M4X10</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">COUNTERSINK-SCREW_M4X10</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000015 COUNTERSINK-SCREW_M4X10</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:02</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:05</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">377CFEA09D464A04A98ECDF4CABBCF4A</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">377CFEA09D464A04A98ECDF4CABBCF4A-57341A2D6BEC416B85E2C4165205F0D1</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">HANDLE</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000039 HANDLE</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A35FFFEFC6EA246479DA05CBE00C3F34F</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:23</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:26</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">35FFFEFC6EA246479DA05CBE00C3F34F</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">57341A2D6BEC416B85E2C4165205F0D1</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000039</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000039 HANDLE</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">HANDLE</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000039 HANDLE</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:02:23</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:02:26</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part BOM">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part BOM</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">F6A5D887B6054E00BDAA10174983EF85</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part BOM</Field>
+   </Properties>
+   <Document-Part type="Part" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">F6A5D887B6054E00BDAA10174983EF85-4FA3DF1DAEEF4D1FBD552946A1BA23CE</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">SWITCH</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">P000000021 SWITCH</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=Part%3A683F3A7DA3044908942C0BFA0BEBB594</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:21</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:24</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">2</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">31e1a24255eaaaab2ab641b4d988426b</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">683F3A7DA3044908942C0BFA0BEBB594</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">4FA3DF1DAEEF4D1FBD552946A1BA23CE</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Material</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Preliminary</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">P000000021</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">P000000021 SWITCH</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">5C07EB829D4241F6BB884952960FAF58</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">SWITCH</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">P000000021 SWITCH</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:01:21</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Dec-18-2009 03:01:24</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">2</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-Part>
+  </Relationship>
+  <Relationship type="Part CAD">
+   <Properties type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+    <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+    <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">Part CAD</Field>
+    <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+    <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+    <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+    <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+    <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+    <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+    <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">72A45A387BBC4B1180F9E28D6C8F8487</Field>
+    <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true">8532D567C70A4029921437DA48B8447D</Field>
+    <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true">P000000014 ASSEMBLY-TROLLEY</Field>
+    <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">Part CAD</Field>
+   </Properties>
+   <Document-CAD type="CAD" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" schemaVersion="1">
+    <Table type="DataTable" name="ds_ai_schema" dimensions="67 cols x 0 rows" version="1.0">
+      <Columns type="DataBag" name="ds_ai_schema" title="NSD Aras Innovator Connector Schema" count="67" version="1.0">
+       <Field type="Text" name="nsd_id" title="NSD Id" isUnique="true" isPrimaryKey="true" isIndexed="true" isStored="true">72A45A387BBC4B1180F9E28D6C8F8487-339E06B2141349799CE944C66047B418</Field>
+       <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true">false</Field>
+       <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true">ASSEMBLY-TROLLEY</Field>
+       <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true">CAD-00001101 ASSEMBLY-TROLLEY</Field>
+       <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true">http://localhost/InnovatorServer/client/default.aspx?StartItem=CAD%3A339E06B2141349799CE944C66047B418</Field>
+       <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true">Dec-18-2009 03:00:59</Field>
+       <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true">Jan-08-2010 17:49:09</Field>
+       <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true">CAD</Field>
+       <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true">Aug-02-2015 12:31:19</Field>
+       <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true">Full</Field>
+       <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true">DEMO10</Field>
+       <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true">Aras Innovator</Field>
+       <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true">true</Field>
+       <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true">8fb076246c887cd587cbed1e28294520</Field>
+       <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true">339E06B2141349799CE944C66047B418</Field>
+       <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true">339E06B2141349799CE944C66047B418</Field>
+       <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true">Mechanical/Assembly</Field>
+       <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true">Demo User</Field>
+       <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true">Released</Field>
+       <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true">CAD-00001101</Field>
+       <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true">A</Field>
+       <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true">Innovator Admin</Field>
+       <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true">Engineering2</Field>
+       <Field type="Text" name="ai_native_file" title="Native File Id" isIndexed="true" isStored="true">4A7541D7192D45A1AB1F6A3E1A8C15AE</Field>
+       <Field type="Text" name="ai_native_file_keyed_name" title="Native File Name" isIndexed="true" isStored="true">cad-00001020_0.sldasm</Field>
+       <Field type="Text" name="ai_native_file_type" title="Native File Type" isIndexed="true" isStored="true">File</Field>
+       <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true">CAD-00001101 ASSEMBLY-TROLLEY</Field>
+       <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true">BADFEE81D2844845BDDAEA8CB663281E</Field>
+       <Field type="Text" name="ai_name" title="Name" isIndexed="true" isStored="true">ASSEMBLY-TROLLEY</Field>
+       <Field type="Text" name="ai_keyed_name" title="Name" isIndexed="true" isStored="true">CAD-00001101 ASSEMBLY-TROLLEY</Field>
+       <Field type="DateTime" name="ai_created_on" title="Created On" isIndexed="true" isStored="true">Dec-18-2009 03:00:59</Field>
+       <Field type="DateTime" name="ai_modified_on" title="Modified On" isIndexed="true" isStored="true">Jan-08-2010 17:49:09</Field>
+       <Field type="Integer" name="ai_generation" title="Generation" isIndexed="true" isStored="true">1</Field>
+       <Field type="Integer" name="ai_is_current" title="Is Current" isIndexed="true" isStored="true">1</Field>
+       <Field type="Text" name="ai_item_type" title="Item Type" isIndexed="true" isStored="true">CAD</Field>
+       <Field type="Text" name="ai_created_by_id" title="Created By Id" isIndexed="true" isStored="true">776FE99F64F14D20AF23638C270E0ED4</Field>
+       <Field type="Text" name="ai_owned_by_id" title="Owned By Id" isIndexed="true" isStored="true">355934804A6548CC8D320ED4ABBC8C53</Field>
+      </Columns>
+    </Table>
+   </Document-CAD>
+  </Relationship>
+ </Related>
+</Part>

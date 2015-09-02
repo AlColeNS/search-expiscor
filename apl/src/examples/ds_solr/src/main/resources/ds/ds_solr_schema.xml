@@ -1,0 +1,52 @@
+<Schema name="ds_solr_schema" title="Data Source Solr Schema">
+ <Field type="Text" name="nsd_id" title="NSD Id" isPrimaryKey="true" isUnique="true" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_parent_id" title="NSD Parent Id" isMultiValue="true" isIndexed="true" isStored="true" />
+ <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_description" title="NSD Description" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_url" title="NSD URL" isUnique="true" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_url_display" title="NSD URL Display" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_content" title="NSD Content" isContent="true" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_file_name" title="NSD File Name" isIndexed="true" isStored="true" />
+ <Field type="Long" name="nsd_file_size" title="NSD File Size" isIndexed="true" isStored="true" />
+ <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true" />
+ <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_mime_type" title="NSD MIME Type" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_rel_type" title="NSD Relationship Type" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_acl_view" title="NSD ACL View" isMultiValue="true" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_acl_preview" title="NSD ACL Preview" isMultiValue="true" isIndexed="true" isStored="true" />
+ <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD AI" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="Aras Innovator" isIndexed="true" isStored="true" />
+ <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true" />
+ <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_id" title="Id" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_config_id" title="Configuration Id" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_change_reason" title="Change Reason" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_classification" title="Classification" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_created_by_id_keyed_name" title="Created By" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_item_number" title="Item Number" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_major_rev" title="Revision" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_manufacturer_keyed_name" title="Manufacturer Name" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_managed_by_id_keyed_name" title="Managed By" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_modified_by_id_keyed_name" title="Modified By" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_owned_by_id_keyed_name" title="Owned  By" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_native_file" title="Native File Id" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_native_file_keyed_name" title="Native File Name" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_native_file_type" title="Native File Type" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_viewable_file" title="Viewable File Id" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_viewable_file_keyed_name" title="Viewable File Name" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_viewable_file_type" title="Viewable File Type" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_source_id" title="Source Id" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_source_id_keyed_name" title="Source Name" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_related_id" title="Related Id" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_related_id_keyed_name" title="Related Name" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_permission_id" title="Permission Id" isIndexed="true" isStored="true" />
+ <Field type="Text" name="ai_team_id" title="Team Id" isIndexed="true" isStored="true" />
+</Schema>

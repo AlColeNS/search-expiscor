@@ -1,0 +1,11 @@
+<Schema name="ds_gdb_schema" title="DS Graph Database Schema" labelName="AI">
+ <Field type="Text" name="nsd_id" title="NSD Id" isPrimaryKey="true" sourcePrivateKey="ai_id" isStored="true" />
+ <Field type="Text" name="nsd_name" title="NSD Name" isStored="true" />
+ <Field type="Text" name="nsd_title" title="NSD Title" isStored="true" />
+ <Field type="Text" name="nsd_doc_type" title="NSD Document Type" isStored="true" />
+ <Field type="Text" name="ai_config_id" title="Configuration Id" isStored="true" isIndexed="true" />
+ <Field type="Text" name="ai_current_state_keyed_name" title="Current State" isStored="true" />
+ <Field type="Integer" name="nsd_version" title="NSD Version Number" isStored="true" />
+ <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" isStored="true" />
+ <!-- Define Site Specific Fields Below -->
+</Schema>
