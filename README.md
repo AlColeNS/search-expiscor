@@ -57,7 +57,7 @@ public interface Versionable
 }
 ```
 
-The key to adopting this approach for services is to ensure that there are a collection of reserved fields (e.g. id, name, version, etc.) and relationships (e.g. access control list) that are always present in the document.
+The key to adopting this approach for services is to ensure that there are a collection of reserved fields (e.g. id, name, version, is_latest, etc.) and relationships (e.g. access control list) that are always present in the document.
 
 ## Content Source Types ##
 
@@ -72,7 +72,6 @@ _Expiscor_ offers a number of classes that can be used to model information stor
 | Part                    | DataBag             | Collection of fields.                                |  
 | Bill of Material | DataTable          | Collection of row x column cell fields.|  
 | Assembly          | Document          | Hierarchical collection of fields, relationships and documents. |
-[Structured Domain Objects to _Expiscor_ Classes]
 
 ### _Unstructured Content_ ###
 
@@ -83,9 +82,42 @@ Unstructured content refers to information that either does not have a pre-defin
 | MS Word Doc   | DataBag             | Collection of fields.                               |  
 | MS Excel Doc   | DataTable          | Collection of row x column cell fields.|  
 | Web Page          | Document          | Hierarchical collection of fields, relationships and documents. |
-[Unstructured Domain Objects to _Expiscor_ Classes]
+
+## Content Connectors ##
+
+While there are a number of sophisticated open source and commercial options for content connectors, there are times when your requirements are simple enough that a basic connector implementation can get the job done.  The _Expiscor_ framework offers two types of connectors as a reference implementation for processing file share and web site content.  These connectors were designed to support a built-in and configurable extract/transform/publish (ETL) pipeline for each document processed.
+
+### File Share ###
+
+The file share connector is responsible for crawling document content within a file system.  The number of threads assigned to extract, transform and publish the documents is configurable. Other configurable features include:
+
+* Full and incremental (via last modified date) document crawling
+* Crawl folder start, folder follow and regular expression ignore lists
+* Document typing and meta data property extraction
+* CSV row expansion to individual documents
+* Field mapping and deletion
+* Pipeline metric processing statistics summaries
+* Document viewing via a RESTful web service
+* Email notification to administrators when errors are detected
+
+### Web Site ###
+
+The web site connector is responsible for crawling document content hosted on a web server.  The number of threads assigned to extract, transform and publish the documents is configurable. Other configurable features include:
+
+* Full and incremental (via last modified date) document crawling
+* Crawl URI start, URI follow and regular expression ignore lists
+* Document typing and meta data property extraction
+* Maximum crawl depth of a web site hierarchy
+* Processing of JavaScript embedded within a web page
+* Following of web page redirects
+* Politeness delay time to avoid burdening a web server
+* Field mapping and deletion
+* Pipeline metric processing statistics summaries
+* Email notification to administrators when errors are detected
 
 ## Build Environment ##
+
+The following section outlines the steps a developer should follow to download, build and execute the _Expiscor_ framework components.
 
 ### Requirements ###
 
