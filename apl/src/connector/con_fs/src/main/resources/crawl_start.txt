@@ -1,0 +1,18 @@
+#
+# File Share Crawler Start List
+#
+# Note: Unlike the 'crawl_follow.txt' and 'crawl_ignore.txt' files
+#       where file paths are normalized to the Linux format of
+#       forward slashes, this configuration file expects the path
+#       names to be formatted based on how the OS refers to them.
+#
+#       Windows Examples:
+#
+#       \\FileShare\Folder1\Folder2
+#       C:\FileShare\Folder1\Folder2
+#
+#       Linux Examples:
+#
+#       /FileShare/Folder1/Folder2
+#
+/Users/acole/NS

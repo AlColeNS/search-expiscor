@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!-- Maven Targets:
+ http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
+ mvn install        Install the package into the local repository.
+-->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.nridge</groupId>
+	<artifactId>connector</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>NS Expiscor connector packages</name>
+	<description>This contains expiscor connector build modules.</description>
+	<modules>
+		<module>con_com</module>
+		<module>con_fs</module>
+		<module>con_ws</module>
+	</modules>
+</project>

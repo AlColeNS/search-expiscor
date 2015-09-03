@@ -1,0 +1,22 @@
+#
+# File Share Crawler Follow List
+#
+# http://www.regexplanet.com/advanced/java/index.html
+# http://docs.oracle.com/javase/tutorial/essential/regex/
+#
+# Note: If you are attempting to follow folder\file combinations on the
+#       Windows platform, then you must convert all backslash characters
+#       to forward slashes.  This is due to the fact that each line in
+#       can be expressed as a regular expression.
+#
+#       If you are processing the following Windows paths:
+#
+#       \\FileShare\Folder1\Folder2
+#       C:\FileShare\Folder1\Folder2
+#
+#       You should format them as follows:
+#
+#       //FileShare/Folder1/Folder2
+#       C:/FileShare/Folder1/Folder2
+#
+/

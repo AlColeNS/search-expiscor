@@ -1,0 +1,33 @@
+<!--
+Note: The NS Discover Connectors expect to have access to all field names
+      prefixed with 'nsd_' in the connector, so do not remove or comment
+      them out.  Adding new fields to the end of this list is permitted.
+-->
+<Schema name="ds_fs_schema" title="NSD File Share Connector Schema">
+ <Field type="Text" name="nsd_id" title="NSD Id" isPrimaryKey="true" isUnique="true" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_parent_id" title="NSD Parent Id" isMultiValue="true" isIndexed="true" isStored="true" />
+ <Field type="Boolean" name="nsd_is_parent" title="NSD Is Parent" defaultValue="false" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_name" title="NSD Name" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_title" title="NSD Title" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_description" title="NSD Description" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_url" title="NSD URL" isUnique="true" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_url_view" title="NSD URL View" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_url_display" title="NSD URL Display" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_content" title="NSD Content" isContent="true" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_file_name" title="NSD File Name" isIndexed="true" isStored="true" />
+ <Field type="Long" name="nsd_file_size" title="NSD File Size" isIndexed="true" isStored="true" />
+ <Field type="DateTime" name="nsd_doc_created_ts" title="NSD Document Created On" isIndexed="true" isStored="true" />
+ <Field type="DateTime" name="nsd_doc_modified_ts" title="NSD Document Modified On" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_mime_type" title="NSD MIME Type" defaultValue="application/octet-stream" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_doc_type" title="NSD Document Type" defaultValue="Unknown" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_acl_view" title="NSD ACL View" isMultiValue="true" defaultValue="public" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_acl_preview" title="NSD ACL Preview" isMultiValue="true" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_acl_deny" title="NSD ACL Deny" isMultiValue="true" isIndexed="true" isStored="true" />
+ <Field type="DateTime" name="nsd_crawl_ts" title="NSD Crawled On" defaultValue="DateTimeToday" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_crawl_type" title="NSD Crawl Type" defaultValue="Full" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_con_name" title="NSD Connector Name" defaultValue="NSD FS" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_con_type" title="NSD Connector Type" defaultValue="File Share" isIndexed="true" isStored="true" />
+ <Field type="Boolean" name="nsd_is_latest" title="NSD Is Latest" defaultValue="true" isIndexed="true" isStored="true" />
+ <Field type="Integer" name="nsd_version" title="NSD Version Number" defaultValue="1" isIndexed="true" isStored="true" />
+ <Field type="Text" name="nsd_doc_hash" title="NSD Document Hash Id" isIndexed="true" isStored="true" />
+</Schema>

@@ -1,0 +1,121 @@
+# 
+# Web Site Crawler Ignore List (e.g. do not add them to the search index)
+#
+# http://docs.oracle.com/javase/tutorial/essential/regex/
+# http://en.wikipedia.org/wiki/List_of_file_formats
+#
+# Note: Regular expressions are patterns that match strings (like URLs).
+#       Most of the contents of this file focus on file types that do
+#       contain meaningful text content.  You can also block complete
+#       URLs by specifying the complete path (see below).
+#
+#       http://www.nridge.com/news.php
+#
+# Images
+.gif$
+.jpg$
+.jpeg$
+.png$
+# Used instead of jpeg sometimes
+.jpe$
+.pcx$
+.tif$
+.tiff$
+.bmp$
+.ico$
+# Binaries/Executables
+.dll$
+.exe$
+.a$
+.o$
+.obj$
+.pyc$
+.pdb$
+.so$
+.bin$
+.class$
+.jnilib$
+# Font types
+# true type font
+.ttf$
+.pfb$
+.pfm$
+.afm$
+# Mac files
+.hqx$
+.sea$
+.dmg$
+# Adobe
+#.ps$
+#.ps.gz$
+#.ps.Z$
+.eps$
+.ai$
+.psd$
+# Media
+.ram$
+.wav$
+.avi$
+.mid$
+.mov$
+.mpg$
+.mpeg$
+.mp3$
+.ogg$
+.3gp$
+.m4a$
+.m4v$
+.swf$
+.wma$
+.wmv$
+.wrl$
+# Databases
+.dat$
+.dta$
+.log$
+.lst$
+# Archives, except .ps.gz, .ps.Z
+.arc$
+.bz2$
+.jar$
+.war$
+.ear$
+.arj$
+.cab$
+.rar$
+.rpm$
+.deb$
+.tar$
+.zip$
+.tar.gz$
+.upp$
+.tgz$
+.sdd$
+# Compressed files (zip, gzip)
+([^.]..|[^p].|[^s])[.]z$
+([^.]..|[^p].|[^s])[.]gz$
+.lzh$
+.msi$
+# Linux distribution files
+.hdr$
+.iso$
+.img$
+.gpg$
+# Google
+.gg$
+.kml$
+.kmz$
+.skb$
+.skp$
+# Mac OS
+.DS_Store
+/__MACOSX/
+# Others
+.css$
+.gbk$
+.fac$
+.ghg$
+.mdic$
+.chm$
+.mht$
+.do$

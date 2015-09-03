@@ -1,0 +1,6 @@
+#
+# Web Site Crawler Follow List
+#
+# http://docs.oracle.com/javase/tutorial/essential/regex/
+#
+http://www.nridge.com/

@@ -1,0 +1,63 @@
+<!-- File System Connector Logback Configuration Properties -->
+<!-- http://logback.qos.ch/manual/configuration.html -->
+<configuration scan="true" scanPeriod="5 minutes" >
+ <!-- http://logback.qos.ch/manual/appenders.html -->
+ <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+  <file>log/con_fs.log</file>
+  <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+   <fileNamePattern>log/con_fs.log.%i.zip</fileNamePattern>
+   <minIndex>1</minIndex>
+   <maxIndex>20</maxIndex>
+  </rollingPolicy>
+  <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+   <maxFileSize>10MB</maxFileSize>
+  </triggeringPolicy>
+  <encoder>
+   <pattern>%date %level [%thread] %logger{40} - %msg%n</pattern>
+  </encoder>
+ </appender>
+ <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+  <encoder>
+   <pattern>%logger{40} - %msg%n</pattern>
+  </encoder>
+ </appender>
+ <!-- Supported Levels: ALL, TRACE, DEBUG, INFO, WARN, ERROR or OFF -->
+ <!--
+ <root level="ERROR">
+  <appender-ref ref="FILE" />
+ </root>
+ -->
+ <logger name="com.nridge.connector.fs.con_fs.Main" level="INFO">
+  <appender-ref ref="STDOUT" />
+ </logger>
+ <logger name="com.nridge.connector.fs.con_fs.core.FileCrawler" level="ERROR">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.connector.fs.con_fs.core.RunMetricReport" level="INFO">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.connector.fs.con_fs.task.TaskConnectorFS" level="INFO">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.connector.common.con_com.crawl" level="ERROR">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.connector.common.con_com.transform" level="ERROR">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.connector.common.con_com.publish" level="ERROR">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.ds.content" level="ERROR">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.ds.solr" level="ERROR">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.core.app" level="ERROR">
+  <appender-ref ref="FILE" />
+ </logger>
+ <logger name="com.nridge.core.ds" level="ERROR">
+  <appender-ref ref="FILE" />
+ </logger>
+</configuration>

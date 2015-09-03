@@ -1,0 +1,4 @@
+# 
+# Field Names to Delete (Exact or Wildcard Matches)
+#
+nsd_url_parent
