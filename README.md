@@ -18,8 +18,7 @@ __Document__ Describes a more complex domain object like a part assembly hierarc
 
 All core field classes support serialization/deserialization to/from XML, JSON and CSV formats.
 
-_Data Sources_
-
+## Data Sources ##
 A data source is an abstract type designed to offer standard methods for accessing content sources. It is modeled after methods that support Create/Read/Update/Delete (CRUD) operations.
 
 __MemoryTable__  The MemoryTable is specialized data source that manages a row x column matrix of data fields in memory.  It implements the four CRUD methods and supports advanced query and paging navigation using a criteria object.  In addition, this data source offers save and load methods for data values.  This can be a useful data source if your table size is small in nature and there is sufficient heap space available.
@@ -30,12 +29,39 @@ __SolrDS__ The Apache Lucene/Solr data source is a specialized data source that 
 
 __Neo4jDS__ The Neo4j data source is a specialized data source that that implements the four CRUD methods for a Neo4j graph database repository and support advanced query, relationship resolution and paging navigation using a criteria object.
 
-_Criteria_
+### _Criteria_ ###
 
 A criteria can be used to express a search criteria for a data source.  In its simplest form, it can capture one or more field names, their features, logical operators (e.g. equal, less-than, greater-than, contains, in, not in) and one or more field values.  In addition, it also supports grouping these expressions with boolean operators such as AND and OR.
 
 
-_Structured Content_
+## Services ##
+
+One of the advantages to modeling domain objects as documents is that you can apply business logic to them in a more generic fashion.  For example, if you wanted to support version control over a __Document__, then you could create a _Version_ service class that implements a _Versionable_ interface.  The following interface definition illustrates how the method signatures would look with this approach.
+
+```
+public interface Versionable
+{
+    public void add(Document aDocument) throws ServiceException;
+
+    public void checkout(Document aDocument)  throws ServiceException;
+
+    public void checkin(Document aDocument)  throws ServiceException;
+
+    public void alter(Document aDocument)  throws ServiceException;
+
+    public void rollback(Document aDocument, int aVersion)  throws ServiceException;
+
+    public void purge(Document aDocument)  throws ServiceException;
+
+    public void delete(Document aDocument)  throws ServiceException;
+}
+```
+
+The key to adopting this approach for services is to ensure that there are a collection of reserved fields (e.g. id, name, version, etc.) and relationships (e.g. access control list) that are always present in the document.
+
+## Content Source Types ##
+
+###_Structured Content_ ###
 
 Structured content is information or content that is organized in a predictable way and is usually classified with metadata.  Examples of structured content would include rows from relational database tables and documents stored in an enterprise content management system or a product lifecycle application.  
 
@@ -48,7 +74,7 @@ _Expiscor_ offers a number of classes that can be used to model information stor
 | Assembly          | Document          | Hierarchical collection of fields, relationships and documents. |
 [Structured Domain Objects to _Expiscor_ Classes]
 
-_Unstructured Content_
+### _Unstructured Content_ ###
 
 Unstructured content refers to information that either does not have a pre-defined data model or is not organized in a pre-defined manner.  Examples of unstructured content would include Microsoft Office documents, PDF files, web pages and email messages.  The following table illustrates how domain objects related to an file shares and web sites can be represented using the framework.
 
@@ -347,7 +373,7 @@ ECD92A97818E44298ACA361D7E3A2B89  WASHER                     P000000034 WASHER  
 
 ## Solr Data Source Example ###
 
-The Solr Data Source example exercises some core features that the data source has to offer.
+The Solr Data Source example exercises some core features that the data source has to offer.  Please note that this is a much more involved example because it is dependent on an Apache Solr index being available and configured for the fields and response handlers utilized by the example logic.  Refer to the "solr" sub folder for more information regarding these configuration files.
 
 ```
 $ cd apl/src/examples/ds_solr
