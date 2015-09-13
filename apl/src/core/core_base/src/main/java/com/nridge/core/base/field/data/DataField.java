@@ -1598,4 +1598,37 @@ public class DataField
         if (mProperties != null)
             mProperties.clear();
     }
+
+    @Override
+    public boolean equals(Object anObject)
+    {
+        if (this == anObject)
+            return true;
+        if (anObject == null || getClass() != anObject.getClass())
+            return false;
+
+        DataField dataField = (DataField) anObject;
+
+        return isEqual(dataField);
+
+    }
+
+    /**
+     * Returns a hash code value for the object. This method is
+     * supported for the benefit of hash tables such as those provided by
+     * {@link java.util.HashMap}.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode()
+    {
+        int result = mDisplaySize;
+        result = 31 * result + (mFieldValue != null ? mFieldValue.hashCode() : 0);
+        result = 31 * result + mName.hashCode();
+        result = 31 * result + (mFeatures != null ? mFeatures.hashCode() : 0);
+        result = 31 * result + mTitle.hashCode();
+        result = 31 * result + (mType != null ? mType.hashCode() : 0);
+        return result;
+    }
 }

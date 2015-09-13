@@ -857,6 +857,57 @@ public class Document
     }
 
     /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param anObject Reference object with which to compare.
+     * @return  {@code true} if this object is the same as the anObject
+     *          argument; {@code false} otherwise.
+     */
+    @Override
+    public boolean equals(Object anObject)
+    {
+        if (this == anObject)
+            return true;
+        if (anObject == null || getClass() != anObject.getClass())
+            return false;
+
+        Document document = (Document) anObject;
+
+        if (mSchemaVersion != document.mSchemaVersion)
+            return false;
+        if (mType != null ? !mType.equals(document.mType) : document.mType != null)
+            return false;
+        if (mTable != null ? !mTable.equals(document.mTable) : document.mTable != null)
+            return false;
+        if (mACL != null ? !mACL.equals(document.mACL) : document.mACL != null)
+            return false;
+        if (mFeatures != null ? !mFeatures.equals(document.mFeatures) : document.mFeatures != null)
+            return false;
+
+        return !(mRelationships != null ? !mRelationships.equals(document.mRelationships) : document.mRelationships != null);
+    }
+
+    /**
+     * Returns a hash code value for the object. This method is
+     * supported for the benefit of hash tables such as those provided by
+     * {@link java.util.HashMap}.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode()
+    {
+        int result = mType != null ? mType.hashCode() : 0;
+        result = 31 * result + (mTable != null ? mTable.hashCode() : 0);
+        result = 31 * result + mSchemaVersion;
+        result = 31 * result + (mACL != null ? mACL.hashCode() : 0);
+        result = 31 * result + (mFeatures != null ? mFeatures.hashCode() : 0);
+        result = 31 * result + (mRelationships != null ? mRelationships.hashCode() : 0);
+
+        return result;
+    }
+
+    /**
      * Returns a read-only copy of the internal map containing
      * feature list.
      *

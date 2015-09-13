@@ -766,4 +766,39 @@ public class FieldValue
     {
         expand(aValue, StrUtl.CHAR_PIPE);
     }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param anObject Reference object with which to compare.
+     * @return  {@code true} if this object is the same as the anObject
+     *          argument; {@code false} otherwise.
+     */
+    @Override
+    public boolean equals(Object anObject)
+    {
+        if (this == anObject)
+            return true;
+
+        if (anObject == null || getClass() != anObject.getClass())
+            return false;
+
+        FieldValue that = (FieldValue) anObject;
+
+        return ! (mValues != null ? !mValues.equals(that.mValues) : that.mValues != null);
+
+    }
+
+    /**
+     * Returns a hash code value for the object. This method is
+     * supported for the benefit of hash tables such as those provided by
+     * {@link java.util.HashMap}.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode()
+    {
+        return mValues != null ? mValues.hashCode() : 0;
+    }
 }

@@ -23,6 +23,7 @@ import com.nridge.core.base.std.StrUtl;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -252,6 +253,40 @@ public class FieldRow
             return false;
 
         return true;
+    }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param anObject Reference object with which to compare.
+     * @return  {@code true} if this object is the same as the anObject
+     *          argument; {@code false} otherwise.
+     */
+    @Override
+    public boolean equals(Object anObject)
+    {
+        if (this == anObject)
+            return true;
+
+        if (anObject == null || getClass() != anObject.getClass())
+            return false;
+
+        FieldRow fieldRow = (FieldRow) anObject;
+
+        return isEqual(fieldRow);
+    }
+
+    /**
+     * Returns a hash code value for the object. This method is
+     * supported for the benefit of hash tables such as those provided by
+     * {@link java.util.HashMap}.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode()
+    {
+        return mCells != null ? Arrays.hashCode(mCells) : 0;
     }
 
     /**

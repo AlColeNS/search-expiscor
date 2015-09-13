@@ -2291,6 +2291,51 @@ public class DataTable
     }
 
     /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param anObject Reference object with which to compare.
+     * @return  {@code true} if this object is the same as the anObject
+     *          argument; {@code false} otherwise.
+     */
+    @Override
+    public boolean equals(Object anObject)
+    {
+        if (this == anObject)
+            return true;
+        if (anObject == null || getClass() != anObject.getClass())
+            return false;
+
+        DataTable dataTable = (DataTable) anObject;
+
+        if (mColumns != null ? !mColumns.equals(dataTable.mColumns) : dataTable.mColumns != null)
+            return false;
+        if (mRows != null ? !mRows.equals(dataTable.mRows) : dataTable.mRows != null)
+            return false;
+        if (mName != null ? !mName.equals(dataTable.mName) : dataTable.mName != null)
+            return false;
+
+        return !(mFeatures != null ? !mFeatures.equals(dataTable.mFeatures) : dataTable.mFeatures != null);
+    }
+
+    /**
+     * Returns a hash code value for the object. This method is
+     * supported for the benefit of hash tables such as those provided by
+     * {@link java.util.HashMap}.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode()
+    {
+        int result = mColumns != null ? mColumns.hashCode() : 0;
+        result = 31 * result + (mRows != null ? mRows.hashCode() : 0);
+        result = 31 * result + (mName != null ? mName.hashCode() : 0);
+        result = 31 * result + (mFeatures != null ? mFeatures.hashCode() : 0);
+
+        return result;
+    }
+
+    /**
      * Returns a read-only copy of the internal map containing
      * feature list.
      *

@@ -519,6 +519,52 @@ public class Relationship
     }
 
     /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param anObject Reference object with which to compare.
+     * @return  {@code true} if this object is the same as the anObject
+     *          argument; {@code false} otherwise.
+     */
+    @Override
+    public boolean equals(Object anObject)
+    {
+        if (this == anObject)
+            return true;
+        if (anObject == null || getClass() != anObject.getClass())
+            return false;
+
+        Relationship that = (Relationship) anObject;
+
+        if (mType != null ? !mType.equals(that.mType) : that.mType != null)
+            return false;
+        if (mBag != null ? !mBag.equals(that.mBag) : that.mBag != null)
+            return false;
+        if (mDocuments != null ? !mDocuments.equals(that.mDocuments) : that.mDocuments != null)
+            return false;
+
+        return !(mFeatures != null ? !mFeatures.equals(that.mFeatures) : that.mFeatures != null);
+
+    }
+
+    /**
+     * Returns a hash code value for the object. This method is
+     * supported for the benefit of hash tables such as those provided by
+     * {@link java.util.HashMap}.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode()
+    {
+        int result = mType != null ? mType.hashCode() : 0;
+        result = 31 * result + (mBag != null ? mBag.hashCode() : 0);
+        result = 31 * result + (mDocuments != null ? mDocuments.hashCode() : 0);
+        result = 31 * result + (mFeatures != null ? mFeatures.hashCode() : 0);
+
+        return result;
+    }
+
+    /**
      * Add an application defined property to the document.
      * <b>Notes:</b>
      * <ul>

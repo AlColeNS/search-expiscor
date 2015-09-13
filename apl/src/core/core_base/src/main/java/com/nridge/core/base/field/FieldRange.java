@@ -713,4 +713,50 @@ public class FieldRange
 
         return false;
     }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param anObject Reference object with which to compare.
+     * @return  {@code true} if this object is the same as the anObject
+     *          argument; {@code false} otherwise.
+     */
+    @Override
+    public boolean equals(Object anObject)
+    {
+        if (this == anObject)
+            return true;
+        if (anObject == null || getClass() != anObject.getClass())
+            return false;
+
+        FieldRange fieldRange = (FieldRange) anObject;
+
+        return isEqual(fieldRange);
+    }
+
+    /**
+     * Returns a hash code value for the object. This method is
+     * supported for the benefit of hash tables such as those provided by
+     * {@link java.util.HashMap}.
+     *
+     * @return A hash code value for this object.
+     */
+    @Override
+    public int hashCode()
+    {
+        int hashCode = mMinLong != null ? mMinLong.hashCode() : 0;
+
+        hashCode = 31 * hashCode + (mMaxLong != null ? mMaxLong.hashCode() : 0);
+        hashCode = 31 * hashCode + (mMinDouble != null ? mMinDouble.hashCode() : 0);
+        hashCode = 31 * hashCode + (mMaxDouble != null ? mMaxDouble.hashCode() : 0);
+        hashCode = 31 * hashCode + (mMinInteger != null ? mMinInteger.hashCode() : 0);
+        hashCode = 31 * hashCode + (mMaxInteger != null ? mMaxInteger.hashCode() : 0);
+        hashCode = 31 * hashCode + (mMinCalendar != null ? mMinCalendar.hashCode() : 0);
+        hashCode = 31 * hashCode + (mMaxCalendar != null ? mMaxCalendar.hashCode() : 0);
+        hashCode = 31 * hashCode + (mItems != null ? mItems.hashCode() : 0);
+        hashCode = 31 * hashCode + (int) mDelimiterChar;
+        hashCode = 31 * hashCode + (mType != null ? mType.hashCode() : 0);
+
+        return hashCode;
+    }
 }
