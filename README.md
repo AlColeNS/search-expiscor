@@ -75,7 +75,7 @@ _Expiscor_ offers a number of classes that can be used to model information stor
 
 ### _Unstructured Content_ ###
 
-Unstructured content refers to information that either does not have a pre-defined data model or is not organized in a pre-defined manner.  Examples of unstructured content would include Microsoft Office documents, PDF files, web pages and email messages.  The following table illustrates how domain objects related to an file shares and web sites can be represented using the framework.
+Unstructured content refers to information that either does not have a pre-defined data model or is not organized in a pre-defined manner.  Examples of unstructured content would include Microsoft Office documents, PDF files, web pages and email messages.  The following table illustrates how domain objects related to file shares and web sites can be represented using the framework.
 
 | Domain Object | _Expiscor_ Class | Notes                                                    |  
 |  :------------------:| :--------------------:| ------------------------------------------------ |  
