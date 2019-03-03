@@ -156,7 +156,7 @@ $ mvn compile source:jar javadoc:jar install
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time: 31.222 s
-[INFO] Finished at: 2015-09-02T15:08:46-05:00
+[INFO] Finished at: 2018-09-02T15:08:46-05:00
 [INFO] Final Memory: 51M/523M
 [INFO] ------------------------------------------------------------------------
 ```
@@ -178,7 +178,7 @@ Data Bag Console Output
    Double Field: 1.0
   Integer Field: 1
   Boolean Field: true
-Date/Time Field: Sep-02-2015 15:17:16
+Date/Time Field: Sep-02-2018 15:17:16
 
 Data Bag XML Output
 <DataBag type="DataBag" name="Data Bag" count="7" version="1.0">
@@ -188,7 +188,7 @@ Data Bag XML Output
  <Field type="Double" name="double_field" title="Double Field">1.0</Field>
  <Field type="Integer" name="integer_field" title="Integer Field">1</Field>
  <Field type="Boolean" name="boolean_field" title="Boolean Field">true</Field>
- <Field type="DateTime" name="datetime_field" title="Date/Time Field">Sep-02-2015 15:17:16</Field>
+ <Field type="DateTime" name="datetime_field" title="Date/Time Field">Sep-02-2018 15:17:16</Field>
 </DataBag>
 
 Data Bag JSON Output
@@ -236,7 +236,7 @@ Data Bag JSON Output
    "name": "datetime_field",
    "type": "DateTime",
    "title": "Date/Time Field",
-   "value": "Sep-02-2015 15:17:16"
+   "value": "Sep-02-2018 15:17:16"
   }
  ]
 }
@@ -244,7 +244,7 @@ Data Bag JSON Output
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time: 3.625 s
-[INFO] Finished at: 2015-09-02T15:17:17-05:00
+[INFO] Finished at: 2018-09-02T15:17:17-05:00
 [INFO] Final Memory: 18M/217M
 [INFO] ------------------------------------------------------------------------
 ```
@@ -260,22 +260,22 @@ $ mvn test
 
 Long Field  Text Field                              Float Field  Double Field  Integer Field  Boolean Field  Date/Time Field       
 ----------  ----------                              -----------  ------------  -------------  -------------  ---------------       
-1           This is a test sentence 1 of 10 rows.   1.0          1.0           1              true           Sep-02-2015 15:22:57  
-2           This is a test sentence 2 of 10 rows.   2.0          2.0           2              false          Sep-02-2015 15:23:57  
-3           This is a test sentence 3 of 10 rows.   3.0          3.0           3              true           Sep-02-2015 15:24:57  
-4           This is a test sentence 4 of 10 rows.   4.0          4.0           4              false          Sep-02-2015 15:25:57  
-5           This is a test sentence 5 of 10 rows.   5.0          5.0           5              true           Sep-02-2015 15:26:57  
-6           This is a test sentence 6 of 10 rows.   6.0          6.0           6              false          Sep-02-2015 15:27:57  
-7           This is a test sentence 7 of 10 rows.   7.0          7.0           7              true           Sep-02-2015 15:28:57  
-8           This is a test sentence 8 of 10 rows.   8.0          8.0           8              false          Sep-02-2015 15:29:57  
-9           This is a test sentence 9 of 10 rows.   9.0          9.0           9              true           Sep-02-2015 15:30:57  
-10          This is a test sentence 10 of 10 rows.  10.0         10.0          10             false          Sep-02-2015 15:31:57  
+1           This is a test sentence 1 of 10 rows.   1.0          1.0           1              true           Sep-02-2018 15:22:57  
+2           This is a test sentence 2 of 10 rows.   2.0          2.0           2              false          Sep-02-2018 15:23:57  
+3           This is a test sentence 3 of 10 rows.   3.0          3.0           3              true           Sep-02-2018 15:24:57  
+4           This is a test sentence 4 of 10 rows.   4.0          4.0           4              false          Sep-02-2018 15:25:57  
+5           This is a test sentence 5 of 10 rows.   5.0          5.0           5              true           Sep-02-2018 15:26:57  
+6           This is a test sentence 6 of 10 rows.   6.0          6.0           6              false          Sep-02-2018 15:27:57  
+7           This is a test sentence 7 of 10 rows.   7.0          7.0           7              true           Sep-02-2018 15:28:57  
+8           This is a test sentence 8 of 10 rows.   8.0          8.0           8              false          Sep-02-2018 15:29:57  
+9           This is a test sentence 9 of 10 rows.   9.0          9.0           9              true           Sep-02-2018 15:30:57  
+10          This is a test sentence 10 of 10 rows.  10.0         10.0          10             false          Sep-02-2018 15:31:57  
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time: 3.693 s
-[INFO] Finished at: 2015-09-02T15:21:58-05:00
+[INFO] Finished at: 2018-09-02T15:21:58-05:00
 [INFO] Final Memory: 18M/217M
 [INFO] ------------------------------------------------------------------------
 ```
@@ -294,7 +294,7 @@ $ mvn test
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time: 4.172 s
-[INFO] Finished at: 2015-09-02T15:25:03-05:00
+[INFO] Finished at: 2018-09-02T15:25:03-05:00
 [INFO] Final Memory: 15M/212M
 [INFO] ------------------------------------------------------------------------
 ```
@@ -343,7 +343,7 @@ Id   First Name   Last Name  Email Address                 Country              
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time: 4.172 s
-[INFO] Finished at: 2015-09-02T15:25:03-05:00
+[INFO] Finished at: 2018-09-02T15:25:03-05:00
 [INFO] Final Memory: 15M/212M
 [INFO] ------------------------------------------------------------------------
 ```
@@ -359,17 +359,17 @@ $ mvn test
 
 Id    Long Field  Float Field  Double Field  Integer Field  Boolean Field  Date/Time Field       Text Field                                 
 --    ----------  -----------  ------------  -------------  -------------  ---------------       ----------                                 
-1990  991         991.0        991.0         991            true           Sep-03-2015 08:03:41  This is a test sentence 991 of 1000 rows.  
-1992  993         993.0        993.0         993            true           Sep-03-2015 08:05:41  This is a test sentence 993 of 1000 rows.  
-1994  995         995.0        995.0         995            true           Sep-03-2015 08:07:41  This is a test sentence 995 of 1000 rows.  
-1996  997         997.0        997.0         997            true           Sep-03-2015 08:09:41  This is a test sentence 997 of 1000 rows.  
-1998  999         999.0        999.0         999            true           Sep-03-2015 08:11:41  This is a test sentence 999 of 1000 rows.  
+1990  991         991.0        991.0         991            true           Sep-03-2018 08:03:41  This is a test sentence 991 of 1000 rows.  
+1992  993         993.0        993.0         993            true           Sep-03-2018 08:05:41  This is a test sentence 993 of 1000 rows.  
+1994  995         995.0        995.0         995            true           Sep-03-2018 08:07:41  This is a test sentence 995 of 1000 rows.  
+1996  997         997.0        997.0         997            true           Sep-03-2018 08:09:41  This is a test sentence 997 of 1000 rows.  
+1998  999         999.0        999.0         999            true           Sep-03-2018 08:11:41  This is a test sentence 999 of 1000 rows.  
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time: 3.403 s
-[INFO] Finished at: 2015-09-02T15:32:43-05:00
+[INFO] Finished at: 2018-09-02T15:32:43-05:00
 [INFO] Final Memory: 22M/230M
 [INFO] ------------------------------------------------------------------------
 ```
@@ -385,20 +385,20 @@ $ mvn test
 
 NSD Id                            NSD Name                   NSD Title                             NSD Document Type  Configuration Id                  Current State                NSD Version Number  NSD Crawled On        
 ------                            --------                   ---------                             -----------------  ----------------                  -------------                ------------------  --------------        
-8532D567C70A4029921437DA48B8447D  ASSEMBLY-TROLLEY           P000000014 ASSEMBLY-TROLLEY           Part               0C73DF74791C44788DFC07E6FF4E0BD9  Preliminary                  3                   Aug-02-2015 12:31:19  
-35FFFEFC6EA246479DA05CBE00C3F34F  HANDLE                     P000000039 HANDLE                     Part               57341A2D6BEC416B85E2C4165205F0D1  Preliminary                  2                   Aug-02-2015 12:31:19  
-683F3A7DA3044908942C0BFA0BEBB594  SWITCH                     P000000021 SWITCH                     Part               4FA3DF1DAEEF4D1FBD552946A1BA23CE  Preliminary                  2                   Aug-02-2015 12:31:19  
-E73FE3D0B2DA4ED38E9815347D4EE21B  WHEEL_SMALL-ASSEMBLY       P000000035 WHEEL_SMALL-ASSEMBLY       Part               B6B36CF99A544CE39B2C2CCEA9EB40BC  Preliminary                  2                   Aug-02-2015 12:31:19  
-8F4F3C0F53744310A65034E47D12D80E  COUNTERSINK-SCREW_M4X10    P000000015 COUNTERSINK-SCREW_M4X10    Part               7A676126708C4A0E954CB1EABFBE3329  Preliminary                  2                   Aug-02-2015 12:31:19  
-89F0C4E15FFF4AA79DBDCEBBFC822CB0  SPRING_WASHER              P000000033 SPRING_WASHER              Part               63954B8F796D4DDCBFAC027E249C96B6  Preliminary                  2                   Aug-02-2015 12:31:19  
-ECD92A97818E44298ACA361D7E3A2B89  WASHER                     P000000034 WASHER                     Part               7ED01E4439E24A2BB501079DB0A6D40F  Preliminary                  2                   Aug-02-2015 12:31:19  
-9574DE06C7414B15A48B6D6C016FF7B1  SOCKET                     P000000025 SOCKET                     Part               AD784F2B0B204F4E8490DEB8808FD890  Preliminary                  2                   Aug-02-2015 12:31:19  
+8532D567C70A4029921437DA48B8447D  ASSEMBLY-TROLLEY           P000000014 ASSEMBLY-TROLLEY           Part               0C73DF74791C44788DFC07E6FF4E0BD9  Preliminary                  3                   Aug-02-2018 12:31:19  
+35FFFEFC6EA246479DA05CBE00C3F34F  HANDLE                     P000000039 HANDLE                     Part               57341A2D6BEC416B85E2C4165205F0D1  Preliminary                  2                   Aug-02-2018 12:31:19  
+683F3A7DA3044908942C0BFA0BEBB594  SWITCH                     P000000021 SWITCH                     Part               4FA3DF1DAEEF4D1FBD552946A1BA23CE  Preliminary                  2                   Aug-02-2018 12:31:19  
+E73FE3D0B2DA4ED38E9815347D4EE21B  WHEEL_SMALL-ASSEMBLY       P000000035 WHEEL_SMALL-ASSEMBLY       Part               B6B36CF99A544CE39B2C2CCEA9EB40BC  Preliminary                  2                   Aug-02-2018 12:31:19  
+8F4F3C0F53744310A65034E47D12D80E  COUNTERSINK-SCREW_M4X10    P000000015 COUNTERSINK-SCREW_M4X10    Part               7A676126708C4A0E954CB1EABFBE3329  Preliminary                  2                   Aug-02-2018 12:31:19  
+89F0C4E15FFF4AA79DBDCEBBFC822CB0  SPRING_WASHER              P000000033 SPRING_WASHER              Part               63954B8F796D4DDCBFAC027E249C96B6  Preliminary                  2                   Aug-02-2018 12:31:19  
+ECD92A97818E44298ACA361D7E3A2B89  WASHER                     P000000034 WASHER                     Part               7ED01E4439E24A2BB501079DB0A6D40F  Preliminary                  2                   Aug-02-2018 12:31:19  
+9574DE06C7414B15A48B6D6C016FF7B1  SOCKET                     P000000025 SOCKET                     Part               AD784F2B0B204F4E8490DEB8808FD890  Preliminary                  2                   Aug-02-2018 12:31:19  
 
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time: 7.174 s
-[INFO] Finished at: 2015-09-02T15:34:35-05:00
+[INFO] Finished at: 2018-09-02T15:34:35-05:00
 [INFO] Final Memory: 118M/509M
 [INFO] ------------------------------------------------------------------------
 ```
@@ -417,7 +417,7 @@ $ mvn test
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
 [INFO] Total time: 4.851 s
-[INFO] Finished at: 2015-09-02T15:39:07-05:00
+[INFO] Finished at: 2018-09-02T15:39:07-05:00
 [INFO] Final Memory: 23M/308M
 [INFO] ------------------------------------------------------------------------
 ```
