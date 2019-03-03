@@ -25,7 +25,7 @@ import com.nridge.core.base.ds.DSException;
 import com.nridge.core.base.field.Field;
 import com.nridge.core.base.field.data.DataField;
 import com.nridge.core.base.std.StrUtl;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.slf4j.Logger;
 
@@ -33,7 +33,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.Date;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 /**
  * The SolrQueryBuilder provides a collection of methods that can generate
@@ -119,34 +120,674 @@ public class SolrQueryBuilder
         return sortOrder;
     }
 
-    private String escapeValue(String aValue)
+    private void createAsQueryString(StringBuilder aStringBuilder, DSCriteria aCriteria)
     {
-        int offset1 = aValue.indexOf(StrUtl.CHAR_BACKSLASH);
-        int offset2 = aValue.indexOf(StrUtl.CHAR_DBLQUOTE);
-        if ((offset1 != -1) || (offset2 != -1))
+        boolean isFirst;
+        DataField dataField;
+        StringBuilder qryBuilder;
+        String fieldName, fieldOpValue;
+        Logger appLogger = mAppMgr.getLogger(this, "createAsQueryString");
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
+
+        if ((aCriteria != null) && (aCriteria.count() > 0))
         {
-            StringBuilder strBuilder = new StringBuilder();
-            int strLength = aValue.length();
-            for (int i = 0; i < strLength; i++)
+            for (DSCriterionEntry ce : aCriteria.getCriterionEntries())
             {
-                if ((aValue.charAt(i) == StrUtl.CHAR_BACKSLASH) ||
-                    (aValue.charAt(i) == StrUtl.CHAR_DBLQUOTE))
-                    strBuilder.append(StrUtl.CHAR_BACKSLASH);
-                strBuilder.append(aValue.charAt(i));
+                if (aStringBuilder.length() > 0)
+                    aStringBuilder.append(String.format(" %s ", ce.getBooleanOperator().name()));
+
+                fieldName = ce.getName();
+                if (StringUtils.startsWith(fieldName, Solr.FIELD_PREFIX))
+                {
+                    if (StringUtils.equals(fieldName, Solr.FIELD_QUERY_NAME))
+                        aStringBuilder.append(ce.getValue());
+                }
+                else
+                {
+                    dataField = ce.getField();
+
+                    if (dataField.isTypeText())
+                    {
+                        switch (ce.getLogicalOperator())
+                        {
+                            case EQUAL:
+                                fieldOpValue = String.format("%s:%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case NOT_EQUAL:
+                                fieldOpValue = String.format("-%s:%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case CONTAINS:
+                                fieldOpValue = String.format("%s:*%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case NOT_CONTAINS:
+                                fieldOpValue = String.format("-%s:*%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case STARTS_WITH:
+                                fieldOpValue = String.format("%s:%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case ENDS_WITH:
+                                fieldOpValue = String.format("%s:*%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case IN:
+                                isFirst = true;
+                                qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                                for (String mValue : dataField.getValues())
+                                {
+                                    if (isFirst)
+                                    {
+                                        isFirst = false;
+                                        qryBuilder.append(Solr.escapeValue(mValue));
+                                    }
+                                    else
+                                    {
+                                        qryBuilder.append(" OR ");
+                                        qryBuilder.append(Solr.escapeValue(mValue));
+                                    }
+                                }
+                                qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                                aStringBuilder.append(qryBuilder);
+                                break;
+                            case NOT_IN:
+                                isFirst = true;
+                                qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                                for (String mValue : dataField.getValues())
+                                {
+                                    if (isFirst)
+                                    {
+                                        isFirst = false;
+                                        qryBuilder.append(Solr.escapeValue(mValue));
+                                    }
+                                    else
+                                    {
+                                        qryBuilder.append(" OR ");
+                                        qryBuilder.append(Solr.escapeValue(mValue));
+                                    }
+                                }
+                                qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                                aStringBuilder.append(qryBuilder);
+                                break;
+                        }
+                    }
+                    else if (dataField.isTypeNumber())
+                    {
+                        switch (ce.getLogicalOperator())
+                        {
+                            case EQUAL:
+                                fieldOpValue = String.format("%s:%s", dataField.getName(), dataField.getValue());
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case NOT_EQUAL:
+                                fieldOpValue = String.format("-%s:%s", dataField.getName(), dataField.getValue());
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case GREATER_THAN:
+                                fieldOpValue = String.format("%s:{%s TO *}", dataField.getName(), dataField.getValue());
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case GREATER_THAN_EQUAL:
+                                fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dataField.getValue());
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case LESS_THAN:
+                                fieldOpValue = String.format("%s:{* TO %s}", dataField.getName(), dataField.getValue());
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case LESS_THAN_EQUAL:
+                                fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dataField.getValue());
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case BETWEEN:
+                                if (dataField.getValues().size() == 2)
+                                {
+                                    fieldOpValue = String.format("%s:{%s TO %s}", dataField.getName(), dataField.getValue(0), dataField.getValue(1));
+                                    aStringBuilder.append(fieldOpValue);
+                                }
+                                break;
+                            case NOT_BETWEEN:
+                                if (dataField.getValues().size() == 2)
+                                {
+                                    fieldOpValue = String.format("-%s:{%s TO %s}", dataField.getName(), dataField.getValue(0), dataField.getValue(1));
+                                    aStringBuilder.append(fieldOpValue);
+                                }
+                                break;
+                            case BETWEEN_INCLUSIVE:
+                                if (dataField.getValues().size() == 2)
+                                {
+                                    fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(), dataField.getValue(0), dataField.getValue(1));
+                                    aStringBuilder.append(fieldOpValue);
+                                }
+                                break;
+                            case IN:
+                                isFirst = true;
+                                qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                                for (String mValue : dataField.getValues())
+                                {
+                                    if (isFirst)
+                                    {
+                                        isFirst = false;
+                                        qryBuilder.append(Solr.escapeValue(mValue));
+                                    }
+                                    else
+                                    {
+                                        qryBuilder.append(" OR ");
+                                        qryBuilder.append(Solr.escapeValue(mValue));
+                                    }
+                                }
+                                qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                                aStringBuilder.append(qryBuilder);
+                                break;
+                            case NOT_IN:
+                                isFirst = true;
+                                qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                                for (String mValue : dataField.getValues())
+                                {
+                                    if (isFirst)
+                                    {
+                                        isFirst = false;
+                                        qryBuilder.append(Solr.escapeValue(mValue));
+                                    }
+                                    else
+                                    {
+                                        qryBuilder.append(" OR ");
+                                        qryBuilder.append(Solr.escapeValue(mValue));
+                                    }
+                                }
+                                qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                                aStringBuilder.append(qryBuilder);
+                                break;
+                        }
+                    }
+                    else if (dataField.isTypeDateOrTime())
+                    {
+                        String dateValue1, dateValue2;
+
+                        switch (ce.getLogicalOperator())
+                        {
+                            case EQUAL:
+                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                fieldOpValue = String.format("%s:%s", dataField.getName(), dateValue1);
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case NOT_EQUAL:
+                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                fieldOpValue = String.format("-%s:%s", dataField.getName(), dateValue1);
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case GREATER_THAN:
+                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                fieldOpValue = String.format("%s:{%s TO *}", dataField.getName(), dateValue1);
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case GREATER_THAN_EQUAL:
+                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dateValue1);
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case LESS_THAN:
+                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                fieldOpValue = String.format("%s:{* TO %s}", dataField.getName(), dateValue1);
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case LESS_THAN_EQUAL:
+                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dateValue1);
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case BETWEEN:
+                                if (dataField.getValues().size() == 2)
+                                {
+                                    dateValue1 = Field.dateValueFormatted(ce.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                    dateValue2 = Field.dateValueFormatted(ce.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                    fieldOpValue = String.format("%s:{%s TO %s}", dataField.getName(), dateValue1, dateValue2);
+                                    aStringBuilder.append(fieldOpValue);
+                                }
+                                break;
+                            case NOT_BETWEEN:
+                                if (dataField.getValues().size() == 2)
+                                {
+                                    dateValue1 = Field.dateValueFormatted(ce.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                    dateValue2 = Field.dateValueFormatted(ce.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                    fieldOpValue = String.format("-%s:{%s TO %s}", dataField.getName(), dateValue1, dateValue2);
+                                    aStringBuilder.append(fieldOpValue);
+                                }
+                                break;
+                            case BETWEEN_INCLUSIVE:
+                                if (dataField.getValues().size() == 2)
+                                {
+                                    dateValue1 = Field.dateValueFormatted(ce.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                    dateValue2 = Field.dateValueFormatted(ce.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                    fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(), dateValue1, dateValue2);
+                                    aStringBuilder.append(fieldOpValue);
+                                }
+                                break;
+                            case IN:
+                                isFirst = true;
+                                qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                                for (String mValue : dataField.getValues())
+                                {
+                                    dateValue1 = Field.dateValueFormatted(Field.createDate(mValue, Field.FORMAT_DATETIME_DEFAULT),
+                                                                          Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                    if (isFirst)
+                                    {
+                                        isFirst = false;
+                                        qryBuilder.append(Solr.escapeValue(dateValue1));
+                                    }
+                                    else
+                                    {
+                                        qryBuilder.append(" OR ");
+                                        qryBuilder.append(Solr.escapeValue(dateValue1));
+                                    }
+                                }
+                                qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                                aStringBuilder.append(qryBuilder);
+                                break;
+                            case NOT_IN:
+                                isFirst = true;
+                                qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                                for (String mValue : dataField.getValues())
+                                {
+                                    dateValue1 = Field.dateValueFormatted(Field.createDate(mValue, Field.FORMAT_DATETIME_DEFAULT),
+                                                                          Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                                    if (isFirst)
+                                    {
+                                        isFirst = false;
+                                        qryBuilder.append(Solr.escapeValue(dateValue1));
+                                    }
+                                    else
+                                    {
+                                        qryBuilder.append(" OR ");
+                                        qryBuilder.append(Solr.escapeValue(dateValue1));
+                                    }
+                                }
+                                qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                                aStringBuilder.append(qryBuilder);
+                                break;
+                        }
+                    }
+                    else if (dataField.isTypeBoolean())
+                    {
+                        switch (ce.getLogicalOperator())
+                        {
+                            case EQUAL:
+                                fieldOpValue = String.format("%s:%s", dataField.getName(), dataField.getValue());
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                            case NOT_EQUAL:
+                                fieldOpValue = String.format("-%s:%s", dataField.getName(), dataField.getValue());
+                                aStringBuilder.append(fieldOpValue);
+                                break;
+                        }
+                    }
+                }
             }
-            aValue = strBuilder.toString();
         }
-        offset2 = aValue.indexOf(StrUtl.CHAR_SPACE);
-        int offset3 = aValue.indexOf(StrUtl.CHAR_COLON);
-        int offset4 = aValue.indexOf(StrUtl.CHAR_HYPHEN);
-        int offset5 = aValue.indexOf(StrUtl.CHAR_PLUS);
-        int offset6 = aValue.indexOf(StrUtl.CHAR_FORWARDSLASH);
-        if ((offset2 == -1) && (offset3 == -1) &&
-            (offset4 == -1) && (offset5 == -1) &&
-            (offset6 == -1))
-            return aValue;
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
+    }
+
+    private void appendParameter(StringBuilder aStringBuilder, String aName, String aValue)
+        throws DSException
+    {
+        if (StringUtils.isNotEmpty(aValue))
+        {
+            try
+            {
+                String encodedValue = URLEncoder.encode(aValue, StandardCharsets.UTF_8.toString());
+                int offset = aStringBuilder.toString().indexOf(StrUtl.CHAR_QUESTMARK);
+                if (offset == -1)
+                    aStringBuilder.append(String.format("?%s=%s", aName, encodedValue));
+                else
+                    aStringBuilder.append(String.format("&%s=%s", aName, encodedValue));
+            }
+            catch (UnsupportedEncodingException e)
+            {
+                Logger appLogger = mAppMgr.getLogger(this, "appendParameter");
+                appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
+                String msgStr = String.format("%s: %s", e.getMessage(), aValue);
+                appLogger.error(msgStr);
+                throw new DSException(msgStr);
+            }
+        }
+    }
+
+    /**
+     * Add criterion entry as a Solr query parameter.
+     *
+     * @param aStringBuilder String builder.
+     * @param aCE Data source criterion entry.
+     *
+     * @throws DSException Data source exception.
+     */
+    public void addCriterionEntryParameter(StringBuilder aStringBuilder, DSCriterionEntry aCE)
+        throws DSException
+    {
+        boolean isFirst;
+        DataField dataField;
+        StringBuilder qryBuilder;
+        String fieldName, fieldOpValue;
+        Logger appLogger = mAppMgr.getLogger(this, "addCriterionEntry");
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
+
+        fieldName = aCE.getName();
+        dataField = aCE.getField();
+        if (StringUtils.startsWith(fieldName, Solr.FIELD_PREFIX))
+        {
+            if (StringUtils.equals(fieldName, Solr.FIELD_QUERY_NAME))
+                appendParameter(aStringBuilder, "q", dataField.getValue());
+            else if (StringUtils.equals(fieldName, Solr.FIELD_PARAM_NAME))
+            {
+                if (dataField.valueCount() == 2)
+                    appendParameter(aStringBuilder, dataField.getValue(0), dataField.getValue(1));
+            }
+        }
         else
-            return "\"" + aValue + "\"";
+        {
+            if (dataField.isTypeText())
+            {
+                switch (aCE.getLogicalOperator())
+                {
+                    case EQUAL:
+                        fieldOpValue = String.format("%s:%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case NOT_EQUAL:
+                        fieldOpValue = String.format("-%s:%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case CONTAINS:
+                        fieldOpValue = String.format("%s:*%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case NOT_CONTAINS:
+                        fieldOpValue = String.format("-%s:*%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case STARTS_WITH:
+                        fieldOpValue = String.format("%s:%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case ENDS_WITH:
+                        fieldOpValue = String.format("%s:*%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case IN:
+                        isFirst = true;
+                        qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                        for (String mValue : dataField.getValues())
+                        {
+                            if (isFirst)
+                            {
+                                isFirst = false;
+                                qryBuilder.append(Solr.escapeValue(mValue));
+                            }
+                            else
+                            {
+                                qryBuilder.append(" OR ");
+                                qryBuilder.append(Solr.escapeValue(mValue));
+                            }
+                        }
+                        qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                        appendParameter(aStringBuilder, "fq", qryBuilder.toString());
+                        break;
+                    case NOT_IN:
+                        isFirst = true;
+                        qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                        for (String mValue : dataField.getValues())
+                        {
+                            if (isFirst)
+                            {
+                                isFirst = false;
+                                qryBuilder.append(Solr.escapeValue(mValue));
+                            }
+                            else
+                            {
+                                qryBuilder.append(" OR ");
+                                qryBuilder.append(Solr.escapeValue(mValue));
+                            }
+                        }
+                        qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                        appendParameter(aStringBuilder, "fq", qryBuilder.toString());
+                        break;
+                }
+            }
+            else if (dataField.isTypeNumber())
+            {
+                switch (aCE.getLogicalOperator())
+                {
+                    case EQUAL:
+                        fieldOpValue = String.format("%s:%s", dataField.getName(), dataField.getValue());
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case NOT_EQUAL:
+                        fieldOpValue = String.format("-%s:%s", dataField.getName(), dataField.getValue());
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case GREATER_THAN:
+                        fieldOpValue = String.format("%s:{%s TO *}", dataField.getName(), dataField.getValue());
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case GREATER_THAN_EQUAL:
+                        fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dataField.getValue());
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case LESS_THAN:
+                        fieldOpValue = String.format("%s:{* TO %s}", dataField.getName(), dataField.getValue());
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case LESS_THAN_EQUAL:
+                        fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dataField.getValue());
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case BETWEEN:
+                        if (dataField.getValues().size() == 2)
+                        {
+                            fieldOpValue = String.format("%s:{%s TO %s}", dataField.getName(), dataField.getValue(0), dataField.getValue(1));
+                            appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        }
+                        break;
+                    case NOT_BETWEEN:
+                        if (dataField.getValues().size() == 2)
+                        {
+                            fieldOpValue = String.format("-%s:{%s TO %s}", dataField.getName(), dataField.getValue(0), dataField.getValue(1));
+                            appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        }
+                        break;
+                    case BETWEEN_INCLUSIVE:
+                        if (dataField.getValues().size() == 2)
+                        {
+                            fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(), dataField.getValue(0), dataField.getValue(1));
+                            appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        }
+                        break;
+                    case IN:
+                        isFirst = true;
+                        qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                        for (String mValue : dataField.getValues())
+                        {
+                            if (isFirst)
+                            {
+                                isFirst = false;
+                                qryBuilder.append(Solr.escapeValue(mValue));
+                            }
+                            else
+                            {
+                                qryBuilder.append(" OR ");
+                                qryBuilder.append(Solr.escapeValue(mValue));
+                            }
+                        }
+                        qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                        appendParameter(aStringBuilder, "fq", qryBuilder.toString());
+                        break;
+                    case NOT_IN:
+                        isFirst = true;
+                        qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                        for (String mValue : dataField.getValues())
+                        {
+                            if (isFirst)
+                            {
+                                isFirst = false;
+                                qryBuilder.append(Solr.escapeValue(mValue));
+                            }
+                            else
+                            {
+                                qryBuilder.append(" OR ");
+                                qryBuilder.append(Solr.escapeValue(mValue));
+                            }
+                        }
+                        qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                        appendParameter(aStringBuilder, "fq", qryBuilder.toString());
+                        break;
+                }
+            }
+            else if (dataField.isTypeDateOrTime())
+            {
+                String dateValue1, dateValue2;
+
+                switch (aCE.getLogicalOperator())
+                {
+                    case EQUAL:
+                        dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("%s:%s", dataField.getName(), dateValue1);
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case NOT_EQUAL:
+                        dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("-%s:%s", dataField.getName(), dateValue1);
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case GREATER_THAN:
+                        dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("%s:{%s TO *}", dataField.getName(), dateValue1);
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case GREATER_THAN_EQUAL:
+                        dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dateValue1);
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case LESS_THAN:
+                        dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("%s:{* TO %s}", dataField.getName(), dateValue1);
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case LESS_THAN_EQUAL:
+                        dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dateValue1);
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case BETWEEN:
+                        if (dataField.getValues().size() == 2)
+                        {
+                            dateValue1 = Field.dateValueFormatted(aCE.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                            dateValue2 = Field.dateValueFormatted(aCE.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                            fieldOpValue = String.format("%s:{%s TO %s}", dataField.getName(), dateValue1, dateValue2);
+                            appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        }
+                        break;
+                    case NOT_BETWEEN:
+                        if (dataField.getValues().size() == 2)
+                        {
+                            dateValue1 = Field.dateValueFormatted(aCE.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                            dateValue2 = Field.dateValueFormatted(aCE.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                            fieldOpValue = String.format("-%s:{%s TO %s}", dataField.getName(), dateValue1, dateValue2);
+                            appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        }
+                        break;
+                    case BETWEEN_INCLUSIVE:
+                        if (dataField.getValues().size() == 2)
+                        {
+                            dateValue1 = Field.dateValueFormatted(aCE.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                            dateValue2 = Field.dateValueFormatted(aCE.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                            fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(), dateValue1, dateValue2);
+                            appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        }
+                        break;
+                    case IN:
+                        isFirst = true;
+                        qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                        for (String mValue : dataField.getValues())
+                        {
+                            dateValue1 = Field.dateValueFormatted(Field.createDate(mValue, Field.FORMAT_DATETIME_DEFAULT),
+                                                                  Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                            if (isFirst)
+                            {
+                                isFirst = false;
+                                qryBuilder.append(Solr.escapeValue(dateValue1));
+                            }
+                            else
+                            {
+                                qryBuilder.append(" OR ");
+                                qryBuilder.append(Solr.escapeValue(dateValue1));
+                            }
+                        }
+                        qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                        appendParameter(aStringBuilder, "fq", qryBuilder.toString());
+                        break;
+                    case NOT_IN:
+                        isFirst = true;
+                        qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
+                        for (String mValue : dataField.getValues())
+                        {
+                            dateValue1 = Field.dateValueFormatted(Field.createDate(mValue, Field.FORMAT_DATETIME_DEFAULT),
+                                                                  Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                            if (isFirst)
+                            {
+                                isFirst = false;
+                                qryBuilder.append(Solr.escapeValue(dateValue1));
+                            }
+                            else
+                            {
+                                qryBuilder.append(" OR ");
+                                qryBuilder.append(Solr.escapeValue(dateValue1));
+                            }
+                        }
+                        qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
+                        appendParameter(aStringBuilder, "fq", qryBuilder.toString());
+                        break;
+                }
+            }
+            else if (dataField.isTypeBoolean())
+            {
+                switch (aCE.getLogicalOperator())
+                {
+                    case EQUAL:
+                        fieldOpValue = String.format("%s:%s", dataField.getName(), dataField.getValue());
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                    case NOT_EQUAL:
+                        fieldOpValue = String.format("-%s:%s", dataField.getName(), dataField.getValue());
+                        appendParameter(aStringBuilder, "fq", fieldOpValue);
+                        break;
+                }
+            }
+        }
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
+    }
+
+
+    private void createAsQueryParameters(StringBuilder aStringBuilder, DSCriteria aCriteria)
+        throws DSException
+    {
+        Logger appLogger = mAppMgr.getLogger(this, "createAsQueryParameters");
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
+
+        if ((aCriteria != null) && (aCriteria.count() > 0))
+        {
+            for (DSCriterionEntry ce : aCriteria.getCriterionEntries())
+                addCriterionEntryParameter(aStringBuilder, ce);
+        }
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
     }
 
     /**
@@ -158,345 +799,54 @@ public class SolrQueryBuilder
      *
      * @return Collapsed query string.
      */
-    public String createAsString(DSCriteria aCriteria)
+    public String createAsQueryString(DSCriteria aCriteria)
     {
-        boolean isFirst;
-        DataField dataField;
-        StringBuilder qryBuilder;
-        String fieldName, fieldOpValue;
-        Logger appLogger = mAppMgr.getLogger(this, "createAsString");
+        Logger appLogger = mAppMgr.getLogger(this, "createAsQueryString");
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
 
         StringBuilder stringBuilder = new StringBuilder();
-
-        if ((aCriteria != null) && (aCriteria.count() > 0))
-        {
-            for (DSCriterionEntry ce : aCriteria.getCriterionEntries())
-            {
-                if (stringBuilder.length() > 0)
-                    stringBuilder.append(String.format(" %s ", ce.getBooleanOperator().name()));
-
-                fieldName = ce.getName();
-                if (StringUtils.startsWith(fieldName, Solr.FIELD_PREFIX))
-                {
-                    if (StringUtils.equals(fieldName, Solr.FIELD_QUERY_NAME))
-                        stringBuilder.append(ce.getValue());
-                }
-                else
-                {
-                    dataField = ce.getField();
-
-                    if (dataField.isTypeText())
-                    {
-                        switch (ce.getLogicalOperator())
-                        {
-                            case EQUAL:
-                                fieldOpValue = String.format("%s:%s", dataField.getName(),
-                                    escapeValue(dataField.getValue()));
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case NOT_EQUAL:
-                                fieldOpValue = String.format("-%s:%s", dataField.getName(),
-                                    escapeValue(dataField.getValue()));
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case CONTAINS:
-                                fieldOpValue = String.format("%s:*%s*", dataField.getName(),
-                                    escapeValue(dataField.getValue()));
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case NOT_CONTAINS:
-                                fieldOpValue = String.format("-%s:*%s*", dataField.getName(),
-                                    escapeValue(dataField.getValue()));
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case STARTS_WITH:
-                                fieldOpValue = String.format("%s:%s*", dataField.getName(),
-                                    escapeValue(dataField.getValue()));
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case ENDS_WITH:
-                                fieldOpValue = String.format("%s:*%s", dataField.getName(),
-                                    escapeValue(dataField.getValue()));
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case IN:
-                                isFirst = true;
-                                qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
-                                for (String mValue : dataField.getValues())
-                                {
-                                    if (isFirst)
-                                    {
-                                        isFirst = false;
-                                        qryBuilder.append(escapeValue(mValue));
-                                    }
-                                    else
-                                    {
-                                        qryBuilder.append(" OR ");
-                                        qryBuilder.append(escapeValue(mValue));
-                                    }
-                                }
-                                qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
-                                stringBuilder.append(qryBuilder);
-                                break;
-                            case NOT_IN:
-                                isFirst = true;
-                                qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
-                                for (String mValue : dataField.getValues())
-                                {
-                                    if (isFirst)
-                                    {
-                                        isFirst = false;
-                                        qryBuilder.append(escapeValue(mValue));
-                                    }
-                                    else
-                                    {
-                                        qryBuilder.append(" OR ");
-                                        qryBuilder.append(escapeValue(mValue));
-                                    }
-                                }
-                                qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
-                                stringBuilder.append(qryBuilder);
-                                break;
-                        }
-                    }
-                    else if (dataField.isTypeNumber())
-                    {
-                        switch (ce.getLogicalOperator())
-                        {
-                            case EQUAL:
-                                fieldOpValue = String.format("%s:%s", dataField.getName(), dataField.getValue());
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case NOT_EQUAL:
-                                fieldOpValue = String.format("-%s:%s", dataField.getName(), dataField.getValue());
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case GREATER_THAN:
-                                fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dataField.getValue());
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case GREATER_THAN_EQUAL:
-                                dataField.setValue(dataField.getValueAsInt() - 1);
-                                fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dataField.getValue());
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case LESS_THAN:
-                                fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dataField.getValue());
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case LESS_THAN_EQUAL:
-                                dataField.setValue(dataField.getValueAsInt() + 1);
-                                fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dataField.getValue());
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case BETWEEN:
-                                if (dataField.getValues().size() == 2)
-                                {
-                                    fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(),
-                                        dataField.getValue(0), dataField.getValue(1));
-                                    stringBuilder.append(fieldOpValue);
-                                }
-                                break;
-                            case NOT_BETWEEN:
-                                if (dataField.getValues().size() == 2)
-                                {
-                                    fieldOpValue = String.format("-%s:[%s TO %s]", dataField.getName(),
-                                        dataField.getValue(0), dataField.getValue(1));
-                                    stringBuilder.append(fieldOpValue);
-                                }
-                                break;
-                            case BETWEEN_INCLUSIVE:
-                                int numValue1 = Integer.parseInt(dataField.getValue(0)) - 1;
-                                int numValue2 = Integer.parseInt(dataField.getValue(1)) + 1;
-                                fieldOpValue = String.format("%s:[%d TO %d]", dataField.getName(), numValue1, numValue2);
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case IN:
-                                isFirst = true;
-                                qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
-                                for (String mValue : dataField.getValues())
-                                {
-                                    if (isFirst)
-                                    {
-                                        isFirst = false;
-                                        qryBuilder.append(escapeValue(mValue));
-                                    }
-                                    else
-                                    {
-                                        qryBuilder.append(" OR ");
-                                        qryBuilder.append(escapeValue(mValue));
-                                    }
-                                }
-                                qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
-                                stringBuilder.append(qryBuilder);
-                                break;
-                            case NOT_IN:
-                                isFirst = true;
-                                qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
-                                for (String mValue : dataField.getValues())
-                                {
-                                    if (isFirst)
-                                    {
-                                        isFirst = false;
-                                        qryBuilder.append(escapeValue(mValue));
-                                    }
-                                    else
-                                    {
-                                        qryBuilder.append(" OR ");
-                                        qryBuilder.append(escapeValue(mValue));
-                                    }
-                                }
-                                qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
-                                stringBuilder.append(qryBuilder);
-                                break;
-                        }
-                    }
-                    else if (dataField.isTypeDateOrTime())
-                    {
-                        long timeValue1, timeValue2;
-                        String dateValue1, dateValue2;
-
-                        switch (ce.getLogicalOperator())
-                        {
-                            case EQUAL:
-                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                    Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                fieldOpValue = String.format("%s:%s", dataField.getName(), dateValue1);
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case NOT_EQUAL:
-                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                    Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                fieldOpValue = String.format("-%s:%s", dataField.getName(), dateValue1);
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case GREATER_THAN:
-                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                    Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dateValue1);
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case GREATER_THAN_EQUAL:
-                                timeValue1 = dataField.getValueAsDate().getTime();
-                                dataField.setValue(new Date(timeValue1-100));
-                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                    Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dateValue1);
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case LESS_THAN:
-                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                    Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dateValue1);
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case LESS_THAN_EQUAL:
-                                timeValue1 = dataField.getValueAsDate().getTime();
-                                dataField.setValue(new Date(timeValue1+100));
-                                dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                    Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dateValue1);
-                                stringBuilder.append(fieldOpValue);
-                                break;
-                            case BETWEEN:
-                                if (dataField.getValues().size() == 2)
-                                {
-                                    dateValue1 = Field.dateValueFormatted(ce.getValueAsDate(0),
-                                        Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                    dateValue2 = Field.dateValueFormatted(ce.getValueAsDate(1),
-                                        Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                    fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(),
-                                        dateValue1, dateValue2);
-                                    stringBuilder.append(fieldOpValue);
-                                }
-                                break;
-                            case NOT_BETWEEN:
-                                if (dataField.getValues().size() == 2)
-                                {
-                                    dateValue1 = Field.dateValueFormatted(ce.getValueAsDate(0),
-                                        Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                    dateValue2 = Field.dateValueFormatted(ce.getValueAsDate(1),
-                                        Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                    fieldOpValue = String.format("-%s:[%s TO %s]", dataField.getName(),
-                                        dateValue1, dateValue2);
-                                    stringBuilder.append(fieldOpValue);
-                                }
-                                break;
-                            case BETWEEN_INCLUSIVE:
-                                if (dataField.getValues().size() == 2)
-                                {
-                                    timeValue1 = ce.getValueAsDate(0).getTime();
-                                    dateValue1 = Field.dateValueFormatted(new Date(timeValue1-100),
-                                        Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                    timeValue2 = ce.getValueAsDate(1).getTime();
-                                    dateValue2 = Field.dateValueFormatted(new Date(timeValue2+100),
-                                        Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                    fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(),
-                                        dateValue1, dateValue2);
-                                    stringBuilder.append(fieldOpValue);
-                                }
-                                break;
-                            case IN:
-                                isFirst = true;
-                                qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
-                                for (String mValue : dataField.getValues())
-                                {
-                                    dateValue1 = Field.dateValueFormatted(Field.createDate(mValue, Field.FORMAT_DATETIME_DEFAULT),
-                                        Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                    if (isFirst)
-                                    {
-                                        isFirst = false;
-                                        qryBuilder.append(escapeValue(dateValue1));
-                                    }
-                                    else
-                                    {
-                                        qryBuilder.append(" OR ");
-                                        qryBuilder.append(escapeValue(dateValue1));
-                                    }
-                                }
-                                qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
-                                stringBuilder.append(qryBuilder);
-                                break;
-                            case NOT_IN:
-                                isFirst = true;
-                                qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
-                                for (String mValue : dataField.getValues())
-                                {
-                                    dateValue1 = Field.dateValueFormatted(Field.createDate(mValue, Field.FORMAT_DATETIME_DEFAULT),
-                                        Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                                    if (isFirst)
-                                    {
-                                        isFirst = false;
-                                        qryBuilder.append(escapeValue(dateValue1));
-                                    }
-                                    else
-                                    {
-                                        qryBuilder.append(" OR ");
-                                        qryBuilder.append(escapeValue(dateValue1));
-                                    }
-                                }
-                                qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
-                                stringBuilder.append(qryBuilder);
-                                break;
-                        }
-                    }
-                }
-            }
-        }
+        createAsQueryString(stringBuilder, aCriteria);
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
 
         return stringBuilder.toString();
     }
 
-    private void add(SolrQuery aSolrQuery, DSCriterionEntry aCriterionEntry)
+    /**
+     * Creates Solr query URL parameters based on the
+     * <i>DSCriteria</i> instance. This method is suitable
+     * for appending to a prefix string that identifies the
+     * Solr host name, port number, collection and request
+     * handler.
+     *
+     * @param aCriteria DS Criteria instance.
+     *
+     * @return String Collapsed query string.
+     *
+     * @throws DSException Data source exception.
+     */
+    public String createAsQueryParameters(DSCriteria aCriteria)
+        throws DSException
+    {
+        Logger appLogger = mAppMgr.getLogger(this, "createAsQueryParameters");
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        createAsQueryParameters(stringBuilder, aCriteria);
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
+
+        return stringBuilder.toString();
+    }
+
+    private void addFilter(SolrQuery aSolrQuery, DSCriterionEntry aCriterionEntry)
     {
         boolean isFirst;
         String fieldOpValue;
         StringBuilder qryBuilder;
-        Logger appLogger = mAppMgr.getLogger(this, "add");
+        Logger appLogger = mAppMgr.getLogger(this, "addFilter");
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
 
@@ -507,71 +857,65 @@ public class SolrQueryBuilder
             switch (aCriterionEntry.getLogicalOperator())
             {
                 case EQUAL:
-                    fieldOpValue = String.format("%s:%s", dataField.getName(),
-                                                 escapeValue(dataField.getValue()));
+                    fieldOpValue = String.format("%s:%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case NOT_EQUAL:
-                    fieldOpValue = String.format("-%s:%s", dataField.getName(),
-                                                 escapeValue(dataField.getValue()));
+                    fieldOpValue = String.format("-%s:%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case CONTAINS:
-                    fieldOpValue = String.format("%s:*%s*", dataField.getName(),
-                                                 escapeValue(dataField.getValue()));
+                    fieldOpValue = String.format("%s:*%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case NOT_CONTAINS:
-                    fieldOpValue = String.format("-%s:*%s*", dataField.getName(),
-                                                 escapeValue(dataField.getValue()));
+                    fieldOpValue = String.format("-%s:*%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case STARTS_WITH:
-                    fieldOpValue = String.format("%s:%s*", dataField.getName(),
-                                                 escapeValue(dataField.getValue()));
+                    fieldOpValue = String.format("%s:%s*", dataField.getName(), Solr.escapeValue(dataField.getValue()));
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case ENDS_WITH:
-                    fieldOpValue = String.format("%s:*%s", dataField.getName(),
-                                                 escapeValue(dataField.getValue()));
+                    fieldOpValue = String.format("%s:*%s", dataField.getName(), Solr.escapeValue(dataField.getValue()));
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case IN:
                     isFirst = true;
-                    qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
+                    qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
                     for (String mValue : dataField.getValues())
                     {
                         if (isFirst)
                         {
                             isFirst = false;
-                            qryBuilder.append(escapeValue(mValue));
+                            qryBuilder.append(Solr.escapeValue(mValue));
                         }
                         else
                         {
                             qryBuilder.append(" OR ");
-                            qryBuilder.append(escapeValue(mValue));
+                            qryBuilder.append(Solr.escapeValue(mValue));
                         }
                     }
-                    qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+                    qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
                     aSolrQuery.addFilterQuery(qryBuilder.toString());
                     break;
                 case NOT_IN:
                     isFirst = true;
-                    qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
+                    qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
                     for (String mValue : dataField.getValues())
                     {
                         if (isFirst)
                         {
                             isFirst = false;
-                            qryBuilder.append(escapeValue(mValue));
+                            qryBuilder.append(Solr.escapeValue(mValue));
                         }
                         else
                         {
                             qryBuilder.append(" OR ");
-                            qryBuilder.append(escapeValue(mValue));
+                            qryBuilder.append(Solr.escapeValue(mValue));
                         }
                     }
-                    qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+                    qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
                     aSolrQuery.addFilterQuery(qryBuilder.toString());
                     break;
                 case SORT:
@@ -633,40 +977,40 @@ public class SolrQueryBuilder
                     break;
                 case IN:
                     isFirst = true;
-                    qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
+                    qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
                     for (String mValue : dataField.getValues())
                     {
                         if (isFirst)
                         {
                             isFirst = false;
-                            qryBuilder.append(escapeValue(mValue));
+                            qryBuilder.append(Solr.escapeValue(mValue));
                         }
                         else
                         {
                             qryBuilder.append(" OR ");
-                            qryBuilder.append(escapeValue(mValue));
+                            qryBuilder.append(Solr.escapeValue(mValue));
                         }
                     }
-                    qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+                    qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
                     aSolrQuery.addFilterQuery(qryBuilder.toString());
                     break;
                 case NOT_IN:
                     isFirst = true;
-                    qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
+                    qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
                     for (String mValue : dataField.getValues())
                     {
                         if (isFirst)
                         {
                             isFirst = false;
-                            qryBuilder.append(escapeValue(mValue));
+                            qryBuilder.append(Solr.escapeValue(mValue));
                         }
                         else
                         {
                             qryBuilder.append(" OR ");
-                            qryBuilder.append(escapeValue(mValue));
+                            qryBuilder.append(Solr.escapeValue(mValue));
                         }
                     }
-                    qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+                    qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
                     aSolrQuery.addFilterQuery(qryBuilder.toString());
                     break;
                 case SORT:
@@ -676,92 +1020,70 @@ public class SolrQueryBuilder
         }
         else if (dataField.isTypeDateOrTime())
         {
-            long timeValue1, timeValue2;
             String dateValue1, dateValue2;
 
             switch (aCriterionEntry.getLogicalOperator())
             {
                 case EQUAL:
-                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                                          Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
                     fieldOpValue = String.format("%s:%s", dataField.getName(), dateValue1);
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case NOT_EQUAL:
-                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                                          Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
                     fieldOpValue = String.format("-%s:%s", dataField.getName(), dateValue1);
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case GREATER_THAN:
-                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                                          Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                    fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dateValue1);
+                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                    fieldOpValue = String.format("%s:{%s TO *}", dataField.getName(), dateValue1);
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case GREATER_THAN_EQUAL:
-                    timeValue1 = dataField.getValueAsDate().getTime();
-                    dataField.setValue(new Date(timeValue1-100));
-                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                                          Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
                     fieldOpValue = String.format("%s:[%s TO *]", dataField.getName(), dateValue1);
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case LESS_THAN:
-                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                                          Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                    fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dateValue1);
+                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                    fieldOpValue = String.format("%s:{* TO %s}", dataField.getName(), dateValue1);
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case LESS_THAN_EQUAL:
-                    timeValue1 = dataField.getValueAsDate().getTime();
-                    dataField.setValue(new Date(timeValue1+100));
-                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(),
-                                                          Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                    dateValue1 = Field.dateValueFormatted(dataField.getValueAsDate(), Field.FORMAT_ISO8601DATETIME_DEFAULT);
                     fieldOpValue = String.format("%s:[* TO %s]", dataField.getName(), dateValue1);
                     aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
                 case BETWEEN:
                     if (dataField.getValues().size() == 2)
                     {
-                        dateValue1 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(0),
-                                                              Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                        dateValue2 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(1),
-                                                              Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                        fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(),
-                                                     dateValue1, dateValue2);
+                        dateValue1 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        dateValue2 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("%s:{%s TO %s}", dataField.getName(), dateValue1, dateValue2);
                         aSolrQuery.addFilterQuery(fieldOpValue);
                     }
                     break;
                 case NOT_BETWEEN:
                     if (dataField.getValues().size() == 2)
                     {
-                        dateValue1 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(0),
-                                                              Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                        dateValue2 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(1),
-                                                              Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                        fieldOpValue = String.format("-%s:[%s TO %s]", dataField.getName(),
-                                                     dateValue1, dateValue2);
+                        dateValue1 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        dateValue2 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("-%s:{%s TO %s}", dataField.getName(), dateValue1, dateValue2);
                         aSolrQuery.addFilterQuery(fieldOpValue);
                     }
                     break;
                 case BETWEEN_INCLUSIVE:
                     if (dataField.getValues().size() == 2)
                     {
-                        timeValue1 = aCriterionEntry.getValueAsDate(0).getTime();
-                        dateValue1 = Field.dateValueFormatted(new Date(timeValue1-100),
-                                                              Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                        timeValue2 = aCriterionEntry.getValueAsDate(1).getTime();
-                        dateValue2 = Field.dateValueFormatted(new Date(timeValue2+100),
-                                                              Field.FORMAT_ISO8601DATETIME_DEFAULT);
-                        fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(),
-                                                     dateValue1, dateValue2);
+                        dateValue1 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(0), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        dateValue2 = Field.dateValueFormatted(aCriterionEntry.getValueAsDate(1), Field.FORMAT_ISO8601DATETIME_DEFAULT);
+                        fieldOpValue = String.format("%s:[%s TO %s]", dataField.getName(), dateValue1, dateValue2);
                         aSolrQuery.addFilterQuery(fieldOpValue);
                     }
                     break;
                 case IN:
                     isFirst = true;
-                    qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
+                    qryBuilder = new StringBuilder(String.format("%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
                     for (String mValue : dataField.getValues())
                     {
                         dateValue1 = Field.dateValueFormatted(Field.createDate(mValue, Field.FORMAT_DATETIME_DEFAULT),
@@ -769,20 +1091,20 @@ public class SolrQueryBuilder
                         if (isFirst)
                         {
                             isFirst = false;
-                            qryBuilder.append(escapeValue(dateValue1));
+                            qryBuilder.append(Solr.escapeValue(dateValue1));
                         }
                         else
                         {
                             qryBuilder.append(" OR ");
-                            qryBuilder.append(escapeValue(dateValue1));
+                            qryBuilder.append(Solr.escapeValue(dateValue1));
                         }
                     }
-                    qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+                    qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
                     aSolrQuery.addFilterQuery(qryBuilder.toString());
                     break;
                 case NOT_IN:
                     isFirst = true;
-                    qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_LEFTPAREN));
+                    qryBuilder = new StringBuilder(String.format("-%s:%c", dataField.getName(), StrUtl.CHAR_PAREN_OPEN));
                     for (String mValue : dataField.getValues())
                     {
                         dateValue1 = Field.dateValueFormatted(Field.createDate(mValue, Field.FORMAT_DATETIME_DEFAULT),
@@ -790,19 +1112,33 @@ public class SolrQueryBuilder
                         if (isFirst)
                         {
                             isFirst = false;
-                            qryBuilder.append(escapeValue(dateValue1));
+                            qryBuilder.append(Solr.escapeValue(dateValue1));
                         }
                         else
                         {
                             qryBuilder.append(" OR ");
-                            qryBuilder.append(escapeValue(dateValue1));
+                            qryBuilder.append(Solr.escapeValue(dateValue1));
                         }
                     }
-                    qryBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+                    qryBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
                     aSolrQuery.addFilterQuery(qryBuilder.toString());
                     break;
                 case SORT:
                     aSolrQuery.addSort(dataField.getName(), valueToOrder(dataField.getValue()));
+                    break;
+            }
+        }
+        else if (dataField.isTypeBoolean())
+        {
+            switch (aCriterionEntry.getLogicalOperator())
+            {
+                case EQUAL:
+                    fieldOpValue = String.format("%s:%s", dataField.getName(), dataField.getValue());
+                    aSolrQuery.addFilterQuery(fieldOpValue);
+                    break;
+                case NOT_EQUAL:
+                    fieldOpValue = String.format("-%s:%s", dataField.getName(), dataField.getValue());
+                    aSolrQuery.addFilterQuery(fieldOpValue);
                     break;
             }
         }
@@ -835,7 +1171,7 @@ public class SolrQueryBuilder
         }
 
         if (StringUtils.isEmpty(requestHandler))
-            rhEndpoint = Solr.QUERY_RESPONSE_HANDLER_DEFAULT;
+            rhEndpoint = Solr.QUERY_REQUEST_HANDLER_DEFAULT;
         else
         {
             if (requestHandler.charAt(0) == StrUtl.CHAR_FORWARDSLASH)
@@ -864,15 +1200,12 @@ public class SolrQueryBuilder
         throws MalformedURLException, UnsupportedEncodingException
     {
         int offset;
-        String[] filterQueries;
         String paramName, paramValue;
         Logger appLogger = mAppMgr.getLogger(this, "urlToSolrQuery");
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
 
         SolrQuery solrQuery = new SolrQuery();
-        solrQuery.setStart(Solr.QUERY_OFFSET_DEFAULT);
-        solrQuery.setRows(Solr.QUERY_PAGESIZE_DEFAULT);
         solrQuery.setRequestHandler(requestHandlerEndpoint(aCriteria));
 
         URL solrURL = new URL(aURL);
@@ -880,18 +1213,6 @@ public class SolrQueryBuilder
         String[] urlPairs = urlQuery.split("&");
         if (urlPairs.length > 0)
         {
-            int fqCount = 0;
-            for (String urlPair : urlPairs)
-            {
-                if (urlPair.startsWith("fq="))
-                    fqCount++;
-            }
-            if (fqCount > 0)
-                filterQueries = new String[fqCount];
-            else
-                filterQueries = null;
-            int fqOffset = 0;
-
             for (String urlPair : urlPairs)
             {
                 offset = urlPair.indexOf("=");
@@ -899,19 +1220,9 @@ public class SolrQueryBuilder
                 {
                     paramName = URLDecoder.decode(urlPair.substring(0, offset), "UTF-8");
                     paramValue = URLDecoder.decode(urlPair.substring(offset + 1), "UTF-8");
-                    if (paramName.equals("q"))
-                        solrQuery.setQuery(paramValue);
-                    else if (paramName.equals("fq"))
-                    {
-                        if ((filterQueries != null) && (fqOffset < fqCount))
-                            filterQueries[fqOffset++] = paramValue;
-                    }
-                    else
-                        solrQuery.setParam(paramName, paramValue);
+                    solrQuery.add(paramName, paramValue);
                 }
             }
-            if (filterQueries != null)
-                solrQuery.setFilterQueries(filterQueries);
         }
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
@@ -938,18 +1249,26 @@ public class SolrQueryBuilder
 
     /**
      * Creates a <i>SolrQuery</i> instance and populates it with the
-     * search query stored within the <i>DSCriteria</i> instance.
+     * search query stored within the <i>DSCriteria</i> instance.  The
+     * method will assign the query string, paging details, filter
+     * queries, request handler, explicit URL.  If you are using this
+     * in conjunction with a QueryPlan, then the specification of a
+     * request handler or explicit URL should be avoided.
      *
      * @param aCriteria DS Criteria instance.
      *
      * @return SolrQuery instance.
      *
      * @throws DSException Data source related exception.
+     *
+     *  @see <a href="http://lucene.apache.org/solr/guide/7_6/common-query-parameters.html">Solr Common Query Parametersr</a>
+     * 	@see <a href="https://lucene.apache.org/solr/guide/7_6/the-standard-query-parser.html">Solr Standard Query Parserr</a>
      */
     public SolrQuery create(DSCriteria aCriteria)
         throws DSException
     {
         String fieldName;
+        DataField dataField;
         Logger appLogger = mAppMgr.getLogger(this, "create");
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
@@ -964,7 +1283,7 @@ public class SolrQueryBuilder
         if (aCriteria.isFeatureAssigned(Doc.FEATURE_OP_LIMIT))
             solrQuery.setRows(aCriteria.getFeatureAsInt(Doc.FEATURE_OP_LIMIT));
 
-        if ((aCriteria != null) && (aCriteria.count() > 0))
+        if (aCriteria.count() > 0)
         {
             try
             {
@@ -975,11 +1294,17 @@ public class SolrQueryBuilder
                     {
                         if (StringUtils.equals(fieldName, Solr.FIELD_QUERY_NAME))
                             solrQuery.setQuery(ce.getValue());
-                        else if (StringUtils.equals(fieldName, Solr.FIELD_URI_NAME))
+                        else if (StringUtils.equals(fieldName, Solr.FIELD_PARAM_NAME))
+                        {
+                            dataField = ce.getField();
+                            if (dataField.valueCount() == 2)
+                                solrQuery.add(dataField.getValue(0), dataField.getValue(1));
+                        }
+                        else if (StringUtils.equals(fieldName, Solr.FIELD_URL_NAME))
                             solrQuery = urlToSolrQuery(aCriteria, ce.getValue());
                     }
                     else
-                        add(solrQuery, ce);
+                        addFilter(solrQuery, ce);
                 }
             }
             catch (MalformedURLException | UnsupportedEncodingException e)

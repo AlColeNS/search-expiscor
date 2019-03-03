@@ -30,7 +30,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.traversal.TraversalDescription;
-import org.neo4j.tooling.GlobalGraphOperations;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -105,7 +104,7 @@ public class Neo4jDS extends DSDocument
             mSchemaPKName = pkField.getName();
         String labelName = aBag.getFeature("labelName");
         if (StringUtils.isNotEmpty(labelName))
-            mGraphDBLabel = DynamicLabel.label(labelName);
+            mGraphDBLabel = Label.label(labelName);
     }
 
 	private void initialize()
@@ -141,8 +140,7 @@ public class Neo4jDS extends DSDocument
         {
             if (mGraphDBLabel == null)
             {
-                GlobalGraphOperations gdbOperations = GlobalGraphOperations.at(mGraphDB);
-                ResourceIterable<Node> nodeIterable = gdbOperations.getAllNodes();
+                ResourceIterable<Node> nodeIterable = mGraphDB.getAllNodes();
                 for (Node iNode : nodeIterable)
                 {
                     docId = (String) iNode.getProperty(mSchemaPKName);
@@ -188,8 +186,7 @@ public class Neo4jDS extends DSDocument
         int nodeCount = 0;
         try (Transaction gdbTransaction = mGraphDB.beginTx())
         {
-            GlobalGraphOperations gdbOperations = GlobalGraphOperations.at(mGraphDB);
-            ResourceIterable<Node> nodeIterable = gdbOperations.getAllNodes();
+            ResourceIterable<Node> nodeIterable = mGraphDB.getAllNodes();
             for (Node iNode : nodeIterable)
                 nodeCount++;
             gdbTransaction.success();
@@ -315,8 +312,7 @@ public class Neo4jDS extends DSDocument
 
         try (Transaction gdbTransaction = mGraphDB.beginTx())
         {
-            GlobalGraphOperations gdbOperations = GlobalGraphOperations.at(mGraphDB);
-            ResourceIterable<Node> gdbNodes = gdbOperations.getAllNodes();
+            ResourceIterable<Node> gdbNodes = mGraphDB.getAllNodes();
 
             Neo4jResponseBuilder responseBuilder = new Neo4jResponseBuilder(mAppMgr, mConverter, getSchema());
             responseDocument = responseBuilder.extract(gdbNodes, Neo4j.RESOLVE_TO_NODE_LIST,
@@ -466,12 +462,11 @@ public class Neo4jDS extends DSDocument
 
         boolean nodeExists = false;
         String docId = mConverter.getSourcePrimaryKeyId(aDocument.getBag());
-        try (Transaction gdbTransaction = mGraphDB.beginTx())
-        {
-            Node docNode = mConverter.findNodeById(docId);
-            if (docNode != null)
-                nodeExists = true;
-        }
+        Transaction gdbTransaction = mGraphDB.beginTx();
+        Node docNode = mConverter.findNodeById(docId);
+        if (docNode != null)
+            nodeExists = true;
+        gdbTransaction.close();
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
 

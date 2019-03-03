@@ -30,19 +30,21 @@ import com.nridge.core.base.field.data.DataField;
 import com.nridge.core.base.field.data.DataTable;
 import com.nridge.core.base.std.NSException;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrRequest;
-import org.apache.solr.client.solrj.SolrServer;
-import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.CloudSolrServer;
-import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.apache.solr.client.solrj.*;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
+import org.apache.solr.client.solrj.impl.ClusterStateProvider;
+import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.impl.ZkClientClusterStateProvider;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.slf4j.Logger;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * The SolDS data source supports CRUD operations and advanced
@@ -61,10 +63,12 @@ public class SolrDS extends DSDocument
     private final String DS_TYPE_NAME = "Solr";
     private final String DS_TITLE_DEFAULT = "Solr Data Source";
 
-    private SolrServer mSolrServer;
+    private SolrClient mSolrClient;
     private boolean mIncludeChildren;
     private SolrQueryBuilder mSolrQueryBuilder;
+    private String mBaseSolrURL = StringUtils.EMPTY;
     private String mSolrIdentity = StringUtils.EMPTY;
+    private String mCollectionName = StringUtils.EMPTY;
 
     /**
      * Constructor accepts an application manager parameter and initializes
@@ -108,41 +112,109 @@ public class SolrDS extends DSDocument
     }
 
     /**
-     * Creates a Solr Server instance for use within the SolrJ framework.
-     * This is an advanced method that should not be used for standard
-     * data source operations.
+     * Assigns the default collection name.  You should assign this before
+     * the data source is initialized.
      *
-     * @return Solr server instance.
-     *
-     * @throws DSException Data source related exception.
+     * @param aName Collection name.
      */
-    public SolrServer createSolrServer()
+    public void setCollectionName(String aName)
+    {
+        mCollectionName = aName;
+        shutdown();
+    }
+
+    /**
+     * Returns the default collection name.
+     *
+     * @return Collection name.
+     */
+    public String getCollectionName()
+    {
+        return mCollectionName;
+    }
+
+    private String getSolrBaseURL(CloudSolrClient aSolrClient)
         throws DSException
     {
-        SolrServer solrServer;
-        Logger appLogger = mAppMgr.getLogger(this, "createSolrServer");
+        Logger appLogger = mAppMgr.getLogger(this, "getSolrBaseURL");
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
 
-        String propertyName = getCfgPropertyPrefix() + ".cloud_zk_host_names";
-        String zookeeperHosts = mAppMgr.getString(propertyName);
-        if (StringUtils.isNotEmpty(zookeeperHosts))
+        Set<String> liveNodes = aSolrClient.getZkStateReader().getClusterState().getLiveNodes();
+        if (liveNodes.isEmpty())
+            throw new DSException("No SolrCloud live nodes found - cannot determine 'solrUrl' from ZooKeeper: " + aSolrClient.getZkHost());
+
+        String firstLiveNode = liveNodes.iterator().next();
+        String solrBaseURL = aSolrClient.getZkStateReader().getBaseUrlForNodeName(firstLiveNode);
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
+
+        return solrBaseURL;
+    }
+
+    /**
+     * Creates a Solr Client instance for use within the SolrJ framework.
+     * This is an advanced method that should not be used for standard
+     * data source operations.
+     *
+     * @return Solr client instance.
+     *
+     * @throws DSException Data source related exception.
+     */
+    public SolrClient createSolrClient()
+        throws DSException
+    {
+        String propertyName;
+        SolrClient solrClient;
+        Logger appLogger = mAppMgr.getLogger(this, "createSolrClient");
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
+
+        if (StringUtils.isEmpty(mCollectionName))
         {
-            CloudSolrServer cloudSolrServer = new CloudSolrServer(zookeeperHosts);
-            propertyName = getCfgPropertyPrefix() + ".cloud_collection";
-            String defaultCollection = mAppMgr.getString(propertyName);
-            if (StringUtils.isNotEmpty(defaultCollection))
+            propertyName = getCfgPropertyPrefix() + ".collection_name";
+            mCollectionName = mAppMgr.getString(propertyName);
+        }
+        ArrayList<String> zkHostNameList = new ArrayList<>();
+        propertyName = getCfgPropertyPrefix() + ".cloud_zk_host_names";
+        String zookeeperHosts = mAppMgr.getString(propertyName);
+        if (mAppMgr.isPropertyMultiValue(propertyName))
+        {
+            String[] zkHosts = mAppMgr.getStringArray(propertyName);
+            for (String zkHost : zkHosts)
+                zkHostNameList.add(zkHost);
+        }
+        else
+        {
+            String zkHost = mAppMgr.getString(propertyName);
+            if (StringUtils.isNotEmpty(zkHost))
+                zkHostNameList.add(zkHost);
+        }
+
+        if (zkHostNameList.size() > 0)
+        {
+            Optional<String> zkChRoot;
+            propertyName = getCfgPropertyPrefix() + ".cloud_zk_root";
+            String zkRoot = mAppMgr.getString(propertyName);
+            if (StringUtils.isEmpty(zkRoot))
+                zkChRoot = Optional.empty();
+            else
+                zkChRoot = Optional.of(zkRoot);
+            CloudSolrClient cloudSolrClient = new CloudSolrClient.Builder(zkHostNameList, zkChRoot).build();
+            if (StringUtils.isNotEmpty(mCollectionName))
             {
-                mSolrIdentity = String.format("SolrCloud (%s)", defaultCollection);
-                cloudSolrServer.setDefaultCollection(defaultCollection);
+                mSolrIdentity = String.format("SolrCloud (%s)", mCollectionName);
+                cloudSolrClient.setDefaultCollection(mCollectionName);
             }
             propertyName = getCfgPropertyPrefix() + ".cloud_zk_timeout";
             int zookeeperTimeout = mAppMgr.getInt(propertyName, Solr.CONNECTION_TIMEOUT_MINIMUM);
             if (zookeeperTimeout > Solr.CONNECTION_TIMEOUT_MINIMUM)
-                cloudSolrServer.setZkConnectTimeout(zookeeperTimeout);
-            solrServer = cloudSolrServer;
+                cloudSolrClient.setZkConnectTimeout(zookeeperTimeout);
+            solrClient = cloudSolrClient;
+            mBaseSolrURL = getSolrBaseURL(cloudSolrClient);
+
             appLogger.debug(String.format("SolrCloud: %s (%s) - %d connection timeout.",
-                                          zookeeperHosts, defaultCollection, zookeeperTimeout));
+                                          zookeeperHosts, mCollectionName, zookeeperTimeout));
         }
         else
         {
@@ -153,14 +225,16 @@ public class SolrDS extends DSDocument
                 String msgStr = String.format("%s: Property is undefined.", propertyName);
                 throw new DSException(msgStr);
             }
-            solrServer = new HttpSolrServer(solrBaseURL);
+            mBaseSolrURL = solrBaseURL;
+            HttpSolrClient.Builder httpSolrClientBuilder = new HttpSolrClient.Builder(solrBaseURL);
+            solrClient = httpSolrClientBuilder.build();
             mSolrIdentity = String.format("SolrServer (%s)", solrBaseURL);
             appLogger.debug(mSolrIdentity);
         }
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
 
-        return solrServer;
+        return solrClient;
     }
 
     private void initialize()
@@ -170,14 +244,66 @@ public class SolrDS extends DSDocument
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
 
-        if (mSolrQueryBuilder == null)
+        if (mSolrClient == null)
         {
             mSolrQueryBuilder = new SolrQueryBuilder(mAppMgr);
             mSolrQueryBuilder.setCfgPropertyPrefix(getCfgPropertyPrefix());
-            mSolrServer = createSolrServer();
+            mSolrClient = createSolrClient();
         }
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
+    }
+
+    /**
+     * Convenience method that provides access to the Zookeeper client cluster state
+     * instance managed by the CloudSolrClient.
+     *
+     * <b>NOTE:</b> This method will fail if the SolrClient is not based on a SolrCloud cluster.
+     *
+     * @return ZkClientClusterStateProvider Zookeeper client cluster state provider.
+     *
+     * @throws DSException Data source exception.
+     */
+    public ZkClientClusterStateProvider getZkClusterStateProvider()
+        throws DSException
+    {
+        initialize();
+
+        if (mSolrClient instanceof CloudSolrClient)
+        {
+            CloudSolrClient cloudSolrClient = (CloudSolrClient) mSolrClient;
+            ClusterStateProvider clusterStateProvider = cloudSolrClient.getClusterStateProvider();
+            if (clusterStateProvider instanceof ZkClientClusterStateProvider)
+            {
+                ZkClientClusterStateProvider zkClientClusterStateProvider = (ZkClientClusterStateProvider) clusterStateProvider;
+                return zkClientClusterStateProvider;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Queries the SolrCloud Zookeeper cluster state for a list of live nodes.
+     *
+     * <b>NOTE:</b> This method will fail if the SolrClient is not based on a SolrCloud cluster.
+     *
+     * @return Set of cluster live node names or <i>null</i> if SolrCloud is not enabled.
+     *
+     * @throws DSException Data source exception.
+     */
+    public Set<String> getClusterLiveNodes()
+        throws DSException
+    {
+        initialize();
+
+        if (mSolrClient instanceof CloudSolrClient)
+        {
+            CloudSolrClient cloudSolrClient = (CloudSolrClient) mSolrClient;
+            return cloudSolrClient.getZkStateReader().getClusterState().getLiveNodes();
+        }
+        else
+            return null;
     }
 
     private SolrResponseBuilder createResponseBuilder()
@@ -187,6 +313,41 @@ public class SolrDS extends DSDocument
         solrResponseBuilder.setCfgPropertyPrefix(getCfgPropertyPrefix());
 
         return solrResponseBuilder;
+    }
+
+    /**
+     * Returns the base Solr URL associated with the standalone/cloud search cluster.
+     *
+     * @param anIncludeCollection Should the collection name be included
+     *
+     * @return Base URL string.
+     *
+     * @throws DSException Data source exception.
+     */
+    public String getBaseURL(boolean anIncludeCollection)
+        throws DSException
+    {
+        String baseSolrURL;
+
+        initialize();
+
+        if ((anIncludeCollection) && (StringUtils.isNotEmpty(mCollectionName)))
+        {
+            if (StringUtils.contains(mBaseSolrURL, mCollectionName))
+                baseSolrURL = mBaseSolrURL;
+            else
+                baseSolrURL = String.format("%s/%s", mBaseSolrURL, mCollectionName);
+        }
+        else
+        {
+            int solrOffset = StringUtils.indexOf(mBaseSolrURL, "solr");
+            if (solrOffset > 5)
+                baseSolrURL = mBaseSolrURL.substring(0, solrOffset+4);
+            else
+                baseSolrURL = mBaseSolrURL;
+        }
+
+        return baseSolrURL;
     }
 
     /**
@@ -252,7 +413,9 @@ public class SolrDS extends DSDocument
      *
      * @param aSolrQuery Solr query instance.
      *
-     * @return Solr response instance.
+     * @return QueryResponse Solr response instance.
+     *
+     * @throws DSException Data source exception.
      */
     public QueryResponse queryExecute(SolrQuery aSolrQuery)
         throws DSException
@@ -268,11 +431,11 @@ public class SolrDS extends DSDocument
         try
         {
             if (StringUtils.equalsIgnoreCase(requestMethod, "POST"))
-                queryResponse = mSolrServer.query(aSolrQuery, SolrRequest.METHOD.POST);
+                queryResponse = mSolrClient.query(aSolrQuery, SolrRequest.METHOD.POST);
             else
-                queryResponse = mSolrServer.query(aSolrQuery, SolrRequest.METHOD.GET);
+                queryResponse = mSolrClient.query(aSolrQuery, SolrRequest.METHOD.GET);
         }
-        catch (SolrServerException e)
+        catch (SolrServerException | IOException e)
         {
             appLogger.error(e.getMessage(), e);
             throw new DSException(e.getMessage());
@@ -405,8 +568,11 @@ public class SolrDS extends DSDocument
         SolrResponseBuilder solrResponseBuilder = createResponseBuilder();
         QueryResponse queryResponse = queryExecute(solrQuery);
         solrDocument = solrResponseBuilder.extract(queryResponse);
+        DataBag headerBag = Solr.getHeader(solrDocument);
+        if (headerBag != null)
+            headerBag.setValueByName("collection_name", getCollectionName());
         String requestHandler = solrQuery.getRequestHandler();
-        solrResponseBuilder.updateHeader(solrQuery.getQuery(), requestHandler,
+        solrResponseBuilder.updateHeader(mBaseSolrURL, solrQuery.getQuery(), requestHandler,
                                          solrQuery.getStart(), solrQuery.getRows());
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
@@ -432,6 +598,9 @@ public class SolrDS extends DSDocument
      * match the criteria in the content source.
      *
      * @throws com.nridge.core.base.ds.DSException Data source related exception.
+     *
+     *  @see <a href="http://lucene.apache.org/solr/guide/7_6/common-query-parameters.html">Solr Common Query Parametersr</a>
+     * 	@see <a href="https://lucene.apache.org/solr/guide/7_6/the-standard-query-parser.html">Solr Standard Query Parserr</a>
      */
     @Override
     public Document fetch(DSCriteria aDSCriteria)
@@ -452,9 +621,17 @@ public class SolrDS extends DSDocument
         SolrResponseBuilder solrResponseBuilder = createResponseBuilder();
         QueryResponse queryResponse = queryExecute(solrQuery);
         solrDocument = solrResponseBuilder.extract(queryResponse);
+        DataBag headerBag = Solr.getHeader(solrDocument);
+        if (headerBag != null)
+            headerBag.setValueByName("collection_name", getCollectionName());
         String requestHandler = solrQuery.getRequestHandler();
-        solrResponseBuilder.updateHeader(solrQuery.getQuery(), requestHandler,
-                                         solrQuery.getStart(), solrQuery.getRows());
+        Integer startPosition = solrQuery.getStart();
+        if (startPosition == null)
+            startPosition = Solr.QUERY_OFFSET_DEFAULT;
+        Integer totalRows = solrQuery.getRows();
+        if (totalRows == null)
+            totalRows = Solr.QUERY_PAGESIZE_DEFAULT;
+        solrResponseBuilder.updateHeader(mBaseSolrURL, solrQuery.getQuery(), requestHandler, startPosition, totalRows);
         if (Solr.isCriteriaParentChild(aDSCriteria))
         {
             SolrParentChild solrParentChild = new SolrParentChild(mAppMgr, this);
@@ -483,6 +660,9 @@ public class SolrDS extends DSDocument
      * and limit values).
      *
      * @throws com.nridge.core.base.ds.DSException Data source related exception.
+     *
+     *  @see <a href="http://lucene.apache.org/solr/guide/7_6/common-query-parameters.html">Solr Common Query Parametersr</a>
+     * 	@see <a href="https://lucene.apache.org/solr/guide/7_6/the-standard-query-parser.html">Solr Standard Query Parserr</a>
      */
     @Override
     public Document fetch(DSCriteria aDSCriteria, int anOffset, int aLimit)
@@ -505,8 +685,11 @@ public class SolrDS extends DSDocument
         SolrResponseBuilder solrResponseBuilder = createResponseBuilder();
         QueryResponse queryResponse = queryExecute(solrQuery);
         solrDocument = solrResponseBuilder.extract(queryResponse, anOffset, aLimit);
+        DataBag headerBag = Solr.getHeader(solrDocument);
+        if (headerBag != null)
+            headerBag.setValueByName("collection_name", getCollectionName());
         String requestHandler = solrQuery.getRequestHandler();
-        solrResponseBuilder.updateHeader(solrQuery.getQuery(), requestHandler,
+        solrResponseBuilder.updateHeader(mBaseSolrURL, solrQuery.getQuery(), requestHandler,
                                          anOffset, aLimit);
         if (Solr.isCriteriaParentChild(aDSCriteria))
         {
@@ -631,7 +814,7 @@ public class SolrDS extends DSDocument
         try
         {
             solrInputDocuments.add(toSolrInputDocument(aDocument));
-            updateResponse = mSolrServer.add(solrInputDocuments);
+            updateResponse = mSolrClient.add(solrInputDocuments);
         }
         catch (Exception e)
         {
@@ -684,7 +867,7 @@ public class SolrDS extends DSDocument
         {
             for (Document document : aDocuments)
                 solrInputDocuments.add(toSolrInputDocument(document));
-            updateResponse = mSolrServer.add(solrInputDocuments);
+            updateResponse = mSolrClient.add(solrInputDocuments);
         }
         catch (Exception e)
         {
@@ -860,7 +1043,7 @@ public class SolrDS extends DSDocument
 
         try
         {
-            updateResponse = mSolrServer.deleteById(docIds);
+            updateResponse = mSolrClient.deleteById(docIds);
         }
         catch (Exception e)
         {
@@ -911,7 +1094,7 @@ public class SolrDS extends DSDocument
 
         try
         {
-            updateResponse = mSolrServer.deleteById(docIds);
+            updateResponse = mSolrClient.deleteById(docIds);
         }
         catch (Exception e)
         {
@@ -955,11 +1138,11 @@ public class SolrDS extends DSDocument
 
         initialize();
 
-        String solrQuery = mSolrQueryBuilder.createAsString(aDSCriteria);
+        String solrQuery = mSolrQueryBuilder.createAsQueryString(aDSCriteria);
 
         try
         {
-            updateResponse = mSolrServer.deleteByQuery(solrQuery);
+            updateResponse = mSolrClient.deleteByQuery(solrQuery);
         }
         catch (Exception e)
         {
@@ -1001,7 +1184,7 @@ public class SolrDS extends DSDocument
 
         try
         {
-            mSolrServer.commit();
+            mSolrClient.commit();
         }
         catch (Exception e)
         {
@@ -1035,7 +1218,7 @@ public class SolrDS extends DSDocument
 
         try
         {
-            mSolrServer.rollback();
+            mSolrClient.rollback();
         }
         catch (Exception e)
         {
@@ -1066,7 +1249,7 @@ public class SolrDS extends DSDocument
 
         try
         {
-            mSolrServer.optimize();
+            mSolrClient.optimize();
         }
         catch (Exception e)
         {
@@ -1092,10 +1275,17 @@ public class SolrDS extends DSDocument
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
 
-        if (mSolrServer != null)
+        if (mSolrClient != null)
         {
-            mSolrServer.shutdown();
-            mSolrServer = null;
+            try
+            {
+                mSolrClient.close();
+            }
+            catch (IOException e)
+            {
+                appLogger.error(e.getMessage(), e);
+            }
+            mSolrClient = null;
         }
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);

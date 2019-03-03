@@ -18,8 +18,7 @@
 package com.nridge.ds.content.ds_content;
 
 import org.apache.tika.exception.TikaException;
-import org.apache.tika.language.LanguageIdentifier;
-import org.apache.tika.language.ProfilingHandler;
+import org.apache.tika.language.detect.LanguageHandler;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
@@ -43,6 +42,8 @@ import java.io.InputStream;
  */
 public class RecursiveMetadataParser extends ParserDecorator
 {
+    static final long serialVersionUID = 1L;
+
     /**
      * Default constructor creates a decorator for the given parser.
      *
@@ -72,13 +73,12 @@ public class RecursiveMetadataParser extends ParserDecorator
                       Metadata aMetaData, ParseContext aContext)
         throws IOException, SAXException, TikaException
     {
-        ProfilingHandler profilingHandler = new ProfilingHandler();
-        ContentHandler teeContentHandler = new TeeContentHandler(aContentHandler, profilingHandler);
+        LanguageHandler languageHandler = new LanguageHandler();
+        ContentHandler teeContentHandler = new TeeContentHandler(aContentHandler, languageHandler);
 
         super.parse(aStream, teeContentHandler, aMetaData, aContext);
 
-        LanguageIdentifier languageIdentifier = profilingHandler.getLanguage();
-        if (languageIdentifier.isReasonablyCertain())
-            aMetaData.set(Metadata.CONTENT_LANGUAGE, languageIdentifier.getLanguage());
+        if (languageHandler.getLanguage().isReasonablyCertain())
+            aMetaData.set(Metadata.CONTENT_LANGUAGE, languageHandler.getLanguage().getLanguage());
     }
 }

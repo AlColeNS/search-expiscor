@@ -115,7 +115,7 @@ public abstract class DSDocument
     }
 
     /**
-     * Constructor accepts a <i>DSTable</i> as an initialization parameter.
+     * Constructor accepts a <i>DSDocument</i> as an initialization parameter.
      * The data source will be used to assign the schema definition to the new
      * data source.
      *

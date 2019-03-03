@@ -81,13 +81,18 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.3.5</version>
+            <version>4.5.3</version>
         </dependency>
         <!-- http://neo4j.com/docs/milestone/tutorials-java-embedded-setup.html -->
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j</artifactId>
-            <version>2.2.1</version>
+            <version>3.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-slf4j</artifactId>
+            <version>3.1.1</version>
         </dependency>
     </dependencies>
 </project>

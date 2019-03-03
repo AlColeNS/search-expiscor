@@ -38,6 +38,7 @@ import org.slf4j.Logger;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Paths;
 
 /**
  * The ContentExtractor class is responsible for extracting textual content
@@ -355,6 +356,7 @@ public class ContentExtractor
      *
      * @throws NSException Thrown when IOExceptions are detected.
      */
+    @SuppressWarnings("deprecation")
     public void process(File anInFile, Writer aWriter)
         throws NSException
     {
@@ -366,6 +368,7 @@ public class ContentExtractor
         {
             appLogger.debug(String.format("[%s] %s", detectType(anInFile), anInFile.getAbsolutePath()));
 
+            ForkParser forkParser = null;
             Metadata tikaMetaData = new Metadata();
             tikaMetaData.set(Metadata.RESOURCE_NAME_KEY, anInFile.getName());
             int contentLimit = getCfgInteger("content_limit", Content.CONTENT_LIMIT_DEFAULT);
@@ -376,10 +379,10 @@ public class ContentExtractor
                 Parser tikaParser;
                 ParseContext parseContext;
 
-                inputStream = TikaInputStream.get(anInFile);
+                inputStream = TikaInputStream.get(anInFile.toPath());
                 if (isCfgStringTrue("tika_fork_parser"))
                 {
-                    ForkParser forkParser = new ForkParser(ContentExtractor.class.getClassLoader(), new AutoDetectParser());
+                    forkParser = new ForkParser(ContentExtractor.class.getClassLoader(), new AutoDetectParser());
                     String javaCmdStr = getCfgString("tika_fork_java_cmd");
                     if (StringUtils.isNotEmpty(javaCmdStr))
                         forkParser.setJavaCommand(javaCmdStr);
@@ -430,6 +433,9 @@ the total character limit threshold was hit.  If that is all it was, then return
                         addAssignField(Content.CONTENT_FIELD_METADATA + mdName, mdValue);
                 }
             }
+
+            if (forkParser != null)
+                forkParser.close();
         }
         else
         {
@@ -451,6 +457,7 @@ the total character limit threshold was hit.  If that is all it was, then return
      *
      * @throws NSException Thrown when IOExceptions are detected.
      */
+    @SuppressWarnings("deprecation")
     public void process(URL aURL, Writer aWriter)
         throws NSException
     {
@@ -549,11 +556,10 @@ the total character limit threshold was hit.  If that is all it was, then return
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
 
-        BufferedWriter bufferedWriter = null;
+        BufferedWriter bufferedWriter;
         String contentEncoding = getCfgString("content_encoding", StrUtl.CHARSET_UTF_8);
-        try
+        try (FileOutputStream fileOutputStream = new FileOutputStream(anOutFile))
         {
-            FileOutputStream fileOutputStream = new FileOutputStream(anOutFile);
             bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, contentEncoding));
             process(anInFile, bufferedWriter);
         }
@@ -562,11 +568,6 @@ the total character limit threshold was hit.  If that is all it was, then return
             String msgStr = String.format("%s: %s", anInFile.getAbsolutePath(), e.getMessage());
             appLogger.error(msgStr, e);
             throw new NSException(e);
-        }
-        finally
-        {
-            if (bufferedWriter != null)
-                IOUtils.closeQuietly(bufferedWriter);
         }
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);

@@ -81,6 +81,7 @@ public class FileCrawler extends SimpleFileVisitor<Path>
      *
      * @param anAppMgr Application manager instance.
      * @param aCrawlQueue Crawl queue instance.
+     * @param aSolrDS Solr data source instance.
      *
      * @throws IOException Identifies an I/O error condition.
      * @throws NSException Identifies an initialization failure.
@@ -120,9 +121,7 @@ public class FileCrawler extends SimpleFileVisitor<Path>
 
     /**
      * Invoked for a directory before entries in the directory are visited.
-     * <p/>
-     * <p> Unless overridden, this method returns {@link java.nio.file.FileVisitResult#CONTINUE
-     * CONTINUE}.
+     * Unless overridden, this method returns {@link java.nio.file.FileVisitResult#CONTINUE}
      *
      * @param aDirectory Directory instance.
      * @param aFileAttributes File attribute instance.
@@ -171,7 +170,7 @@ public class FileCrawler extends SimpleFileVisitor<Path>
                 String solrURL = String.format("%s/%s?q=nsd_id%%3A%s&fl=nsd_doc_hash&wt=xml&echoParams=none",
                                                solrURI, requestHandler, aDocId);
                 DSCriteria dsCriteria = new DSCriteria("Solr Document Exists");
-                dsCriteria.add(Solr.FIELD_URI_NAME, Field.Operator.EQUAL, solrURL);
+                dsCriteria.add(Solr.FIELD_URL_NAME, Field.Operator.EQUAL, solrURL);
                 try
                 {
                     int docCount = mSolrDS.count(dsCriteria);
@@ -395,8 +394,7 @@ public class FileCrawler extends SimpleFileVisitor<Path>
 
     /**
      * Invoked for a file in a directory.
-     * <p/>
-     * <p> Unless overridden, this method returns {@link java.nio.file.FileVisitResult#CONTINUE
+     * Unless overridden, this method returns {@link java.nio.file.FileVisitResult#CONTINUE
      * CONTINUE}.
      *
      * @param aPath Path instance.
@@ -447,8 +445,7 @@ public class FileCrawler extends SimpleFileVisitor<Path>
 
     /**
      * Invoked for a file that could not be visited.
-     * <p/>
-     * <p> Unless overridden, this method re-throws the I/O exception that prevented
+     * Unless overridden, this method re-throws the I/O exception that prevented
      * the file from being visited.
      *
      * @param aPathFile Path file instance.
@@ -469,9 +466,8 @@ public class FileCrawler extends SimpleFileVisitor<Path>
     /**
      * Invoked for a directory after entries in the directory, and all of their
      * descendants, have been visited.
-     * <p/>
-     * <p> Unless overridden, this method returns {@link java.nio.file.FileVisitResult#CONTINUE
-     * CONTINUE} if the directory iteration completes without an I/O exception;
+     * Unless overridden, this method returns {@link java.nio.file.FileVisitResult#CONTINUE}
+     * if the directory iteration completes without an I/O exception;
      * otherwise this method re-throws the I/O exception that caused the iteration
      * of the directory to terminate prematurely.
      *

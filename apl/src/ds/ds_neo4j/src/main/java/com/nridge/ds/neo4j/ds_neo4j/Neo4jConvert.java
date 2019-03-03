@@ -24,7 +24,6 @@ import com.nridge.core.base.field.data.DataBag;
 import com.nridge.core.base.field.data.DataField;
 import org.apache.commons.lang3.StringUtils;
 import org.neo4j.graphdb.*;
-import org.neo4j.tooling.GlobalGraphOperations;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -97,7 +96,7 @@ public class Neo4jConvert
         }
         String labelName = aBag.getFeature("labelName");
         if (StringUtils.isNotEmpty(labelName))
-            mGraphDBLabel = DynamicLabel.label(labelName);
+            mGraphDBLabel = Label.label(labelName);
     }
 
     /**
@@ -174,8 +173,7 @@ public class Neo4jConvert
         {
             if (mGraphDBLabel == null)
             {
-                GlobalGraphOperations gdbOperations = GlobalGraphOperations.at(mGraphDB);
-                ResourceIterable<Node> nodeIterable = gdbOperations.getAllNodes();
+                ResourceIterable<Node> nodeIterable = mGraphDB.getAllNodes();
                 for (Node iNode : nodeIterable)
                 {
                     docId = (String) iNode.getProperty(mSchemaPKName);
@@ -358,7 +356,7 @@ public class Neo4jConvert
                 else
                     assignProperties(relNode, relDocBag);
 
-                gdbRelType = DynamicRelationshipType.withName(relType);
+                gdbRelType = RelationshipType.withName(relType);
                 gdbRelationship = docNode.createRelationshipTo(relNode, gdbRelType);
                 assignProperties(gdbRelationship, relBag);
             }

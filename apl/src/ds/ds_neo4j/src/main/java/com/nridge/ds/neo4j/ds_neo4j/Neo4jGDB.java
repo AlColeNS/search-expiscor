@@ -22,15 +22,14 @@ import com.nridge.core.base.ds.DSException;
 import com.nridge.core.base.field.data.DataBag;
 import com.nridge.core.base.field.data.DataField;
 import org.apache.commons.lang3.StringUtils;
-import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.schema.IndexDefinition;
 import org.neo4j.graphdb.schema.Schema;
-import org.neo4j.kernel.logging.DevNullLoggingService;
-import org.neo4j.kernel.logging.Logging;
+import org.neo4j.logging.LogProvider;
+import org.neo4j.logging.slf4j.Slf4jLogProvider;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -67,7 +66,7 @@ public class Neo4jGDB
             {
                 String labelName = aSchemaBag.getFeature("labelName");
                 if (StringUtils.isNotEmpty(labelName))
-                    graphDBLabel = DynamicLabel.label(labelName);
+                    graphDBLabel = Label.label(labelName);
             }
             String graphDBPathName = anAppMgr.getString(anAppMgr.APP_PROPERTY_GDB_PATH);
             String graphDBSchemaPathFileName = String.format("%s%cschema", graphDBPathName, File.separatorChar);
@@ -87,7 +86,7 @@ public class Neo4jGDB
 
 // Prevent a large number of log messages from being generated.
 
-            Logging gdbLogging = new DevNullLoggingService();
+            LogProvider logProvider = new Slf4jLogProvider();
 
 // Enter the critical section to create the service handle.
 
@@ -95,7 +94,7 @@ public class Neo4jGDB
             {
                 if (mGraphDBService == null)
                 {
-                    mGraphDBService = new GraphDatabaseFactory().setLogging(gdbLogging).newEmbeddedDatabaseBuilder(graphDBPathName).newGraphDatabase();
+                    mGraphDBService = new GraphDatabaseFactory().setUserLogProvider(logProvider).newEmbeddedDatabaseBuilder(new File(graphDBPathName)).newGraphDatabase();
                     if ((aSchemaBag != null) && (! gdbSchemaExists))
                     {
                         DataField pkField = aSchemaBag.getPrimaryKeyField();

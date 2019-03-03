@@ -22,6 +22,7 @@ import com.nridge.core.base.field.Field;
 import com.nridge.core.base.doc.Document;
 import com.nridge.core.base.field.data.DataBag;
 import com.nridge.core.base.field.data.DataField;
+import com.nridge.core.base.io.IO;
 import com.nridge.core.base.io.xml.IOXML;
 import com.nridge.core.base.std.NSException;
 import com.nridge.core.base.std.StrUtl;
@@ -41,7 +42,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.io.*;
 
 /**
@@ -339,6 +339,11 @@ public class SolrSchemaXML
             if (StrUtl.stringToBoolean(aValue))
                 aField.enableFeature("isStored");
         }
+        else if (StringUtils.equalsIgnoreCase(aName, "docValues"))
+        {
+            if (StrUtl.stringToBoolean(aValue))
+                aField.enableFeature("isDocValue");
+        }
         else if (StringUtils.equalsIgnoreCase(aName, "multiValued"))
         {
             if (StrUtl.stringToBoolean(aValue))
@@ -597,11 +602,11 @@ public class SolrSchemaXML
             finally
             {
                 if (inputStream != null)
-                    IOUtils.closeQuietly(inputStream);
+                    IO.closeQuietly(inputStream);
                 if (outputStream != null)
-                    IOUtils.closeQuietly(outputStream);
+                    IO.closeQuietly(outputStream);
                 if (httpResponse != null)
-                    IOUtils.closeQuietly(httpResponse);
+                    IO.closeQuietly(httpResponse);
             }
         }
 

@@ -139,7 +139,7 @@ public class ResourceDocView extends ServerResource
             SolrDS solrDS = new SolrDS(appMgr);
             solrDS.setCfgPropertyPrefix(Constants.CFG_PROPERTY_PREFIX + ".solr");
             DSCriteria dsCriteria = new DSCriteria("Solr Document Exists");
-            dsCriteria.add(Solr.FIELD_URI_NAME, Field.Operator.EQUAL, solrURL);
+            dsCriteria.add(Solr.FIELD_URL_NAME, Field.Operator.EQUAL, solrURL);
             try
             {
                 Document solrDocument = solrDS.fetch(dsCriteria, 0, 1);

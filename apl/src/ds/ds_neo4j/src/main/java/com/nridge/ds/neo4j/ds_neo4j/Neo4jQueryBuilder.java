@@ -25,10 +25,7 @@ import com.nridge.core.base.field.data.DataField;
 import com.nridge.core.base.std.StrUtl;
 import freemarker.template.Configuration;
 import org.apache.commons.lang.StringUtils;
-import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.DynamicRelationshipType;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.*;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
 import org.neo4j.graphdb.traversal.Uniqueness;
@@ -241,10 +238,10 @@ public class Neo4jQueryBuilder
                     if (dataField.isMultiValue())
                     {
                         for (String relName : dataField.getValues())
-                            traversalDescription = traversalDescription.relationships(DynamicRelationshipType.withName(relName), gdbDirection);
+                            traversalDescription = traversalDescription.relationships(RelationshipType.withName(relName), gdbDirection);
                     }
                     else
-                        traversalDescription = traversalDescription.relationships(DynamicRelationshipType.withName(dataField.getValue()), gdbDirection);
+                        traversalDescription = traversalDescription.relationships(RelationshipType.withName(dataField.getValue()), gdbDirection);
                 }
                 else if (StringUtils.equals(fieldName, Neo4j.FIELD_REL_TRAVERSAL))
                 {

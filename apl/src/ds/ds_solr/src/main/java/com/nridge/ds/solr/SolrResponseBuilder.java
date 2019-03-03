@@ -74,7 +74,7 @@ public class SolrResponseBuilder
      * @param anAppMgr Application manager instance.
      * @param aBag Data bag instance.
      */
-    public SolrResponseBuilder(AppMgr anAppMgr, final DataBag aBag)
+    public SolrResponseBuilder(final AppMgr anAppMgr, final DataBag aBag)
     {
         mAppMgr = anAppMgr;
         instantiate(aBag);
@@ -90,7 +90,7 @@ public class SolrResponseBuilder
      * @param anAppMgr Application manager instance.
      * @param aDocument Document instance.
      */
-    public SolrResponseBuilder(AppMgr anAppMgr, final Document aDocument)
+    public SolrResponseBuilder(final AppMgr anAppMgr, final Document aDocument)
     {
         mAppMgr = anAppMgr;
         instantiate(aDocument.getBag());
@@ -159,6 +159,7 @@ public class SolrResponseBuilder
         headerBag.add(new DataTextField("request_handler", "Request Handler"));
         headerBag.add(new DataLongField("offset_start", "Offset Start"));
         headerBag.add(new DataIntegerField("page_size", "Page Size"));
+        headerBag.add(new DataTextField("base_url", "Base URL"));
         headerBag.add(new DataTextField("collection_name", "Collection Name"));
         headerBag.add(new DataTextField("account_name", "Account Name"));
 
@@ -211,6 +212,27 @@ public class SolrResponseBuilder
         groupDocumentBag.add(new DataLongField("total_count", "Total Document Count"));
 
         return new Document(Solr.RESPONSE_GROUP_COLLECTION, groupDocumentBag);
+    }
+
+    private DataBag createMLTBag()
+    {
+        DataBag mltBag = new DataBag("More Like This");
+
+        DataTextField dataTextField = new DataTextField("mlt_name", "MLT Name");
+        dataTextField.setMultiValueFlag(true);
+        mltBag.add(dataTextField);
+        mltBag.add(new DataIntegerField("mlt_total", "MLT Total"));
+
+        return mltBag;
+    }
+
+    private Document createMLTCollection()
+    {
+        DataBag mltBag = new DataBag("MLT Collection");
+
+        mltBag.add(new DataLongField("total_count", "Total MLT Count"));
+
+        return new Document(Solr.RESPONSE_MLT_COLLECTION, mltBag);
     }
 
     private DataTable createDocumentTable()
@@ -325,7 +347,7 @@ public class SolrResponseBuilder
         mDocument.addRelationship(Solr.RESPONSE_DOCUMENT, emptyBag);
     }
 
-    public void updateHeader(String aQuery, String aRequestHandler, int anOffset, int aLimit)
+    public void updateHeader(String aBaseURL, String aQuery, String aRequestHandler, int anOffset, int aLimit)
     {
         Logger appLogger = mAppMgr.getLogger(this, "updateHeader");
 
@@ -335,6 +357,16 @@ public class SolrResponseBuilder
         if (headerRelationship != null)
         {
             DataBag headerBag = headerRelationship.getBag();
+            if (StringUtils.isNotEmpty(aBaseURL))
+            {
+                headerBag.setValueByName("base_url", aBaseURL);
+                String collectionName = headerBag.getValueAsString("collection_name");
+                if (StringUtils.isEmpty(collectionName))
+                {
+                    collectionName = StringUtils.substringAfterLast(aBaseURL, "/");
+                    headerBag.setValueByName("collection_name", collectionName);
+                }
+            }
             if (StringUtils.isNotEmpty(aQuery))
                 headerBag.setValueByName("query_keyword", aQuery);
             if (aLimit > 0)
@@ -353,6 +385,7 @@ public class SolrResponseBuilder
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private void populateHeader(QueryResponse aQueryResponse, long anOffset, long aLimit)
     {
         Logger appLogger = mAppMgr.getLogger(this, "populateHeader");
@@ -391,8 +424,8 @@ public class SolrResponseBuilder
             {
                 Float maxScore = solrDocumentList.getMaxScore();
                 if (maxScore == null)
-                    maxScore = new Float(0.0);
-                headerBag.setValueByName("maximum_score", maxScore);
+                    maxScore = (float) 0.0;
+                headerBag.setValueByName("max_score", maxScore);
                 headerBag.setValueByName("fetch_count", solrDocumentList.size());
                 long totalCount = solrDocumentList.getNumFound();
                 headerBag.setValueByName("total_count", totalCount);
@@ -401,7 +434,7 @@ public class SolrResponseBuilder
             NamedList<Object> headerList = aQueryResponse.getHeader();
             if (headerList != null)
             {
-                NamedList paramList = (NamedList) aQueryResponse.getResponseHeader().get("params");
+                NamedList<Object> paramList = (NamedList<Object>) aQueryResponse.getResponseHeader().get("params");
                 if (paramList != null)
                 {
                     Object paramObject = paramList.get("fl");
@@ -419,6 +452,16 @@ public class SolrResponseBuilder
                                 for (int i = 0; i < fieldCount; i++)
                                     dataField.addValue(fieldList.get(i).toString());
                             }
+                        }
+                    }
+                    paramObject = paramList.get("hl");
+                    if (paramObject != null)
+                    {
+                        DataField dataField = headerBag.getFieldByName("is_highlighted");
+                        if (paramObject instanceof String)
+                        {
+                            if (StringUtils.equalsIgnoreCase(paramObject.toString(), "on"))
+                                dataField.setValue(true);
                         }
                     }
                 }
@@ -462,8 +505,9 @@ public class SolrResponseBuilder
                         if (dataField == null)
                         {
                             entryObject = entry.getValue();
-                            dataField = new DataField(Field.getTypeField(entryObject), cellName,
-                                                      Field.nameToTitle(cellName));
+                            dataField = new DataField(Field.getTypeField(entryObject), cellName, Field.nameToTitle(cellName));
+                            if (Solr.isSolrReservedFieldName(cellName))
+                                dataField.addFeature(Field.FEATURE_IS_VISIBLE, StrUtl.STRING_FALSE);
                             resultBag.add(dataField);
                         }
                     }
@@ -654,6 +698,7 @@ dropped from the result table via the collapseUnusedColumns() method. */
                                    int aRowId, int aParentId,
                                    PivotField aPivotField)
     {
+        Object facetValue;
         FieldRow fieldRow;
         String fieldName, facetName, facetNameCount;
         Logger appLogger = mAppMgr.getLogger(this, "populateFacetPivot");
@@ -663,8 +708,14 @@ dropped from the result table via the collapseUnusedColumns() method. */
         if (aPivotField != null)
         {
             fieldName = aPivotField.getField();
-            facetName = aPivotField.getValue().toString();
-            facetNameCount = String.format("%s (%s)", facetName, aPivotField.getCount());
+            facetValue = aPivotField.getValue();
+            if (facetValue == null)
+                facetNameCount = String.format("Unassigned (%s)", aPivotField.getCount());
+            else
+            {
+                facetName = aPivotField.getValue().toString();
+                facetNameCount = String.format("%s (%s)", facetName, aPivotField.getCount());
+            }
 
             ArrayList<String> facetValues = null;
             if (StringUtils.equals(fieldName, aFacetNames[0]))
@@ -762,8 +813,7 @@ dropped from the result table via the collapseUnusedColumns() method. */
                     {
                         for (PivotField pivotField : entry.getValue())
                         {
-                            rowId = populateFacetPivot(facetTable, facetNames,
-                                rowId, parentId, pivotField);
+                            rowId = populateFacetPivot(facetTable, facetNames, rowId, parentId, pivotField);
                             parentId = rowId;
                         }
                     }
@@ -777,6 +827,7 @@ dropped from the result table via the collapseUnusedColumns() method. */
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
     }
 
+    @SuppressWarnings({"rawtypes"})
     private Field.Type facetRangeToFieldType(RangeFacet aRangeFacet, DataField aField)
     {
         if (aField == null)
@@ -802,6 +853,7 @@ dropped from the result table via the collapseUnusedColumns() method. */
         return Field.Type.Text;
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private void populateFacet(DataTable aTable, RangeFacet aRangeFacet)
     {
         DataField schemaField;
@@ -815,7 +867,7 @@ dropped from the result table via the collapseUnusedColumns() method. */
         Field.Type fieldType = facetRangeToFieldType(aRangeFacet, schemaField);
         if (Field.isDateOrTime(fieldType))
         {
-            RangeFacet.Date facetRangeDate = (RangeFacet.Date) aRangeFacet;
+            RangeFacet<Date,Date> facetRangeDate = (RangeFacet<Date,Date>) aRangeFacet;
 
             aTable.newRow();
             aTable.setValueByName("field_name", fieldName);
@@ -826,10 +878,10 @@ dropped from the result table via the collapseUnusedColumns() method. */
             aTable.setValueByName("field_type", Field.typeToString(fieldType));
             Object objectValue = facetRangeDate.getStart();
             if (objectValue != null)
-                aTable.setValueByName("field_start", objectValue.toString());
+                aTable.setValueByName("field_start", facetRangeDate.getStart());
             objectValue = facetRangeDate.getEnd();
             if (objectValue != null)
-            aTable.setValueByName("field_finish", objectValue.toString());
+                aTable.setValueByName("field_finish", facetRangeDate.getEnd());
             objectValue = facetRangeDate.getGap();
             if (objectValue != null)
                 aTable.setValueByName("field_gap", objectValue.toString());
@@ -887,15 +939,14 @@ dropped from the result table via the collapseUnusedColumns() method. */
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
     }
 
-// solr-4.10.0-src/solr/solrj/src/test/org/apache/solr/client/solrj/response/QueryResponseTest.java
+// solr/src/solr-7.5.0/solr/solrj/src/test/org/apache/solr/client/ls/response/QueryResponseTest.java
 
+    @SuppressWarnings({"rawtypes"})
     private void populateFacetRange(QueryResponse aQueryResponse)
     {
         Logger appLogger = mAppMgr.getLogger(this, "populateFacetRange");
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
-
-// ToDo: This logic did work at one time, but does not now.  Could be that query needs to be explicit in SolrJ (versus default in request handler).
 
         List<RangeFacet> facetRangeList = aQueryResponse.getFacetRanges();
         if ((facetRangeList != null) && (facetRangeList.size() > 0))
@@ -915,17 +966,44 @@ dropped from the result table via the collapseUnusedColumns() method. */
             }
         }
 
-        /*
-        List<FacetField> facetDateList = aQueryResponse.getFacetDates();
-        if ((facetDateList != null) && (facetDateList.size() > 0))
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
+    }
+
+    private void populateMoreLikeThis(QueryResponse aQueryResponse)
+    {
+        String docName;
+        Document mltDocument;
+        DataField docNameField;
+        SolrDocumentList solrDocumentList;
+        Logger appLogger = mAppMgr.getLogger(this, "populateMoreLikeThis");
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
+
+        NamedList<SolrDocumentList> mltDocuments = aQueryResponse.getMoreLikeThis();
+        if (mltDocuments != null)
         {
-            mDocument.addRelationship(Solr.RESPONSE_FACET_RANGE, createFacetRangeBag());
-            Relationship facetRelationship = mDocument.getFirstRelationship(Solr.RESPONSE_FACET_RANGE);
-            if (facetRelationship != null)
+            mDocument.addRelationship(Solr.RESPONSE_MORE_LIKE_THIS, createMLTBag());
+            Relationship mltRelationship = mDocument.getFirstRelationship(Solr.RESPONSE_MORE_LIKE_THIS);
+            if (mltRelationship != null)
             {
+                int mltCount = mltDocuments.size();
+                DataBag mltBag = mltRelationship.getBag();
+                docNameField = mltBag.getFieldByName("mlt_name");
+                mltBag.setValueByName("mlt_total", mltCount);
+                for (int i = 0; i < mltCount; i++)
+                {
+                    docName = mltDocuments.getName(i);
+                    docNameField.addValue(docName);
+                    solrDocumentList = mltDocuments.getVal(i);
+                    if (solrDocumentList.getNumFound() > 0L)
+                    {
+                        mltDocument = new Document(Solr.RESPONSE_MLT_DOCUMENT, createDocumentTable());
+                        populateDocument(mltDocument, solrDocumentList);
+                        mltRelationship.add(mltDocument);
+                    }
+                }
             }
         }
-        */
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
     }
@@ -1200,7 +1278,7 @@ dropped from the result table via the collapseUnusedColumns() method. */
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
 
-// solr-4.10.0-src/solr/solrj/src/test/org/apache/solr/client/solrj/response/QueryResponseTest.java
+// solr/src/solr-7.5.0/solr/solrj/src/test/org/apache/solr/client/ls/response/QueryResponseTest.java
 
         populateHeader(aQueryResponse, anOffset, aLimit);
         populateResponseDocument(aQueryResponse);
@@ -1212,6 +1290,7 @@ dropped from the result table via the collapseUnusedColumns() method. */
         populateSpelling(aQueryResponse);
         populateStatistic(aQueryResponse);
         populateHighlighting(aQueryResponse);
+        populateMoreLikeThis(aQueryResponse);
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
 

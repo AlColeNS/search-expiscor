@@ -22,6 +22,7 @@ import com.nridge.core.base.doc.Document;
 import com.nridge.core.base.field.Field;
 import com.nridge.core.base.field.data.DataBag;
 import com.nridge.core.base.field.data.DataField;
+import com.nridge.core.base.io.IO;
 import com.nridge.core.base.io.xml.IOXML;
 import com.nridge.core.base.std.NSException;
 import org.apache.commons.io.IOUtils;
@@ -340,11 +341,11 @@ public class SolrConfigXML
             finally
             {
                 if (inputStream != null)
-                    IOUtils.closeQuietly(inputStream);
+                    IO.closeQuietly(inputStream);
                 if (outputStream != null)
-                    IOUtils.closeQuietly(outputStream);
+                    IO.closeQuietly(outputStream);
                 if (httpResponse != null)
-                    IOUtils.closeQuietly(httpResponse);
+                    IO.closeQuietly(httpResponse);
             }
         }
 
