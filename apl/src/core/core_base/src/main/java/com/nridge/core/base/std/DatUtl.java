@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,9 +17,17 @@
 
 package com.nridge.core.base.std;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import com.nridge.core.base.field.Field;
+import org.apache.commons.lang3.StringUtils;
+
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 /**
  * The DatUtl class provides static convenience methods for calculating date/time
@@ -40,8 +48,9 @@ public class DatUtl
 
 // Gregorian Calendar adopted Oct. 15, 1582 (2299161)
 
-    public static int GREGORIANSTARTDATE = 15 + 31 * (10 + 12 * 1582);
     public static double HALFSECOND = 0.5;
+    public static List<SimpleDateFormat> mDateFormatList = null;
+    public static int GREGORIANSTARTDATE = 15 + 31 * (10 + 12 * 1582);
 
     private DatUtl()
     {
@@ -146,5 +155,106 @@ public class DatUtl
         if (year <= 0) year--;
 
         return new int[]{year, month, day};
+    }
+
+    /**
+     * Attempts to detect the date/time format of the value and create
+     * a 'Date' object.
+     *
+     * @param aDateTimeValue String value.
+     * @return Date object if the format is recognized or <i>null</i>.
+     */
+    public static Date detectCreateDate(String aDateTimeValue)
+    {
+        Date createDate = null;
+
+        if (StringUtils.isNotEmpty(aDateTimeValue))
+        {
+            if (mDateFormatList == null)
+            {
+                mDateFormatList = new ArrayList<SimpleDateFormat>();
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_ISO8601DATETIME_DEFAULT));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_ISO8601DATETIME_MILLI2D));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_ISO8601DATETIME_MILLI3D));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_RFC1123_DATE_TIME));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_SQLORACLEDATE_DEFAULT));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_SQLISODATE_DEFAULT));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_SQLISOTIME_DEFAULT));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_SQLISODATETIME_DEFAULT));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_DATE_DEFAULT));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_TIME_AMPM));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_TIME_PLAIN));
+                mDateFormatList.add(new SimpleDateFormat(Field.FORMAT_TIMESTAMP_PACKED));
+            }
+
+            ParsePosition parsePosition = new ParsePosition(0);
+            for (SimpleDateFormat sdf : mDateFormatList)
+            {
+                sdf.setLenient(false);
+                createDate = sdf.parse(aDateTimeValue, parsePosition);
+                if (createDate != null)
+                    break;
+            }
+        }
+        return createDate;
+    }
+
+    /**
+     * Calculates the number of business days (excluding weekends)
+     * between two dates (inclusive).
+     * <p>
+     * https://stackoverflow.com/questions/4600034/calculate-number-of-weekdays-between-two-dates-in-java
+     * </p>
+     * @param aStartDate Start date.
+     * @param anEndDate End date.
+     *
+     * @return Number of business days.
+     */
+    @SuppressWarnings("UnnecessaryLocalVariable")
+    public static long calculateBusinessDays(LocalDate aStartDate, LocalDate anEndDate)
+    {
+        DayOfWeek startWeekDay = aStartDate.getDayOfWeek().getValue() < 6 ? aStartDate.getDayOfWeek() : DayOfWeek.MONDAY;
+        DayOfWeek endWeekDay = anEndDate.getDayOfWeek().getValue() < 6 ? anEndDate.getDayOfWeek() : DayOfWeek.FRIDAY;
+
+        long numberOfWeeks = ChronoUnit.DAYS.between(aStartDate, anEndDate) / 7;
+        long totalWeekDays = numberOfWeeks * 5 + Math.floorMod(endWeekDay.getValue() - startWeekDay.getValue(), 5);
+
+        return totalWeekDays + 1;
+    }
+
+    /**
+     * Calculates the number of business days (excluding weekends)
+     * between two dates (inclusive).  In addition, this utility
+     * method will factor in holidays (e.g. skip them in the count)
+     * for the calculation.
+     * <p>
+     * https://stackoverflow.com/questions/4600034/calculate-number-of-weekdays-between-two-dates-in-java
+     * </p>
+     *
+     * @param aStartDate Start date.
+     * @param anEndDate End date.
+     * @param aHolidayList List of holidays to skip.
+     *
+     * @return Number of business days.
+     */
+    public static long calculateBusinessDays(LocalDate aStartDate, LocalDate anEndDate,
+                                             List<LocalDate> aHolidayList)
+    {
+        long totalBusinessDays = calculateBusinessDays(aStartDate, anEndDate);
+
+        if ((totalBusinessDays > 0) && (aHolidayList != null))
+        {
+            for (LocalDate holidayDate : aHolidayList)
+            {
+                if (holidayDate.isEqual(aStartDate))
+                    totalBusinessDays--;
+                else if (holidayDate.isEqual(anEndDate))
+                    totalBusinessDays--;
+                else if ((holidayDate.isAfter(aStartDate)) && (holidayDate.isBefore(anEndDate)))
+                    totalBusinessDays--;
+            }
+        }
+
+        return Math.max(totalBusinessDays, 0);
     }
 }

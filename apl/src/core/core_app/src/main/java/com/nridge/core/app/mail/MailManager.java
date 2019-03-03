@@ -31,16 +31,19 @@ import org.slf4j.Logger;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -52,6 +55,7 @@ import java.util.Properties;
  * to message generation via Freemarker Templates.
  *
  * @see <a href="http://javamail.kenai.com/nonav/javadocs/com/sun/mail/smtp/package-summary.html">Mail Reference</a>
+ * @see <a href="http://crunchify.com/java-mailapi-example-send-an-email-via-gmail-smtp/">GMail SMTP (TLS Authentication)</a>
  * @see <a href="http://freemarker.org/">Freemarker Template</a>
  */
 public class MailManager
@@ -113,7 +117,7 @@ public class MailManager
     {
         String propertyName;
 
-        if (org.apache.commons.lang.StringUtils.startsWith(aSuffix, "."))
+        if (StringUtils.startsWith(aSuffix, "."))
             propertyName = mCfgPropertyPrefix + aSuffix;
         else
             propertyName = mCfgPropertyPrefix + "." + aSuffix;
@@ -136,7 +140,7 @@ public class MailManager
     {
         String propertyName;
 
-        if (org.apache.commons.lang.StringUtils.startsWith(aSuffix, "."))
+        if (StringUtils.startsWith(aSuffix, "."))
             propertyName = mCfgPropertyPrefix + aSuffix;
         else
             propertyName = mCfgPropertyPrefix + "." + aSuffix;
@@ -158,7 +162,7 @@ public class MailManager
     {
         String propertyName;
 
-        if (org.apache.commons.lang.StringUtils.startsWith(aSuffix, "."))
+        if (StringUtils.startsWith(aSuffix, "."))
             propertyName = mCfgPropertyPrefix + aSuffix;
         else
             propertyName = mCfgPropertyPrefix + "." + aSuffix;
@@ -178,6 +182,90 @@ public class MailManager
     {
         String propertyValue = getCfgString(aSuffix);
         return StrUtl.stringToBoolean(propertyValue);
+    }
+
+    /**
+     * Performs a property lookup for the from address.
+     *
+     * @return Email address from property file.
+     *
+     * @throws NSException Property is undefined.
+     */
+    public String lookupFromAddress()
+        throws NSException
+    {
+        String propertyName = "address_from";
+        String mailAddressFrom = getCfgString(propertyName);
+        if (StringUtils.isEmpty(mailAddressFrom))
+        {
+            String msgStr = String.format("Mail Manager property '%s' is undefined.", mCfgPropertyPrefix + "." + propertyName);
+            throw new NSException(msgStr);
+        }
+
+        return mailAddressFrom;
+    }
+
+    /**
+     * Convenience method that assigns the recipient email address to an array
+     * list.
+     *
+     * @param anEmailAddress Single email address.
+     *
+     * @return Array list of email address strings.
+     */
+    public ArrayList<String> createRecipientList(String anEmailAddress)
+    {
+        ArrayList<String> recipientList = new ArrayList<String>();
+        recipientList.add(anEmailAddress);
+
+        return recipientList;
+    }
+
+    /**
+     * Convenience method that assigns the recipient email addresses
+     * defined in the application property file to an array list.
+     *
+     * @return Array list of email address strings.
+     */
+    public ArrayList<String> createRecipientList()
+        throws NSException
+    {
+        ArrayList<String> recipientList = new ArrayList<String>();
+
+        String propertyName = "address_to";
+        if (mAppMgr.isPropertyMultiValue(getCfgString(propertyName)))
+        {
+            String[] addressToArray = mAppMgr.getStringArray(getCfgString(propertyName));
+            for (String mailAddressTo : addressToArray)
+                recipientList.add(mailAddressTo);
+        }
+        else
+        {
+            String mailAddressTo = getCfgString(propertyName);
+            if (StringUtils.isEmpty(mailAddressTo))
+            {
+                String msgStr = String.format("Mail Manager property '%s' is undefined.", mCfgPropertyPrefix + "." + propertyName);
+                throw new NSException(msgStr);
+            }
+        }
+
+        return recipientList;
+    }
+
+    /**
+     * Convenience method that assigns a single attachment to an array
+     * list.
+     *
+     * @param anAttachmentPathFileName Attachment path file name.
+     *
+     * @return Array list of attachment path/file names.
+     */
+    public ArrayList<String> createAttachmentList(String anAttachmentPathFileName)
+    {
+        ArrayList<String> attachmentPathFileList = new ArrayList<String>();
+        attachmentPathFileList.add(anAttachmentPathFileName);
+
+        return attachmentPathFileList;
     }
 
     /**
@@ -285,6 +373,7 @@ public class MailManager
             if (isCfgStringTrue("authn_enabled"))
             {
                 systemProperties.setProperty("mail.smtp.auth", "true");
+                systemProperties.setProperty("mail.smtp.starttls.enable", "true");
                 mMailSession = Session.getInstance(systemProperties, mailAuthenticator);
             }
             else
@@ -517,7 +606,6 @@ public class MailManager
         else
             appLogger.warn("Email delivery is not enabled - no message will be sent.");
 
-
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
     }
 
@@ -603,6 +691,93 @@ public class MailManager
 
         String messageBody = createMessage(aBag, mailTemplatePathFileName);
         sendMessage(aSubject, messageBody);
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
+    }
+
+    /**
+     * If the property "delivery_enabled" is <i>true</i>, then this method
+     * will generate an email message that includes subject, message and
+     * attachments to the recipient list.  You can use the convenience
+     * methods <i>lookupFromAddress()</i>, <i>createRecipientList()</i>
+     * and <i>createAttachmentList()</i> for parameter building assistance.
+     *
+     * @param aFromAddress Source email address.
+     * @param aRecipientList List of recipient email addresses.
+     * @param aSubject Subject of the email message.
+     * @param aMessage Messsage.
+     * @param anAttachmentFiles List of file attachments or <i>null</i> for none.
+     *
+     * @see <a href="https://www.tutorialspoint.com/javamail_api/javamail_api_send_email_with_attachment.htm">JavaMail API Attachments</a>
+     * @see <a href="https://stackoverflow.com/questions/6756162/how-do-i-send-mail-with-both-plain-text-as-well-as-html-text-so-that-each-mail-r">JavaMail API MIME Types</a>
+     *
+     * @throws IOException I/O related error condition.
+     * @throws NSException Missing configuration properties.
+     * @throws MessagingException Message subsystem error condition.
+     */
+    public void sendMessage(String aFromAddress, ArrayList<String> aRecipientList,
+                            String aSubject, String aMessage,
+                            ArrayList<String>  anAttachmentFiles)
+
+        throws IOException, NSException, MessagingException
+    {
+        InternetAddress internetAddressFrom, internetAddressTo;
+        Logger appLogger = mAppMgr.getLogger(this, "sendMessage");
+
+        appLogger.trace(mAppMgr.LOGMSG_TRACE_ENTER);
+
+        if (isCfgStringTrue("delivery_enabled"))
+        {
+            if ((StringUtils.isNotEmpty(aFromAddress)) && (aRecipientList.size() > 0) &&
+                (StringUtils.isNotEmpty(aSubject)) && (StringUtils.isNotEmpty(aMessage)))
+            {
+                initialize();
+
+                Message mimeMessage = new MimeMessage(mMailSession);
+                internetAddressFrom = new InternetAddress(aFromAddress);
+                mimeMessage.addFrom(new InternetAddress[]{internetAddressFrom});
+                for (String mailAddressTo : aRecipientList)
+                {
+                    internetAddressTo = new InternetAddress(mailAddressTo);
+                    mimeMessage.addRecipient(MimeMessage.RecipientType.TO, internetAddressTo);
+                }
+                mimeMessage.setSubject(aSubject);
+
+// The following logic create a multi-part message and adds the attachment to it.
+
+                BodyPart messageBodyPart = new MimeBodyPart();
+                messageBodyPart.setText(aMessage);
+//                messageBodyPart.setContent(aMessage, "text/html");
+                Multipart multipart = new MimeMultipart();
+                multipart.addBodyPart(messageBodyPart);
+
+                if ((anAttachmentFiles != null) && (anAttachmentFiles.size() > 0))
+                {
+                    for (String pathFileName : anAttachmentFiles)
+                    {
+                        File attachmentFile = new File(pathFileName);
+                        if (attachmentFile.exists())
+                        {
+                            messageBodyPart = new MimeBodyPart();
+                            DataSource fileDataSource = new FileDataSource(pathFileName);
+                            messageBodyPart.setDataHandler(new DataHandler(fileDataSource));
+                            messageBodyPart.setFileName(attachmentFile.getName());
+                            multipart.addBodyPart(messageBodyPart);
+                        }
+                    }
+                    appLogger.debug(String.format("Mail Message (%s): %s - with attachments", aSubject, aMessage));
+                }
+                else
+                    appLogger.debug(String.format("Mail Message (%s): %s", aSubject, aMessage));
+
+                mimeMessage.setContent(multipart);
+                Transport.send(mimeMessage);
+            }
+            else
+                throw new NSException("Valid from, recipient, subject and message are required parameters.");
+        }
+        else
+            appLogger.warn("Email delivery is not enabled - no message will be sent.");
 
         appLogger.trace(mAppMgr.LOGMSG_TRACE_DEPART);
     }

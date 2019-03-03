@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -148,6 +148,57 @@ public class DataTable
             for (FieldRow fieldRow : aTable.getRows())
                 this.addRow(new FieldRow(fieldRow));
         }
+    }
+
+    /**
+     * Creates a new table by extending the current table with columns in the
+     * parameter bag followed by adding the bag as a new row.
+     *
+     * @param aBag Bag of new column fields to add to the table.
+     * @param aRowOffset Row offset to insert the bag at.
+     *
+     * @return DataTable A table reflecting the new columns.
+     */
+    public DataTable addNewColumnsAndRow(DataBag aBag, int aRowOffset)
+    {
+        DataBag rowBag;
+        DataTable newTable;
+        DataField curDataField, newDataField;
+
+        if (StringUtils.isEmpty(mName))
+		{
+			newTable = new DataTable(mColumns);
+			newTable.setName(aBag.getName());
+		}
+        else
+		{
+			newTable = new DataTable(mColumns);
+			newTable.setName(mName);
+		}
+        newTable.setFeatures(getFeatures());
+        newTable.setSortFieldName(getSortFieldName());
+        for (DataField ncbDataField : aBag.getFields())
+        {
+            curDataField = mColumns.getFieldByName(ncbDataField.getName());
+            if (curDataField == null)
+            {
+                newDataField = new DataField(ncbDataField);
+                newDataField.clearValues();
+                newTable.add(newDataField);
+            }
+            else
+                newTable.add(curDataField);
+        }
+        int curRowCount = rowCount();
+        for (int row = 0; row < curRowCount; row++)
+        {
+           rowBag = getRowAsBag(row);
+           if (row == aRowOffset)
+               newTable.addRow(aBag);
+           newTable.addRow(rowBag);
+        }
+
+        return newTable;
     }
 
     /**
@@ -2034,20 +2085,20 @@ public class DataTable
             switch (dataField.getType())
             {
                 case Integer:
-                    Integer integerValue1 = new Integer(cellValue1);
-                    Integer integerValue2 = new Integer(cellValue2);
+                    Integer integerValue1 = Integer.valueOf(cellValue1);
+                    Integer integerValue2 = Integer.valueOf(cellValue2);
                     return integerValue1.compareTo(integerValue2);
                 case Long:
-                    Long longValue1 = new Long(cellValue1);
-                    Long longValue2 = new Long(cellValue2);
+                    Long longValue1 = Long.valueOf(cellValue1);
+                    Long longValue2 = Long.valueOf(cellValue2);
                     return longValue1.compareTo(longValue2);
                 case Float:
-                    Float floatValue1 = new Float(cellValue1);
-                    Float floatValue2 = new Float(cellValue2);
+                    Float floatValue1 = Float.valueOf(cellValue1);
+                    Float floatValue2 = Float.valueOf(cellValue2);
                     return floatValue1.compareTo(floatValue2);
                 case Double:
-                    Double doubleValue1 = new Double(cellValue1);
-                    Double doubleValue2 = new Double(cellValue2);
+                    Double doubleValue1 = Double.valueOf(cellValue1);
+                    Double doubleValue2 = Double.valueOf(cellValue2);
                     return doubleValue1.compareTo(doubleValue2);
                 case Boolean:
                     Boolean booleanValue1 = Field.isValueTrue(cellValue1);
@@ -2077,20 +2128,20 @@ public class DataTable
             switch (dataField.getType())
             {
                 case Integer:
-                    Integer integerValue1 = new Integer(cellValue1);
-                    Integer integerValue2 = new Integer(cellValue2);
+                    Integer integerValue1 = Integer.valueOf(cellValue1);
+                    Integer integerValue2 = Integer.valueOf(cellValue2);
                     return integerValue2.compareTo(integerValue1);
                 case Long:
-                    Long longValue1 = new Long(cellValue1);
-                    Long longValue2 = new Long(cellValue2);
+                    Long longValue1 = Long.valueOf(cellValue1);
+                    Long longValue2 = Long.valueOf(cellValue2);
                     return longValue2.compareTo(longValue1);
                 case Float:
-                    Float floatValue1 = new Float(cellValue1);
-                    Float floatValue2 = new Float(cellValue2);
+                    Float floatValue1 = Float.valueOf(cellValue1);
+                    Float floatValue2 = Float.valueOf(cellValue2);
                     return floatValue2.compareTo(floatValue1);
                 case Double:
-                    Double doubleValue1 = new Double(cellValue1);
-                    Double doubleValue2 = new Double(cellValue2);
+                    Double doubleValue1 = Double.valueOf(cellValue1);
+                    Double doubleValue2 = Double.valueOf(cellValue2);
                     return doubleValue2.compareTo(doubleValue1);
                 case Boolean:
                     Boolean booleanValue1 = Field.isValueTrue(cellValue1);

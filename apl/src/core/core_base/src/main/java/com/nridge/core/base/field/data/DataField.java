@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -1345,6 +1345,23 @@ public class DataField
     {
         return StringUtils.equals(aField.getName(), getName()) &&
                isValueEqual(aField);
+    }
+
+    /**
+     * Returns <i>true</i> if this field does not have FEATURE_IS_HIDDEN and
+     * FEATURE_IS_VISIBLE assigned as true.  Otherwise, it will return false
+     * to signify that this field should not be displayed to the user.
+     *
+     * @return <i>true</i> or <i>false</i>
+     */
+    public boolean isDisplayable()
+    {
+        if ((isFeatureAssigned(Field.FEATURE_IS_VISIBLE)) && (isFeatureFalse(Field.FEATURE_IS_VISIBLE)))
+            return false;
+        if ((isFeatureAssigned(Field.FEATURE_IS_HIDDEN)) && (isFeatureFalse(Field.FEATURE_IS_HIDDEN)))
+            return false;
+
+        return true;
     }
 
     /**

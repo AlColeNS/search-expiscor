@@ -651,7 +651,7 @@ framework.  http://www.slf4j.org/codes.html */
                              String.format("Identifies the test name to execute (use '%s' for all tests).",
                                            CMDARG_TESTALL_TASKS));
 
-        CommandLineParser cliParser = new GnuParser();
+        CommandLineParser cliParser = new DefaultParser();
         try
         {
 
@@ -1196,7 +1196,7 @@ framework.  http://www.slf4j.org/codes.html */
         String appBuild = "1";
         String appVersion = "1.0";
         String appName = "Undefined Application";
-        String appDate = "Mon Jan 06 00:00:00 EDT 2014";
+        String appDate = "Mon Jan 06 00:00:00 EDT 2017";
         String appDescription = "The application properties file did not provide a description.";
 
         if (mConfiguration != null)
@@ -1239,7 +1239,7 @@ framework.  http://www.slf4j.org/codes.html */
      *
      * @see <a href="http://logback.qos.ch/">Logback Project</a>
      */
-    public Logger getLogger(Class aClass)
+    public Logger getLogger(Class<?> aClass)
     {
         return LoggerFactory.getLogger(aClass.getClass().getName());
     }

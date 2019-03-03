@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -87,6 +87,7 @@ public class DSCriteria
      * @param aName Name of the criteria.
      * @param aCriteriaMap Map of fields to construct a criteria from.
      */
+    @SuppressWarnings("unchecked")
     public DSCriteria(String aName, Map<String, Object> aCriteriaMap)
     {
         setName(aName);
@@ -106,13 +107,13 @@ public class DSCriteria
                 Object entryObject = mapEntry.getValue();
                 if (entryObject instanceof ArrayList)
                 {
-                    ArrayList arrayList = (ArrayList) entryObject;
+                    ArrayList<Object> arrayList = (ArrayList<Object>) entryObject;
                     for (Object arrayObject : arrayList)
                     {
-                        HashMap hashMap = (HashMap) arrayObject;
+                        HashMap<String,String> hashMap = (HashMap<String,String>) arrayObject;
                         mapValue = hashMap.get("value");
-                        mapName = (String) hashMap.get("fieldName");
-                        mapOperator = (String) hashMap.get("operator");
+                        mapName = hashMap.get("fieldName");
+                        mapOperator = hashMap.get("operator");
                         addSpecialEntry(mapName, mapOperator, mapValue);
                     }
                 }
@@ -191,6 +192,7 @@ public class DSCriteria
      * @param anOperator Logical field operator.
      * @param anObject Generic representation of the value.
      */
+    @SuppressWarnings("unchecked")
     public void addSpecialEntry(String aFieldName, String anOperator, Object anObject)
     {
         if ((StringUtils.isNotEmpty(aFieldName)) && (StringUtils.isNotEmpty(anOperator)) &&
@@ -249,7 +251,7 @@ public class DSCriteria
                 }
                 else if (anObject instanceof ArrayList)
                 {
-                    ArrayList arrayList = (ArrayList) anObject;
+                    ArrayList<String> arrayList = (ArrayList<String>) anObject;
                     String[] fieldValues = StrUtl.convertToMulti(arrayList);
                     dsCriterion = new DSCriterion(aFieldName, convertSpecialOperator(anOperator), fieldValues);
                 }

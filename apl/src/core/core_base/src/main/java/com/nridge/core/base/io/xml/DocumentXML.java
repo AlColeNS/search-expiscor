@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import com.nridge.core.base.doc.Relationship;
 import com.nridge.core.base.io.IO;
 import com.nridge.core.base.std.StrUtl;
 import com.nridge.core.base.std.XMLUtl;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;

@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,6 +20,10 @@ package com.nridge.core.base.io;
 import com.nridge.core.base.std.StrUtl;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Closeable;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
  * The IO class captures the constants, enumerated types and utility methods for the IO package.
  *
@@ -28,6 +32,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class IO
 {
+
+
     public static final String SQLBAG_XML_FORMAT_VERSION = "1.0";
     public static final String DATABAG_XML_FORMAT_VERSION = "1.0";
     public static final String CRITERIA_XML_FORMAT_VERSION = "1.0";
@@ -113,5 +119,47 @@ public class IO
         String className2 = extractType(aClassName2);
 
         return className1.equals(className2);
+    }
+
+    public static void closeQuietly(InputStream aStream)
+    {
+        if (aStream != null)
+        {
+            try
+            {
+                aStream.close();
+            }
+            catch (Exception ignored)
+            {
+            }
+        }
+    }
+
+    public static void closeQuietly(OutputStream aStream)
+    {
+        if (aStream != null)
+        {
+            try
+            {
+                aStream.close();
+            }
+            catch (Exception ignored)
+            {
+            }
+        }
+    }
+
+    public static void closeQuietly(Closeable aCloseable)
+    {
+        if (aCloseable != null)
+        {
+            try
+            {
+                aCloseable.close();
+            }
+            catch (Exception ignored)
+            {
+            }
+        }
     }
 }

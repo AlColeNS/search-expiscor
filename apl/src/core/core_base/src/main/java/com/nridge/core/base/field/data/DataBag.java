@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -740,7 +740,33 @@ public class DataBag
             dataField.setValue(aValue);
     }
 
+    /**
+     * Assigns the values parameter to the field matching the
+     * name parameter.
+     *
+     * @param aName Field name.
+     * @param aValues List of field values to assign.
+     */
+    public void setValuesByName(String aName, ArrayList<String> aValues)
+    {
+        DataField dataField = getFieldByName(aName);
+        if (dataField != null)
+            dataField.setValues(aValues);
+    }
 
+    /**
+     * Assigns the values parameter to the field matching the
+     * name parameter.
+     *
+     * @param aName Field name.
+     * @param aValues Array of field values to assign.
+     */
+    public void setValuesByName(String aName, String... aValues)
+    {
+        DataField dataField = getFieldByName(aName);
+        if (dataField != null)
+            dataField.setValues(aValues);
+    }
 
     /**
      * Returns the value of the field matching the name parameter.
@@ -754,7 +780,12 @@ public class DataBag
         if (dataField == null)
             return StringUtils.EMPTY;
         else
-            return dataField.getValueAsString();
+        {
+            if (dataField.isMultiValue())
+                return dataField.collapse(StrUtl.CHAR_COMMA);
+            else
+                return dataField.getValueAsString();
+        }
     }
 
     /**
@@ -1210,7 +1241,7 @@ public class DataBag
     {
         setAssignedFlagAll(false);
         for (DataField dataField : mFields)
-            dataField.setValue(StringUtils.EMPTY);
+            dataField.clearValues();
     }
 
     /**
@@ -1221,7 +1252,7 @@ public class DataBag
     {
         for (DataField dataField : mFields)
         {
-            dataField.setValue(StringUtils.EMPTY);
+            dataField.clearValues();
             dataField.setAssignedFlag(false);
             dataField.assignValueFromDefault();
         }

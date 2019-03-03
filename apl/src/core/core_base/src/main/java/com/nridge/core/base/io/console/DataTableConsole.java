@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -114,10 +114,8 @@ public class DataTableConsole
         {
             dataField = mTable.getFieldByColumn(col);
 
-            if (dataField.isFeatureTrue(Field.FEATURE_IS_HIDDEN))
-                continue;
-
-            totalWidth += deriveRowColumnWidth(col, aMaxWidth);
+            if (dataField.isDisplayable())
+                totalWidth += deriveRowColumnWidth(col, aMaxWidth);
         }
         totalWidth += (aColSpace * (colCount - 1));
 
@@ -138,17 +136,17 @@ public class DataTableConsole
         {
             dataField = mTable.getFieldByColumn(col);
 
-            if (dataField.isFeatureTrue(Field.FEATURE_IS_HIDDEN))
-                continue;
-
-            displayWidth = deriveRowColumnWidth(col, aMaxWidth);
-            labelString = dataField.getTitle();
-            strLength = labelString.length();
-            colWidth = displayWidth + aColSpace;
-            strLength = Math.min(displayWidth, strLength);
-            rowStrBuilder.append(labelString.substring(0, strLength));
-            for (k = strLength; k < colWidth; k++)
-                rowStrBuilder.append(StrUtl.CHAR_SPACE);
+            if (dataField.isDisplayable())
+            {
+                displayWidth = deriveRowColumnWidth(col, aMaxWidth);
+                labelString = dataField.getTitle();
+                strLength = labelString.length();
+                colWidth = displayWidth + aColSpace;
+                strLength = Math.min(displayWidth, strLength);
+                rowStrBuilder.append(labelString.substring(0, strLength));
+                for (k = strLength; k < colWidth; k++)
+                    rowStrBuilder.append(StrUtl.CHAR_SPACE);
+            }
         }
         aPW.printf("%s%n", rowStrBuilder.toString());
 
@@ -160,18 +158,18 @@ public class DataTableConsole
         {
             dataField = mTable.getFieldByColumn(col);
 
-            if (dataField.isFeatureTrue(Field.FEATURE_IS_HIDDEN))
-                continue;
-
-            displayWidth = deriveRowColumnWidth(col, aMaxWidth);
-            labelString = dataField.getTitle();
-            strLength = labelString.length();
-            colWidth = displayWidth + aColSpace;
-            strLength = Math.min(displayWidth, strLength);
-            for (j = 0; j < strLength; j++)
-                rowStrBuilder.append(StrUtl.CHAR_HYPHEN);
-            for (k = strLength; k < colWidth; k++)
-                rowStrBuilder.append(StrUtl.CHAR_SPACE);
+            if (dataField.isDisplayable())
+            {
+                displayWidth = deriveRowColumnWidth(col, aMaxWidth);
+                labelString = dataField.getTitle();
+                strLength = labelString.length();
+                colWidth = displayWidth + aColSpace;
+                strLength = Math.min(displayWidth, strLength);
+                for (j = 0; j < strLength; j++)
+                    rowStrBuilder.append(StrUtl.CHAR_HYPHEN);
+                for (k = strLength; k < colWidth; k++)
+                    rowStrBuilder.append(StrUtl.CHAR_SPACE);
+            }
         }
         aPW.printf("%s%n", rowStrBuilder.toString());
 
@@ -187,25 +185,25 @@ public class DataTableConsole
             {
                 dataField = mTable.getFieldByRowCol(row, col);
 
-                if (dataField.isFeatureTrue(Field.FEATURE_IS_HIDDEN))
-                    continue;
-
-                displayWidth = deriveRowColumnWidth(col, aMaxWidth);
-                if (dataField.isAssigned())
+                if (dataField.isDisplayable())
                 {
-                    valueString = dataField.collapse(StrUtl.CHAR_COMMA);
-                    if (StringUtils.isEmpty(valueString))
+                    displayWidth = deriveRowColumnWidth(col, aMaxWidth);
+                    if (dataField.isAssigned())
+                    {
+                        valueString = dataField.collapse(StrUtl.CHAR_COMMA);
+                        if (StringUtils.isEmpty(valueString))
+                            valueString = StringUtils.EMPTY;
+                    }
+                    else
                         valueString = StringUtils.EMPTY;
-                }
-                else
-                    valueString = StringUtils.EMPTY;
 
-                strLength = valueString.length();
-                colWidth = displayWidth + aColSpace;
-                strLength = Math.min(displayWidth, strLength);
-                rowStrBuilder.append(valueString.substring(0, strLength));
-                for (k = strLength; k < colWidth; k++)
-                    rowStrBuilder.append(StrUtl.CHAR_SPACE);
+                    strLength = valueString.length();
+                    colWidth = displayWidth + aColSpace;
+                    strLength = Math.min(displayWidth, strLength);
+                    rowStrBuilder.append(valueString.substring(0, strLength));
+                    for (k = strLength; k < colWidth; k++)
+                        rowStrBuilder.append(StrUtl.CHAR_SPACE);
+                }
             }
             aPW.printf("%s%n", rowStrBuilder.toString());
         }

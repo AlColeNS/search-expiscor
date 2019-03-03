@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 
 package com.nridge.core.base.std;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.*;
 
@@ -43,7 +43,7 @@ public class XMLUtl
         offset = aString.indexOf(StrUtl.CHAR_LESSTHAN);
         if (offset != -1)
             return true;
-        offset = aString.indexOf(StrUtl.CHAR_GREATTHAN);
+        offset = aString.indexOf(StrUtl.CHAR_GREATERTHAN);
         if (offset != -1)
             return true;
         offset = aString.indexOf(StrUtl.CHAR_AMPERSAND);

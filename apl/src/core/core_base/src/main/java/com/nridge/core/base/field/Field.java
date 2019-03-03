@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -83,6 +83,7 @@ public class Field
     public static final String FEATURE_IS_STORED = "isStored";
     public static final String FEATURE_IS_UNIQUE = "isUnique";
     public static final String FEATURE_IS_HIDDEN = "isHidden";
+    public static final String FEATURE_IS_VISIBLE = "isVisible";
     public static final String FEATURE_IS_INDEXED = "isIndexed";
     public static final String FEATURE_IS_CONTENT = "isContent";
     public static final String FEATURE_IS_REQUIRED = "isRequired";
@@ -90,6 +91,9 @@ public class Field
     public static final String FEATURE_IS_PRIMARY_KEY = "isPrimaryKey";
     public static final String FEATURE_IS_RELATED_SRC_KEY = "isRelatedSrcKey";
     public static final String FEATURE_IS_RELATED_DST_KEY = "isRelatedDstKey";
+
+    public static final String FEATURE_DESCRIPTION = "fieldDescription";
+    public static final String FEATURE_INDEX_FIELD_TYPE = "indexFieldType";
 
 // SQL field feature constants.
 
@@ -418,7 +422,7 @@ public class Field
             {
                 curChar = aFieldName.charAt(i);
 
-                if (curChar == StrUtl.CHAR_UNDERLINE)
+                if ((curChar == StrUtl.CHAR_UNDERLINE) || (curChar == StrUtl.CHAR_DOT))
                 {
                     curChar = StrUtl.CHAR_SPACE;
                     stringBuilder.append(curChar);
@@ -463,7 +467,19 @@ public class Field
     public static String titleToName(String aTitle)
     {
         if (StringUtils.isNotEmpty(aTitle))
-            return StringUtils.replaceChars(aTitle.toLowerCase(), StrUtl.CHAR_SPACE, StrUtl.CHAR_UNDERLINE);
+        {
+            String fieldName = StringUtils.replaceChars(aTitle.toLowerCase(), StrUtl.CHAR_SPACE, StrUtl.CHAR_UNDERLINE);
+            fieldName = StringUtils.replaceChars(fieldName, StrUtl.CHAR_HYPHEN ,StrUtl.CHAR_UNDERLINE);
+            fieldName = StringUtils.replaceChars(fieldName, StrUtl.CHAR_PAREN_OPEN ,StrUtl.CHAR_UNDERLINE);
+            fieldName = StringUtils.replaceChars(fieldName, StrUtl.CHAR_PAREN_CLOSE ,StrUtl.CHAR_UNDERLINE);
+            fieldName = StringUtils.replaceChars(fieldName, StrUtl.CHAR_BRACKET_OPEN ,StrUtl.CHAR_UNDERLINE);
+            fieldName = StringUtils.replaceChars(fieldName, StrUtl.CHAR_BRACKET_CLOSE ,StrUtl.CHAR_UNDERLINE);
+            fieldName = StrUtl.removeDuplicateChar(fieldName, StrUtl.CHAR_UNDERLINE);
+            if (StrUtl.endsWithChar(fieldName, StrUtl.CHAR_UNDERLINE))
+                fieldName = StrUtl.trimLastChar(fieldName);
+
+            return fieldName;
+        }
         else
             return aTitle;
     }
@@ -475,7 +491,7 @@ public class Field
      *
      * @return Java data type class.
      */
-    public static Class getTypeClass(Field.Type aType)
+    public static Class<?> getTypeClass(Field.Type aType)
     {
         switch (aType)
         {
@@ -574,7 +590,7 @@ public class Field
      */
     public static int createInt(String aValue)
     {
-        if (NumberUtils.isNumber(aValue))
+        if (NumberUtils.isDigits(aValue))
             return Integer.parseInt(aValue);
         else
             return Integer.MIN_VALUE;
@@ -590,8 +606,8 @@ public class Field
      */
     public static Integer createIntegerObject(String aValue)
     {
-        if (NumberUtils.isNumber(aValue))
-            return new Integer(aValue);
+        if (NumberUtils.isDigits(aValue))
+            return Integer.valueOf(aValue);
         else
             return Integer.MIN_VALUE;
     }
@@ -606,7 +622,7 @@ public class Field
      */
     public static long createLong(String aValue)
     {
-        if (NumberUtils.isNumber(aValue))
+        if (NumberUtils.isDigits(aValue))
             return Long.parseLong(aValue);
         else
             return Long.MIN_VALUE;
@@ -622,8 +638,8 @@ public class Field
      */
     public static Long createLongObject(String aValue)
     {
-        if (NumberUtils.isNumber(aValue))
-            return new Long(aValue);
+        if (NumberUtils.isDigits(aValue))
+            return Long.valueOf(aValue);
         else
             return Long.MIN_VALUE;
     }
@@ -638,7 +654,7 @@ public class Field
      */
     public static float createFloat(String aValue)
     {
-        if (NumberUtils.isNumber(aValue))
+        if (StringUtils.isNotEmpty(aValue))
             return Float.parseFloat(aValue);
         else
             return Float.MIN_VALUE;
@@ -654,8 +670,8 @@ public class Field
      */
     public static Float createFloatObject(String aValue)
     {
-        if (NumberUtils.isNumber(aValue))
-            return new Float(aValue);
+        if (StringUtils.isNotEmpty(aValue))
+            return Float.valueOf(aValue);
         else
             return Float.MIN_VALUE;
     }
@@ -670,7 +686,7 @@ public class Field
      */
     public static double createDouble(String aValue)
     {
-        if (NumberUtils.isNumber(aValue))
+        if (StringUtils.isNotEmpty(aValue))
             return Double.parseDouble(aValue);
         else
             return Double.MIN_VALUE;
@@ -686,8 +702,8 @@ public class Field
      */
     public static Double createDoubleObject(String aValue)
     {
-        if (NumberUtils.isNumber(aValue))
-            return new Double(aValue);
+        if (StringUtils.isNotEmpty(aValue))
+            return Double.valueOf(aValue);
         else
             return Double.MIN_VALUE;
     }

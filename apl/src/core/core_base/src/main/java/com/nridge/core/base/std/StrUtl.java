@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -46,6 +46,7 @@ public class StrUtl
 
 // The following constants are defined to aid in code documentation.
 
+    public static final char CHAR_AT = '@';
     public static final char CHAR_DOT = '.';
     public static final char CHAR_COLON = ':';
     public static final char CHAR_PIPE = '|';
@@ -58,7 +59,7 @@ public class StrUtl
     public static final char CHAR_DOLLAR = '$';
     public static final char CHAR_PERCENT = '%';
     public static final char CHAR_LESSTHAN = '<';
-    public static final char CHAR_GREATTHAN = '>';
+    public static final char CHAR_GREATERTHAN = '>';
     public static final char CHAR_AMPERSAND = '&';
     public static final char CHAR_QUESTMARK = '?';
     public static final char CHAR_UNDERLINE = '_';
@@ -66,14 +67,12 @@ public class StrUtl
     public static final char CHAR_DBLQUOTE = '"';
     public static final char CHAR_ASTERISK = '*';
     public static final char CHAR_SEMICOLON = ';';
-    public static final char CHAR_LEFTPAREN = '(';
-    public static final char CHAR_RIGHTPAREN = ')';
     public static final char CHAR_BACKSLASH = '\\';
     public static final char CHAR_LEFTBRACKET = '[';
     public static final char CHAR_RIGHTBRACKET = ']';
     public static final char CHAR_FORWARDSLASH = '/';
-    public static final char CHAR_PAREN_OPEN = '[';
-    public static final char CHAR_PAREN_CLOSE = ']';
+    public static final char CHAR_PAREN_OPEN = '(';
+    public static final char CHAR_PAREN_CLOSE = ')';
     public static final char CHAR_BRACKET_OPEN = '[';
     public static final char CHAR_BRACKET_CLOSE = ']';
 
@@ -113,6 +112,24 @@ public class StrUtl
     public static final double SIZE_IN_MB = 1024 * SIZE_IN_KB;
     public static final double SIZE_IN_GB = 1024 * SIZE_IN_MB;
     public static final double SIZE_IN_TB = 1024 * SIZE_IN_GB;
+
+    /**
+     * Given a lowercase name, this method will make it a proper
+     * name by capitalizing the first character.
+     *
+     * @param aName Lowercase name.
+     *
+     * @return Proper name.
+     */
+    public static String firstCharToUpper(String aName)
+    {
+        String properName = StringUtils.EMPTY;
+
+        if (StringUtils.isNotEmpty(aName))
+            properName = aName.substring(0, 1).toUpperCase() + aName.substring(1);
+
+        return properName;
+    }
 
     /**
      * Given a <i>boolean</i> value, return a string object representation of
@@ -178,6 +195,67 @@ public class StrUtl
             }
 
             return strBuilder.toString();
+        }
+    }
+
+    /**
+     * Removes a duplicate character (meaning it repeats two more more times)
+     * from the string.
+     *
+     * @param aString A source string.
+     * @param aChar A repeating character.
+     *
+     * @return Update string.
+     */
+    public static String removeDuplicateChar(String aString, char aChar)
+    {
+        int strLength;
+        char prevChar, nextChar;
+        StringBuilder strBuilder;
+
+        if (StringUtils.isEmpty(aString))
+            return aString;
+        else
+        {
+            prevChar = 0;
+            strLength = aString.length();
+            strBuilder = new StringBuilder();
+            for (int i = 0; i < strLength; i++)
+            {
+                nextChar = aString.charAt(i);
+                if (nextChar == aChar)
+                {
+                    if (nextChar != prevChar)
+                        strBuilder.append(nextChar);
+                }
+                else
+                    strBuilder.append(nextChar);
+                prevChar = nextChar;
+            }
+
+            return strBuilder.toString();
+        }
+    }
+
+    /**
+     * Trims the last character from the string.
+     *
+     * @param aString A source string.
+     *
+     * @return Trimmed string.
+     */
+    public static String trimLastChar(String aString)
+    {
+        char ch;
+        int strLength;
+        StringBuilder strBuilder;
+
+        if (StringUtils.isEmpty(aString))
+            return aString;
+        else
+        {
+            strLength = aString.length();
+            return aString.substring(0, strLength-1);
         }
     }
 
@@ -562,6 +640,25 @@ public class StrUtl
     }
 
     /**
+     * Appends the character to the string if it is missing.
+     *
+     * @param aString A source string.
+     * @param aChar Identifies the character to append (if missing).
+     *
+     * @return The updated string if the character was missing.
+     */
+    public static String appendCharIfMissing(String aString, char aChar)
+    {
+        if (StringUtils.isNotEmpty(aString))
+        {
+            if (! endsWithChar(aString, aChar))
+                return aString + aChar;
+        }
+
+        return aString;
+    }
+
+    /**
      * Escape <code>aCharToEscape</code> in the string
      * with a Java escape character (backslash).
      *
@@ -693,7 +790,7 @@ public class StrUtl
      *
      * @return An array of values extracted from the array list.
      */
-    public static String[] convertToMulti(ArrayList anArrayList)
+    public static String[] convertToMulti(ArrayList<?> anArrayList)
     {
         if ((anArrayList == null) || (anArrayList.size() == 0))
         {

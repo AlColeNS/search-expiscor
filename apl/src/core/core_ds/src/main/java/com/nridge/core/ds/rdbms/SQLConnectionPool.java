@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -202,7 +202,7 @@ anymore. */
         String driverClassName = aProperties.getProperty("driverClassName");
         try
         {
-            Class.forName(driverClassName).newInstance();
+            Class.forName(driverClassName).getConstructor().newInstance();
         }
         catch (Exception e)
         {
@@ -235,7 +235,7 @@ anymore. */
         String driverClassName = aProperties.getProperty("driverClassName");
         try
         {
-            Class.forName(driverClassName).newInstance();
+            Class.forName(driverClassName).getConstructor().newInstance();
         }
         catch (Exception e)
         {

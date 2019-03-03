@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -157,7 +157,7 @@ public class PostgreSQLTable extends SQLTable
 
         boolean isCommaNeeded = false;
         StringBuilder sqlBuilder = new StringBuilder(sqlStatement);
-        sqlBuilder.append(StrUtl.CHAR_LEFTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_OPEN);
         for (DataField pField : aBag.getFields())
         {
             if (isCommaNeeded)
@@ -166,7 +166,7 @@ public class PostgreSQLTable extends SQLTable
                 isCommaNeeded = true;
             sqlBuilder.append(columnElement(pField));
         }
-        sqlBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
 
         String tableSpace = aBag.getFeature(Field.FEATURE_TABLESPACE_NAME);
         if (StringUtils.isNotEmpty(tableSpace))
@@ -511,7 +511,7 @@ public class PostgreSQLTable extends SQLTable
         boolean isCommaNeeded = false;
         StringBuilder sqlBuilder = new StringBuilder(String.format("INSERT INTO %s ", schemaName(aBag)));
 
-        sqlBuilder.append(StrUtl.CHAR_LEFTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_OPEN);
         for (DataField pField : aBag.getFields())
         {
             if (isCommaNeeded)
@@ -520,12 +520,12 @@ public class PostgreSQLTable extends SQLTable
                 isCommaNeeded = true;
             sqlBuilder.append(columnName(pField.getName()));
         }
-        sqlBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
 
         isCommaNeeded = false;
         sqlBuilder.append(" VALUES ");
 
-        sqlBuilder.append(StrUtl.CHAR_LEFTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_OPEN);
         for (DataField pField : aBag.getFields())
         {
             if (isCommaNeeded)
@@ -558,7 +558,7 @@ public class PostgreSQLTable extends SQLTable
                     sqlBuilder.append(fieldValue);
             }
         }
-        sqlBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
 
         mSQLConnection.execute(sqlBuilder.toString());
 

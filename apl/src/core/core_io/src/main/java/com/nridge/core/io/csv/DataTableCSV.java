@@ -93,6 +93,72 @@ public class DataTableCSV
         return totalCount;
     }
 
+    private String dataFieldToColumnName(DataField aDataField, boolean anIsTitleOnly)
+    {
+        if (anIsTitleOnly)
+        {
+            String fieldTitle = aDataField.getTitle();
+            if (StringUtils.isEmpty(fieldTitle))
+                fieldTitle = Field.nameToTitle(aDataField.getName());
+
+            return fieldTitle;
+        }
+        else
+        {
+            StringBuilder stringBuilder = new StringBuilder(aDataField.getName());
+
+            stringBuilder.append(String.format("[%s]", aDataField.getType().name()));
+            String fieldTitle = aDataField.getTitle();
+            if (StringUtils.isNotEmpty(fieldTitle))
+                stringBuilder.append(String.format("(%s)", fieldTitle));
+
+            return stringBuilder.toString();
+        }
+    }
+
+    private DataField fieldTypeLabelToDataField(String aFieldTypeLabel, int aColumnOffset)
+    {
+        DataField dataField;
+        Field.Type fieldType = Field.Type.Text;
+
+        if (StringUtils.isNotEmpty(aFieldTypeLabel))
+        {
+            String fieldName = aFieldTypeLabel;
+            String fieldTitle = StringUtils.EMPTY;
+            String typeName = Field.Type.Text.name();
+
+            int typeOffsetStart = aFieldTypeLabel.indexOf(StrUtl.CHAR_BRACKET_OPEN);
+            int typeOffsetFinish = aFieldTypeLabel.indexOf(StrUtl.CHAR_BRACKET_CLOSE);
+            int labelOffsetStart = aFieldTypeLabel.indexOf(StrUtl.CHAR_PAREN_OPEN);
+            int labelOffsetFinish = aFieldTypeLabel.indexOf(StrUtl.CHAR_PAREN_CLOSE);
+
+            if ((typeOffsetStart > 0) && (typeOffsetFinish > 0))
+            {
+                fieldName = aFieldTypeLabel.substring(0, typeOffsetStart);
+                typeName = aFieldTypeLabel.substring(typeOffsetStart+1, typeOffsetFinish);
+                fieldType = Field.stringToType(typeName);
+            }
+            if ((labelOffsetStart > 0) && (labelOffsetFinish > 0))
+            {
+                if (typeOffsetStart == -1)
+                    fieldName = aFieldTypeLabel.substring(0, labelOffsetStart);
+                fieldTitle = aFieldTypeLabel.substring(labelOffsetStart+1, labelOffsetFinish);
+            }
+
+            if (StringUtils.isEmpty(fieldTitle))
+                dataField = new DataField(fieldType, fieldName);
+            else
+                dataField = new DataField(fieldType, fieldName, fieldTitle);
+        }
+        else
+        {
+            String fieldName = String.format("field_name_%02d", aColumnOffset);
+            dataField = new DataField(fieldType, fieldName);
+        }
+
+        return dataField;
+    }
+
     /**
      * Saves the previous assigned table (e.g. via constructor or set method)
      * to the <i>PrintWriter</i> output stream.
@@ -100,10 +166,11 @@ public class DataTableCSV
      * @param aPW Print writer output stream.
      * @param aWithHeaders If <i>true</i>, then column headers will be stored
      *                     in the CSV file.
+     * @param anIsTitleOnly Limit the column headers to just title strings.
      *
      * @throws IOException I/O related exception.
      */
-    public void save(PrintWriter aPW, boolean aWithHeaders)
+    public void save(PrintWriter aPW, boolean aWithHeaders, boolean anIsTitleOnly)
         throws IOException
     {
         int colOffset;
@@ -127,10 +194,8 @@ public class DataTableCSV
                     {
                         if (mIsFieldNamePreferred)
                             headerName = dataField.getName();
-                        else if (StringUtils.isNotEmpty(dataField.getTitle()))
-                            headerName = dataField.getTitle();
                         else
-                            headerName = dataField.getName();
+                            headerName = dataFieldToColumnName(dataField, anIsTitleOnly);
                         headerColumns[colOffset++] = headerName;
                     }
                 }
@@ -168,7 +233,29 @@ public class DataTableCSV
     {
         try (PrintWriter printWriter = new PrintWriter(aPathFileName, StrUtl.CHARSET_UTF_8))
         {
-            save(printWriter, aWithHeaders);
+            save(printWriter, aWithHeaders, false);
+        }
+        catch (Exception e)
+        {
+            throw new IOException(aPathFileName + ": " + e.getMessage());
+        }
+    }
+
+    /**
+     * Saves the previous assigned table (e.g. via constructor or set method)
+     * to the <i>PrintWriter</i> output stream using the column titles in the
+     * header row.
+     *
+     * @param aPathFileName Absolute file name.
+     *
+     * @throws IOException I/O related exception.
+     */
+    public void saveWithTitleHeader(String aPathFileName)
+        throws IOException
+    {
+        try (PrintWriter printWriter = new PrintWriter(aPathFileName, StrUtl.CHARSET_UTF_8))
+        {
+            save(printWriter, true, true);
         }
         catch (Exception e)
         {
@@ -197,8 +284,8 @@ public class DataTableCSV
             String mvDelimiter;
             DataField dataField;
             List<String> rowCells;
-            String[] columnHeaders;
             int columnCount, adjCount;
+            String[] columnHeaders = null;
 
 // We are grabbing a reference in case we want to use it in the future (unused now).
 
@@ -206,6 +293,16 @@ public class DataTableCSV
                 columnHeaders = csvListReader.getHeader(aWithHeaders);
 
             columnCount = mDataTable.columnCount();
+            if ((columnHeaders != null) && (columnCount == 0))
+            {
+                for (String columnName : columnHeaders)
+                {
+                    columnCount++;
+                    dataField = fieldTypeLabelToDataField(columnName, columnCount);
+                    mDataTable.add(dataField);
+                }
+            }
+
             do
             {
                 rowCells = csvListReader.read();

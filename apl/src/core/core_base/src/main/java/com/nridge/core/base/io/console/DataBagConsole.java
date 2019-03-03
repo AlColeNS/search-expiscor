@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,7 +72,7 @@ public class DataBagConsole
         int maxPromptLength = 0;
         for (DataField dataField : mBag.getFields())
         {
-            if (dataField.isFeatureFalse(Field.FEATURE_IS_HIDDEN))
+            if (dataField.isDisplayable())
             {
                 if (mIsBasedOnTitle)
                     fieldTitle = dataField.getTitle();
@@ -100,7 +100,7 @@ public class DataBagConsole
 
         for (DataField dataField : mBag.getFields())
         {
-            if (dataField.isFeatureFalse(Field.FEATURE_IS_HIDDEN))
+            if (dataField.isDisplayable())
             {
                 if (mIsBasedOnTitle)
                     fieldTitle = dataField.getTitle();
@@ -178,7 +178,7 @@ public class DataBagConsole
         int maxTitleLength = 0;
         for (DataField dataField : mBag.getFields())
         {
-            if (dataField.isFeatureFalse(Field.FEATURE_IS_HIDDEN))
+            if (dataField.isDisplayable())
             {
                 if (mIsBasedOnTitle)
                     fieldTitle = dataField.getTitle();
@@ -199,13 +199,16 @@ public class DataBagConsole
 
         for (DataField dataField : mBag.getFields())
         {
-            if (dataField.isFeatureFalse(Field.FEATURE_IS_HIDDEN))
+            if (dataField.isDisplayable())
             {
                 if (mIsBasedOnTitle)
                     fieldTitle = dataField.getTitle();
                 else
                     fieldTitle = dataField.getName();
-                fieldValue = dataField.getValue();
+                if (dataField.isMultiValue())
+                    fieldValue = StrUtl.collapseToSingle(dataField.getValues(), StrUtl.CHAR_COMMA);
+                else
+                    fieldValue = dataField.getValue();
                 stringBuilder = new StringBuilder();
                 for (int j = fieldTitle.length(); j < maxTitleLength; j++)
                     stringBuilder.append(StrUtl.CHAR_SPACE);

@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,8 @@ import com.nridge.core.base.std.NSException;
  */
 public class DSException extends NSException
 {
+    static final long serialVersionUID = 2L;
+
     /**
      * Default constructor.
      */

@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -189,6 +189,8 @@ public class DocumentJSON
      * Saves the previous assigned document list (e.g. via constructor or set method)
      * to a string and returns it.
      *
+     * @return JSON string representing the document.
+     *
      * @throws java.io.IOException I/O related exception.
      */
     public String saveAsString()
@@ -258,6 +260,8 @@ public class DocumentJSON
      * an instance to it.
      *
      * @param aReader Json reader stream instance.
+     *
+     * @return Document instance containing the parsed data.
      *
      * @throws java.io.IOException I/O related exception.
      */

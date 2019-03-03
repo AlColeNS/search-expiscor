@@ -197,7 +197,7 @@ public class ADQuery
 
 // LDAP Reference - http://docs.oracle.com/javase/1.5.0/docs/guide/jndi/jndi-ldap-gl.html
 
-        Hashtable environmentalVariables = new Hashtable();
+        Hashtable<String,String> environmentalVariables = new Hashtable<String,String>();
         environmentalVariables.put("com.sun.jndi.ldap.connect.pool", StrUtl.STRING_TRUE);
         environmentalVariables.put(Context.PROVIDER_URL, getPropertyValue("domain_url", null));
         environmentalVariables.put("java.naming.ldap.attributes.binary", "tokenGroups objectSid");
@@ -269,7 +269,7 @@ public class ADQuery
         try
         {
             loadUserByAccountName(userBag);
-            Hashtable environmentalVariables = new Hashtable();
+            Hashtable<String,String> environmentalVariables = new Hashtable<String,String>();
             environmentalVariables.put("com.sun.jndi.ldap.connect.pool", StrUtl.STRING_TRUE);
             environmentalVariables.put(Context.PROVIDER_URL, getPropertyValue("domain_url", null));
             environmentalVariables.put("java.naming.ldap.attributes.binary", "tokenGroups objectSid");
@@ -419,11 +419,11 @@ public class ADQuery
         String accountName = null;
         int attrCount = aUserBag.count();
         String[] ldapAttrNames = new String[attrCount];
-        for (DataField complexField : aUserBag.getFields())
+        for (DataField dataField : aUserBag.getFields())
         {
-            fieldName = complexField.getName();
+            fieldName = dataField.getName();
             if (fieldName.equals(LDAP_ACCOUNT_NAME))
-                accountName = complexField.getValueAsString();
+                accountName = dataField.getValueAsString();
             ldapAttrNames[field++] = fieldName;
         }
         searchControls.setReturningAttributes(ldapAttrNames);
@@ -440,7 +440,7 @@ public class ADQuery
                                                 LDAP_ACCOUNT_NAME, accountName);
         try
         {
-            NamingEnumeration searchResponse = mLdapContext.search(userSearchBaseDN, userSearchFilter, searchControls);
+            NamingEnumeration<?> searchResponse = mLdapContext.search(userSearchBaseDN, userSearchFilter, searchControls);
             if ((searchResponse != null) && (searchResponse.hasMore()))
             {
                 responseAttributes = ((SearchResult) searchResponse.next()).getAttributes();
@@ -530,7 +530,7 @@ public class ADQuery
             LDAP_COMMON_NAME, commonName);
         try
         {
-            NamingEnumeration searchResponse = mLdapContext.search(userSearchBaseDN, userSearchFilter, searchControls);
+            NamingEnumeration<?> searchResponse = mLdapContext.search(userSearchBaseDN, userSearchFilter, searchControls);
             if ((searchResponse != null) && (searchResponse.hasMore()))
             {
                 responseAttributes = ((SearchResult) searchResponse.next()).getAttributes();
@@ -619,7 +619,7 @@ public class ADQuery
                                                   LDAP_ACCOUNT_NAME, accountName);
         try
         {
-            NamingEnumeration searchResponse = mLdapContext.search(groupSearchBaseDN, groupSearchFilter, searchControls);
+            NamingEnumeration<?> searchResponse = mLdapContext.search(groupSearchBaseDN, groupSearchFilter, searchControls);
             if ((searchResponse != null) && (searchResponse.hasMore()))
             {
                 responseAttributes = ((SearchResult) searchResponse.next()).getAttributes();
@@ -737,7 +737,7 @@ public class ADQuery
 
         try
         {
-            NamingEnumeration userSearchResponse = mLdapContext.search(distinguishedName, "(objectClass=user)",
+            NamingEnumeration<?> userSearchResponse = mLdapContext.search(distinguishedName, "(objectClass=user)",
                                                                        userSearchControls);
             if ((userSearchResponse != null) && (userSearchResponse.hasMoreElements()))
             {
@@ -750,11 +750,11 @@ public class ADQuery
                 {
                     try
                     {
-                        for (NamingEnumeration searchResultAttributesAll = userResultAttributes.getAll();
+                        for (NamingEnumeration<?> searchResultAttributesAll = userResultAttributes.getAll();
                              searchResultAttributesAll.hasMore();)
                         {
                             Attribute attr = (Attribute) searchResultAttributesAll.next();
-                            for (NamingEnumeration namingEnumeration = attr.getAll(); namingEnumeration.hasMore();)
+                            for (NamingEnumeration<?> namingEnumeration = attr.getAll(); namingEnumeration.hasMore();)
                             {
                                 objectSid = (byte[]) namingEnumeration.next();
                                 groupsSearchFilter.append("(objectSid=" + objectSidToString2(objectSid) + ")");
@@ -785,9 +785,9 @@ public class ADQuery
                     groupsReturnedAtts[field++] = fieldName;
                 }
                 groupSearchControls.setReturningAttributes(groupsReturnedAtts);
-                NamingEnumeration groupSearchResponse = mLdapContext.search(groupSearchBaseDN,
-                    groupsSearchFilter.toString(),
-                    groupSearchControls);
+                NamingEnumeration<?> groupSearchResponse = mLdapContext.search(groupSearchBaseDN,
+                                                                                groupsSearchFilter.toString(),
+                                                                                groupSearchControls);
                 while ((groupSearchResponse != null) && (groupSearchResponse.hasMoreElements()))
                 {
                     SearchResult groupSearchResult = (SearchResult) groupSearchResponse.next();

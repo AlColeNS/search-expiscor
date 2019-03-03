@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -541,6 +541,23 @@ public class Document
         ArrayList<Document> documentList = new ArrayList<>();
         ArrayList<Relationship> relationshipList = getRelationships(aType);
         for (Relationship relationship : relationshipList)
+        {
+            for (Document document : relationship.getDocuments())
+                documentList.add(document);
+        }
+
+        return documentList;
+    }
+
+    /**
+     * Returns a collection of related documents.
+     *
+     * @return List of related documents.
+     */
+    public ArrayList<Document> getRelatedDocuments()
+    {
+        ArrayList<Document> documentList = new ArrayList<>();
+        for (Relationship relationship : getRelationships())
         {
             for (Document document : relationship.getDocuments())
                 documentList.add(document);

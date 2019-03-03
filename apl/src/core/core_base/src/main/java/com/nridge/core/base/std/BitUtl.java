@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ package com.nridge.core.base.std;
  * The BitUtl class provides utility methods for bitwise mask
  * operations.  The goal of the class was to improve code readability.
  * An EnumSet is a better way to model bits.  If you decide to serialize
- * the enum, then you should look at the ordinal() method.
+ * the enum, then you look at the ordinal() method.
  *
  * @author Al Cole
  * @version 1.0 Jan 4, 2014

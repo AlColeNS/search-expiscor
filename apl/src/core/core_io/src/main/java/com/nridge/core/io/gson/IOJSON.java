@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonWriter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +48,28 @@ public class IOJSON
     {
         if (StringUtils.isNotEmpty(aValue))
             aWriter.name(aName).value(aValue);
+    }
+
+    /**
+     * Writes a JSON field name/values if the value is not empty.
+     *
+     * @param aWriter JSON writer output stream.
+     * @param aName Field name.
+     * @param aValues Field values.
+     *
+     * @throws IOException I/O related exception.
+     */
+    public static void writeNameValue(JsonWriter aWriter, String aName,
+                                      ArrayList<String> aValues)
+        throws IOException
+    {
+        if ((aValues != null) && (aValues.size() > 0))
+        {
+            aWriter.name(aName).beginArray();
+            for (String value : aValues)
+                aWriter.value(value);
+            aWriter.endArray();
+        }
     }
 
     /**

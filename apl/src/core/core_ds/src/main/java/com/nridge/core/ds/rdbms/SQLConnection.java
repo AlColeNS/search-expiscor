@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -408,7 +408,7 @@ public class SQLConnection implements AutoCloseable
                                       anAccount, anPassword));
         try
         {
-            Class.forName(aDriverName).newInstance();
+            Class.forName(aDriverName).getConstructor().newInstance();
             mConnection = DriverManager.getConnection(aConnectionURI, anAccount, anPassword);
             identifyVendor();
         }

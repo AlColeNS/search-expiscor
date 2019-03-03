@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,6 +72,7 @@ public class DocumentOpJSON implements DocOpInterface
     /**
      * Constructor accepts a list of document instances as a parameter.
      *
+     * @param aName Operation name.
      * @param aDocumentList A list of document instances.
      */
     public DocumentOpJSON(String aName, ArrayList<Document> aDocumentList)
@@ -83,6 +84,7 @@ public class DocumentOpJSON implements DocOpInterface
     /**
      * Constructor accepts a data source criteria as a parameter.
      *
+     * @param aName Operation name.
      * @param aCriteria Data source criteria instance.
      */
     public DocumentOpJSON(String aName, DSCriteria aCriteria)

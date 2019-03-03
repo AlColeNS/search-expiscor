@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -307,6 +307,17 @@ public class Relationship
             return mDocuments.get(0);
         else
             return null;
+    }
+
+    /**
+     * Assigns list of destination documents to the relationship.
+     *
+     * @param aDocuments List of document instances.
+     */
+    public void setDocuments(ArrayList<Document> aDocuments)
+    {
+        if (aDocuments != null)
+            mDocuments = aDocuments;
     }
 
     /**

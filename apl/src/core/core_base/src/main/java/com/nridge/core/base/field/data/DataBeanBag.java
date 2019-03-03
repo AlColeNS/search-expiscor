@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ public class DataBeanBag
         fieldName = aField.getName();
         fieldTitle = com.nridge.core.base.field.Field.nameToTitle(fieldName);
 
-        Class classFieldType = aField.getType();
+        Class<?> classFieldType = aField.getType();
         Object fieldObject = aField.get(anObject);
 
         if ((StringUtils.endsWith(classFieldType.getName(), "Integer")) ||
@@ -140,7 +140,7 @@ public class DataBeanBag
         String fieldTypeString = aBeanField.type();
         if (StringUtils.isEmpty(fieldTypeString))
         {
-            Class methodReturnType = aMethod.getReturnType();
+            Class<?> methodReturnType = aMethod.getReturnType();
             if ((StringUtils.endsWith(methodReturnType.getName(), "Integer")) ||
                 (StringUtils.endsWith(methodReturnType.getName(), "int")))
             {
@@ -253,7 +253,7 @@ public class DataBeanBag
 
         DataBag dataBag = new DataBag(anObject.toString());
 
-        Class objClass = anObject.getClass();
+        Class<?> objClass = anObject.getClass();
         Field[] fieldArray = objClass.getDeclaredFields();
         for (Field objField : fieldArray)
         {
@@ -292,7 +292,7 @@ public class DataBeanBag
             throw new NSException("Object is null");
 
         DataBag dataBag = new DataBag(anObject.toString());
-        Class objClass = anObject.getClass();
+        Class<?> objClass = anObject.getClass();
         Method[] methodArray = objClass.getDeclaredMethods();
         for (Method objMethod : methodArray)
         {

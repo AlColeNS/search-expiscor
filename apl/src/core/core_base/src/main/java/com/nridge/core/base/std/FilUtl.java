@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -71,6 +71,42 @@ public class FilUtl
             return false;
     }
 
+    /**
+     * Generates a unique path based on the parameters provided.
+     *
+     * @param aPathName Optional path name - if not provided, then the current working directory will be used.
+     * @param aPrefix Path name prefix (appended with random id)
+     *
+     * @return A unique path name.
+     */
+    static public String generateUniquePathName(String aPathName, String aPrefix)
+    {
+        if (StringUtils.isEmpty(aPathName))
+            aPathName = getWorkingDirectory();
+        if (StringUtils.isEmpty(aPathName))
+            aPrefix = "subpath";
+
+// http://www.javapractices.com/topic/TopicAction.do?Id=56
+
+        UUID uniqueId = UUID.randomUUID();
+        byte idBytes[] = uniqueId.toString().getBytes();
+        Checksum checksumValue = new CRC32();
+        checksumValue.update(idBytes, 0, idBytes.length);
+        long longValue = checksumValue.getValue();
+
+        return String.format("%s%c%s_%d", aPathName, File.separatorChar, aPrefix, longValue);
+    }
+
+    /**
+     * Generates a unique path and file name combination based on the parameters
+     * provided.
+     *
+     * @param aPathName Path name.
+     * @param aFilePrefix File name prefix (appended with random id)
+     * @param aFileExtension File name extension.
+     *
+     * @return A unique path and file name combination.
+     */
     static public String generateUniquePathFileName(String aPathName, String aFilePrefix,
                                                     String aFileExtension)
     {

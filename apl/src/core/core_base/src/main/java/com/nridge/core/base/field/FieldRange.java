@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -295,6 +295,7 @@ public class FieldRange
             case Text:
                 if ((mItems != null) && (mItems.size() > 0))
                     return mItems.get(0);
+                break;
             case Long:
                 return mMinLong.toString();
             case Integer:
@@ -323,6 +324,7 @@ public class FieldRange
             case Text:
                 if ((mItems != null) && (mItems.size() > 0))
                     return mItems.get(mItems.size()-1);
+                break;
             case Long:
                 return mMaxLong.toString();
             case Integer:
@@ -363,6 +365,7 @@ public class FieldRange
                     }
                     return mmString;
                 }
+                break;
             case Long:
                 return String.format("Range: %d - %d", mMinLong, mMaxLong);
             case Integer:

@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -83,6 +83,8 @@ public interface DocReplyInterface
      * Saves the previous assigned document list (e.g. via constructor or set method)
      * to a string and returns it.
      *
+     * @return String representation of the document.
+     *
      * @throws java.io.IOException I/O related exception.
      */
     public String saveAsString() throws IOException;
@@ -94,6 +96,9 @@ public interface DocReplyInterface
      * @param anIS Input stream instance.
      *
      * @throws java.io.IOException I/O related exception.
+     * @throws ParserConfigurationException Parsing exception.
+     * @throws SAXException SAX exception.
+     * @throws TransformerException Transformer exception.
      */
     public void load(InputStream anIS) throws ParserConfigurationException, IOException, SAXException, TransformerException;
 }

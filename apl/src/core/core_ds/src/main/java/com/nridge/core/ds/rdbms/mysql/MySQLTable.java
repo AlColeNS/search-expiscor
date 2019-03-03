@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -428,7 +428,7 @@ public class MySQLTable extends SQLTable
 
         boolean isCommaNeeded = false;
         StringBuilder sqlBuilder = new StringBuilder(sqlStatement);
-        sqlBuilder.append(StrUtl.CHAR_LEFTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_OPEN);
         for (DataField pField : aBag.getFields())
         {
             if (isCommaNeeded)
@@ -437,7 +437,7 @@ public class MySQLTable extends SQLTable
                 isCommaNeeded = true;
             sqlBuilder.append(columnElement(pField));
         }
-        sqlBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
 
         sqlBuilder.append(String.format(" ENGINE = %s DEFAULT CHARSET=utf8", VENDOR_STORAGE_ENGINE));
 
@@ -506,7 +506,7 @@ public class MySQLTable extends SQLTable
         StringBuilder sqlBuilder = new StringBuilder(String.format("INSERT INTO %s ", schemaName(aBag)));
 
         boolean isCommaNeeded = false;
-        sqlBuilder.append(StrUtl.CHAR_LEFTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_OPEN);
         for (DataField pField : aBag.getFields())
         {
             if (! pField.isFeatureEqual(Field.FEATURE_SEQUENCE_MANAGEMENT, Field.SQL_INDEX_MANAGEMENT_IMPLICIT))
@@ -518,12 +518,12 @@ public class MySQLTable extends SQLTable
                 sqlBuilder.append(columnName(pField.getName()));
             }
         }
-        sqlBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
 
         isCommaNeeded = false;
         sqlBuilder.append(" VALUES ");
 
-        sqlBuilder.append(StrUtl.CHAR_LEFTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_OPEN);
         for (DataField pField : aBag.getFields())
         {
             if (isCommaNeeded)
@@ -558,7 +558,7 @@ public class MySQLTable extends SQLTable
                     sqlBuilder.append(fieldValue);
             }
         }
-        sqlBuilder.append(StrUtl.CHAR_RIGHTPAREN);
+        sqlBuilder.append(StrUtl.CHAR_PAREN_CLOSE);
 
         mSQLConnection.execute(sqlBuilder.toString());
 

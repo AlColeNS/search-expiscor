@@ -17,6 +17,13 @@
 
 package com.nridge.core.app.mail;
 
+import com.nridge.core.app.mgr.AppMgr;
+import com.nridge.core.base.std.NSException;
+import com.nridge.core.base.std.StrUtl;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+
 /**
  * The Mail class captures the constants, enumerated types
  * and utility methods for the Mail Manager package.
@@ -35,6 +42,63 @@ public class Mail
 
     private Mail()
     {
+    }
 
+    /**
+     * Convenience method that extracts a first name from an email address
+     * formatted as 'first.last@company.com'.  The first name will have its
+     * first letter capitalized.
+     *
+     * @param anEmailAddress Email address.
+     *
+     * @return Proper first name.
+     */
+    public static String extractFirstName(String anEmailAddress)
+    {
+        String firstName = StringUtils.EMPTY;
+
+        if (StringUtils.isNotEmpty(anEmailAddress))
+        {
+            int offset = anEmailAddress.indexOf(StrUtl.CHAR_DOT);
+            if (offset > 0)
+                firstName = StrUtl.firstCharToUpper(anEmailAddress.substring(0, offset));
+            else
+            {
+                offset = anEmailAddress.indexOf(StrUtl.CHAR_AT);
+                if (offset > 0)
+                    firstName = StrUtl.firstCharToUpper(anEmailAddress.substring(0, offset));
+            }
+        }
+
+        return firstName;
+    }
+
+    /**
+     * Convenience method that extracts a last name from an email address
+     * formatted as 'first.last@company.com'.  The last name will have its
+     * first letter capitalized.
+     *
+     * @param anEmailAddress Email address.
+     *
+     * @return Proper last name.
+     */
+    public static String extractLastName(String anEmailAddress)
+    {
+        String lastName = StringUtils.EMPTY;
+
+        if (StringUtils.isNotEmpty(anEmailAddress))
+        {
+            int offset2 = anEmailAddress.indexOf(StrUtl.CHAR_AT);
+            if (offset2 > 0)
+            {
+                int offset1 = anEmailAddress.indexOf(StrUtl.CHAR_DOT);
+                if (offset1 > 0)
+                    lastName = StrUtl.firstCharToUpper(anEmailAddress.substring(offset1+1, offset2));
+                else
+                    lastName = StrUtl.firstCharToUpper(anEmailAddress.substring(0, offset2));
+            }
+        }
+
+        return lastName;
     }
 }

@@ -1,5 +1,5 @@
 /*
- * NorthRidge Software, LLC - Copyright (c) 2015.
+ * NorthRidge Software, LLC - Copyright (c) 2019.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -72,6 +72,7 @@ public class DocumentOpXML implements DOMInterface, DocOpInterface
     /**
      * Constructor accepts a list of document instances as a parameter.
      *
+     * @param aName Text field name.
      * @param aDocumentList A list of document instances.
      */
     public DocumentOpXML(String aName, ArrayList<Document> aDocumentList)
@@ -83,6 +84,7 @@ public class DocumentOpXML implements DOMInterface, DocOpInterface
     /**
      * Constructor accepts a data source criteria as a parameter.
      *
+     * @param aName Criteria name.
      * @param aCriteria Data source criteria instance.
      */
     public DocumentOpXML(String aName, DSCriteria aCriteria)
@@ -406,6 +408,7 @@ public class DocumentOpXML implements DOMInterface, DocOpInterface
      * @throws java.io.IOException                            I/O related exception.
      * @throws javax.xml.parsers.ParserConfigurationException XML parser related exception.
      * @throws org.xml.sax.SAXException                       XML parser related exception.
+     * @throws TransformerException Transformer exception.
      */
     public void load(org.w3c.dom.Document aDocument)
         throws ParserConfigurationException, IOException, SAXException, TransformerException
@@ -419,7 +422,10 @@ public class DocumentOpXML implements DOMInterface, DocOpInterface
      *
      * @param anIS Input stream.
      *
-     * @throws java.io.IOException I/O related exception.
+     * @throws java.io.IOException                            I/O related exception.
+     * @throws javax.xml.parsers.ParserConfigurationException XML parser related exception.
+     * @throws org.xml.sax.SAXException                       XML parser related exception.
+     * @throws TransformerException Transformer exception.
      */
     @Override
     public void load(InputStream anIS)
@@ -437,6 +443,7 @@ public class DocumentOpXML implements DOMInterface, DocOpInterface
      * and loads it into a document list.
      *
      * @param aPathFileName Absolute file name.
+     *
      * @throws java.io.IOException                            I/O related exception.
      * @throws javax.xml.parsers.ParserConfigurationException XML parser related exception.
      * @throws org.xml.sax.SAXException                       XML parser related exception.
