@@ -61,7 +61,7 @@ The key to adopting this approach for services is to ensure that there are a col
 
 ## Content Source Types ##
 
-###_Structured Content_ ###
+### _Structured Content_ ###
 
 Structured content is information or content that is organized in a predictable way and is usually classified with metadata.  Examples of structured content would include rows from relational database tables and documents stored in an enterprise content management system or a product lifecycle application.  
 
